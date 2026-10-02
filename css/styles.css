@@ -11588,8 +11588,9 @@ html {
   max-width: 40rem;
 }
 .profile .profile-img {
-  height: 65vw;
-  max-height: 34rem;
+  width: 100%;
+  max-width: 28rem;
+  height: auto;
   position: absolute;
   bottom: 0;
   left: 50%;
