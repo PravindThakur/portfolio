@@ -174,5 +174,14 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
+        <script>
+document.querySelectorAll('.gallery-img').forEach(function (img) {
+    img.addEventListener('click', function () {
+        var big = document.getElementById('photoModalImg');
+        big.src = img.src;
+        big.alt = img.alt;
+    });
+});
+</script>
     </body>
 </html>
