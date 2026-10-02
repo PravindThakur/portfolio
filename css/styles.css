@@ -11745,9 +11745,12 @@ html {
 @media (min-width: 768px) {
   .insta-photo {
     width: 250px;
-    aspect-ratio: 3 / 4;
+    flex-shrink: 0;
+    aspect-ratio: auto;
+    align-self: stretch;
+    height: auto;
+    object-fit: cover;
   }
 }
-
 
 
