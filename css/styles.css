@@ -11588,12 +11588,13 @@ html {
   max-width: 40rem;
 }
 .profile .profile-img {
-  height: 65vw;
-  max-height: 34rem;
-  position: absolute;
-  bottom: 0;
-  left: 40%;
-  transform: translateX(-40%);
+  width: 100%;
+  height: auto !important;
+  max-height: none;
+  left: 0;
+  transform: none;
+  border-bottom-left-radius: 5vw;
+  border-bottom-right-radius: 5vw;
 }
 .profile .dots-1 {
   position: absolute;
