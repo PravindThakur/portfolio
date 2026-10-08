@@ -25,9 +25,8 @@ export async function onRequestGet(context) {
     const skills =
         requestUrl.searchParams.get("skills") || "";
 
-
     // --------------------------------------------------
-    // Convert time to seconds
+    // Convert posted-within value to seconds
     // --------------------------------------------------
 
     let seconds = timeValue;
@@ -44,9 +43,8 @@ export async function onRequestGet(context) {
         seconds = timeValue * 24 * 60 * 60;
     }
 
-
     // --------------------------------------------------
-    // LinkedIn URL
+    // Build LinkedIn guest search URL
     // --------------------------------------------------
 
     const linkedinParams = new URLSearchParams();
@@ -54,36 +52,40 @@ export async function onRequestGet(context) {
     linkedinParams.set("keywords", keywords);
     linkedinParams.set("location", location);
     linkedinParams.set("f_TPR", `r${seconds}`);
+
     linkedinParams.set(
         "sortBy",
         sort === "newest" ? "DD" : "R"
     );
-    linkedinParams.set("start", "0");
 
+    // IMPORTANT:
+    // Keep this at 0.
+    // Do not paginate to 10/20/30/40 because
+    // multiple LinkedIn requests can trigger HTTP 429.
+    linkedinParams.set("start", "0");
 
     const linkedinUrl =
         "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?" +
         linkedinParams.toString();
 
-
     // --------------------------------------------------
-    // Cache
+    // Cloudflare cache
     // --------------------------------------------------
 
     const cache = caches.default;
 
-    const cacheKey =
-        new Request(linkedinUrl, {
+    const cacheKey = new Request(
+        linkedinUrl,
+        {
             method: "GET"
-        });
+        }
+    );
 
-
-    // Fresh cache = 5 minutes
+    // Cache for 5 minutes
     const CACHE_SECONDS = 300;
 
-
     // --------------------------------------------------
-    // Check fresh cache
+    // Check cache first
     // --------------------------------------------------
 
     try {
@@ -97,32 +99,21 @@ export async function onRequestGet(context) {
                 await cachedResponse.json();
 
             return new Response(
-
                 JSON.stringify({
-
                     ...cachedData,
-
                     cached: true,
-
                     cacheStatus: "fresh"
-
                 }),
-
                 {
                     status: 200,
-
                     headers: {
-
                         "Content-Type":
                             "application/json",
-
                         "Cache-Control":
                             "no-store"
                     }
                 }
-
             );
-
         }
 
     } catch (error) {
@@ -131,12 +122,10 @@ export async function onRequestGet(context) {
             "Fresh cache read failed:",
             error.message
         );
-
     }
 
-
     // --------------------------------------------------
-    // LinkedIn request
+    // LinkedIn request function
     // --------------------------------------------------
 
     async function fetchLinkedIn() {
@@ -150,16 +139,12 @@ export async function onRequestGet(context) {
                 8000
             );
 
-
         try {
 
             const response =
                 await fetch(
-
                     linkedinUrl,
-
                     {
-
                         method: "GET",
 
                         headers: {
@@ -179,11 +164,8 @@ export async function onRequestGet(context) {
 
                         signal:
                             controller.signal
-
                     }
-
                 );
-
 
             clearTimeout(timeout);
 
@@ -194,24 +176,16 @@ export async function onRequestGet(context) {
             clearTimeout(timeout);
 
             throw error;
-
         }
-
     }
 
-
     // --------------------------------------------------
-    // One LinkedIn attempt only
-    //
-    // IMPORTANT:
-    // Don't retry a 429 immediately.
-    // That can make rate limiting worse.
+    // Call LinkedIn once
     // --------------------------------------------------
 
     let response = null;
 
     let lastError = null;
-
 
     try {
 
@@ -222,7 +196,6 @@ export async function onRequestGet(context) {
 
             lastError =
                 `LinkedIn returned HTTP ${response.status}`;
-
         }
 
     } catch (error) {
@@ -230,18 +203,15 @@ export async function onRequestGet(context) {
         lastError =
             error.message ||
             "LinkedIn request failed";
-
     }
 
-
     // --------------------------------------------------
-    // LinkedIn failed
+    // Handle LinkedIn failure
     // --------------------------------------------------
 
     if (!response || !response.ok) {
 
         return new Response(
-
             JSON.stringify({
 
                 success: false,
@@ -259,27 +229,19 @@ export async function onRequestGet(context) {
                     response?.status || 0
 
             }),
-
             {
-
                 status: 200,
 
                 headers: {
-
                     "Content-Type":
                         "application/json",
 
                     "Cache-Control":
                         "no-store"
-
                 }
-
             }
-
         );
-
     }
-
 
     // --------------------------------------------------
     // Read LinkedIn HTML
@@ -295,7 +257,6 @@ export async function onRequestGet(context) {
     } catch (error) {
 
         return new Response(
-
             JSON.stringify({
 
                 success: false,
@@ -306,34 +267,25 @@ export async function onRequestGet(context) {
                 details:
                     error.message,
 
-                retryable:
-                    true
+                retryable: true
 
             }),
-
             {
-
                 status: 200,
 
                 headers: {
-
                     "Content-Type":
                         "application/json",
 
                     "Cache-Control":
                         "no-store"
-
                 }
-
             }
-
         );
-
     }
 
-
     // --------------------------------------------------
-    // Parse job cards
+    // Find LinkedIn job cards
     // --------------------------------------------------
 
     const jobCardRegex =
@@ -343,55 +295,65 @@ export async function onRequestGet(context) {
 
     let match;
 
-
     while (
         (match =
             jobCardRegex.exec(html)) !== null
     ) {
 
         cards.push(match[1]);
-
     }
 
+    // --------------------------------------------------
+    // Parse job cards
+    // --------------------------------------------------
 
     const jobs =
         cards.map(card => {
 
+            // Job title
             const titleMatch =
                 card.match(
                     /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
                 );
 
-
+            // Company
             const companyMatch =
                 card.match(
                     /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
                 );
 
-
+            // Location
             const locationMatch =
                 card.match(
                     /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
                 );
 
-
+            // LinkedIn job URL
             const urlMatch =
                 card.match(
                     /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
                 );
 
-
+            // Posted time
             const timeMatch =
                 card.match(
                     /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
                 );
 
-
+            // LinkedIn Job ID
             const idMatch =
                 card.match(
                     /data-entity-urn="urn:li:jobPosting:(\d+)"/i
                 );
 
+            // --------------------------------------------------
+            // Job snippet / short description
+            // --------------------------------------------------
+
+            const snippetMatch =
+                card.match(
+                    /<p[^>]*class="[^"]*job-search-card__snippet[^"]*"[^>]*>([\s\S]*?)<\/p>/i
+                );
 
             return {
 
@@ -424,12 +386,18 @@ export async function onRequestGet(context) {
                 url:
                     cleanUrl(
                         urlMatch?.[1]
+                    ),
+
+                snippet:
+                    cleanText(
+                        snippetMatch?.[1]
                     )
-
             };
-
         });
 
+    // --------------------------------------------------
+    // Remove invalid job records
+    // --------------------------------------------------
 
     const validJobs =
         jobs.filter(job =>
@@ -438,9 +406,8 @@ export async function onRequestGet(context) {
             job.url
         );
 
-
     // --------------------------------------------------
-    // Build result
+    // Final response
     // --------------------------------------------------
 
     const result = {
@@ -478,7 +445,6 @@ export async function onRequestGet(context) {
                     : [],
 
             sort
-
         },
 
         count:
@@ -494,25 +460,19 @@ export async function onRequestGet(context) {
 
             responseLength:
                 html.length
-
         }
-
     };
 
-
     // --------------------------------------------------
-    // Save successful result to cache
+    // Store result in Cloudflare cache
     // --------------------------------------------------
 
     try {
 
         const cacheResponse =
             new Response(
-
                 JSON.stringify(result),
-
                 {
-
                     status: 200,
 
                     headers: {
@@ -522,21 +482,15 @@ export async function onRequestGet(context) {
 
                         "Cache-Control":
                             `public, max-age=${CACHE_SECONDS}`
-
                     }
-
                 }
-
             );
 
-
         context.waitUntil(
-
             cache.put(
                 cacheKey,
                 cacheResponse
             )
-
         );
 
     } catch (error) {
@@ -545,20 +499,15 @@ export async function onRequestGet(context) {
             "Cache write failed:",
             error.message
         );
-
     }
 
-
     // --------------------------------------------------
-    // Return result
+    // Return response to frontend
     // --------------------------------------------------
 
     return new Response(
-
         JSON.stringify(result),
-
         {
-
             status: 200,
 
             headers: {
@@ -568,19 +517,15 @@ export async function onRequestGet(context) {
 
                 "Cache-Control":
                     "no-store"
-
             }
-
         }
-
     );
-
 }
 
 
-// --------------------------------------------------
-// Helpers
-// --------------------------------------------------
+// ======================================================
+// Helper: Clean HTML/text
+// ======================================================
 
 function cleanText(value) {
 
@@ -621,9 +566,12 @@ function cleanText(value) {
         )
 
         .trim();
-
 }
 
+
+// ======================================================
+// Helper: Clean LinkedIn URL
+// ======================================================
 
 function cleanUrl(value) {
 
@@ -637,5 +585,4 @@ function cleanUrl(value) {
             "&"
         )
         .trim();
-
 }
