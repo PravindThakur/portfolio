@@ -1,4 +1,5 @@
 export async function onRequestGet(context) {
+
     const requestUrl = new URL(context.request.url);
 
     const keywords =
@@ -24,7 +25,10 @@ export async function onRequestGet(context) {
     const skills =
         requestUrl.searchParams.get("skills") || "";
 
-    // Convert requested time into seconds
+    /*
+     * Convert requested time to seconds
+     */
+
     let seconds = timeValue;
 
     if (timeUnit === "minutes") {
@@ -39,7 +43,10 @@ export async function onRequestGet(context) {
         seconds = timeValue * 24 * 60 * 60;
     }
 
-    // LinkedIn guest endpoint
+    /*
+     * Build LinkedIn URL
+     */
+
     const linkedinParams = new URLSearchParams();
 
     linkedinParams.set("keywords", keywords);
@@ -55,144 +62,103 @@ export async function onRequestGet(context) {
         "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?" +
         linkedinParams.toString();
 
-    try {
-        const response = await fetch(linkedinUrl, {
-            headers: {
-                "User-Agent":
-                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/154.0.0.0 Safari/537.36",
+    /*
+     * Fetch LinkedIn with timeout
+     */
 
-                "Accept":
-                    "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    async function fetchLinkedIn() {
 
-                "Accept-Language":
-                    "en-US,en;q=0.9",
+        const controller = new AbortController();
 
-                "Referer":
-                    "https://www.linkedin.com/jobs/"
-            }
-        });
+        const timeout = setTimeout(() => {
+            controller.abort();
+        }, 8000);
 
-        if (!response.ok) {
-    const errorBody = await response.text();
+        try {
 
-    return new Response(
-        JSON.stringify({
-            success: false,
-            error: `LinkedIn returned HTTP ${response.status}`,
-            linkedinStatus: response.status,
-            responseLength: errorBody.length
-        }),
-        {
-            status: 502,
-            headers: {
-                "Content-Type": "application/json",
-                "Cache-Control": "no-store"
-            }
+            const response = await fetch(
+                linkedinUrl,
+                {
+                    method: "GET",
+
+                    headers: {
+                        "User-Agent":
+                            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154.0.0.0 Safari/537.36",
+
+                        "Accept":
+                            "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+
+                        "Accept-Language":
+                            "en-US,en;q=0.9",
+
+                        "Referer":
+                            "https://www.linkedin.com/jobs/"
+                    },
+
+                    signal: controller.signal
+                }
+            );
+
+            clearTimeout(timeout);
+
+            return response;
+
+        } catch (error) {
+
+            clearTimeout(timeout);
+
+            throw error;
         }
-    );
-}
+    }
 
-        const html = await response.text();
+    /*
+     * Try LinkedIn twice
+     */
+
+    let response;
+    let lastError = null;
+
+    for (let attempt = 1; attempt <= 2; attempt++) {
+
+        try {
+
+            response = await fetchLinkedIn();
+
+            if (response.ok) {
+                break;
+            }
+
+            lastError =
+                `LinkedIn returned HTTP ${response.status}`;
+
+        } catch (error) {
+
+            lastError = error.message || "LinkedIn request failed";
+        }
 
         /*
-         * Extract individual LinkedIn job cards.
+         * Small delay before retry
          */
-        const jobCardRegex =
-            /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
 
-        const cards = [];
-        let match;
-
-        while ((match = jobCardRegex.exec(html)) !== null) {
-            cards.push(match[1]);
+        if (attempt === 1) {
+            await new Promise(resolve =>
+                setTimeout(resolve, 500)
+            );
         }
+    }
 
-        const jobs = cards.map((card) => {
+    /*
+     * LinkedIn request failed
+     */
 
-            // Job title
-            const titleMatch =
-                card.match(
-                    /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
-                );
-
-            // Company
-            const companyMatch =
-                card.match(
-                    /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
-                );
-
-            // Location
-            const locationMatch =
-                card.match(
-                    /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
-                );
-
-            // Job URL
-            const urlMatch =
-                card.match(
-                    /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
-                );
-
-            // Posted time
-            const timeMatch =
-                card.match(
-                    /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
-                );
-
-            // Job ID
-            const idMatch =
-                card.match(
-                    /data-entity-urn="urn:li:jobPosting:(\d+)"/i
-                );
-
-            return {
-                title: cleanText(titleMatch?.[1]),
-                company: cleanText(companyMatch?.[1]),
-                location: cleanText(locationMatch?.[1]),
-                posted: cleanText(timeMatch?.[2]),
-                postedAt: timeMatch?.[1] || "",
-                jobId: idMatch?.[1] || "",
-                url: cleanUrl(urlMatch?.[1])
-            };
-        });
-
-        // Remove empty/invalid jobs
-        const validJobs = jobs.filter(
-            job =>
-                job.title &&
-                job.company &&
-                job.url
-        );
+    if (!response || !response.ok) {
 
         return new Response(
             JSON.stringify({
-                success: true,
-
-                source: "LinkedIn guest jobs endpoint",
-
-                search: {
-                    keywords,
-                    location,
-                    timeValue,
-                    timeUnit,
-                    seconds,
-                    workplace: workplace
-                        ? workplace.split(",")
-                        : [],
-                    skills: skills
-                        ? skills.split(",")
-                        : [],
-                    sort
-                },
-
-                count: validJobs.length,
-
-                jobs: validJobs,
-
-                linkedin: {
-                    status: response.status,
-                    responseLength: html.length
-                }
+                success: false,
+                error: "LinkedIn temporarily unavailable",
+                details: lastError,
+                retryable: true
             }),
             {
                 status: 200,
@@ -202,17 +168,29 @@ export async function onRequestGet(context) {
                 }
             }
         );
+    }
+
+    /*
+     * Read LinkedIn HTML
+     */
+
+    let html;
+
+    try {
+
+        html = await response.text();
 
     } catch (error) {
 
         return new Response(
             JSON.stringify({
                 success: false,
-                error: "Unable to process LinkedIn response",
-                details: error.message
+                error: "Unable to read LinkedIn response",
+                details: error.message,
+                retryable: true
             }),
             {
-                status: 502,
+                status: 200,
                 headers: {
                     "Content-Type": "application/json",
                     "Cache-Control": "no-store"
@@ -220,12 +198,134 @@ export async function onRequestGet(context) {
             }
         );
     }
+
+    /*
+     * Extract LinkedIn job cards
+     */
+
+    const jobCardRegex =
+        /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
+
+    const cards = [];
+
+    let match;
+
+    while ((match = jobCardRegex.exec(html)) !== null) {
+        cards.push(match[1]);
+    }
+
+    /*
+     * Convert cards into jobs
+     */
+
+    const jobs = cards.map(card => {
+
+        const titleMatch =
+            card.match(
+                /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
+            );
+
+        const companyMatch =
+            card.match(
+                /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
+            );
+
+        const locationMatch =
+            card.match(
+                /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
+            );
+
+        const urlMatch =
+            card.match(
+                /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
+            );
+
+        const timeMatch =
+            card.match(
+                /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
+            );
+
+        const idMatch =
+            card.match(
+                /data-entity-urn="urn:li:jobPosting:(\d+)"/i
+            );
+
+        return {
+            title: cleanText(titleMatch?.[1]),
+            company: cleanText(companyMatch?.[1]),
+            location: cleanText(locationMatch?.[1]),
+            posted: cleanText(timeMatch?.[2]),
+            postedAt: timeMatch?.[1] || "",
+            jobId: idMatch?.[1] || "",
+            url: cleanUrl(urlMatch?.[1])
+        };
+
+    });
+
+    /*
+     * Remove invalid jobs
+     */
+
+    const validJobs = jobs.filter(job =>
+        job.title &&
+        job.company &&
+        job.url
+    );
+
+    /*
+     * Return successful response
+     */
+
+    return new Response(
+        JSON.stringify({
+
+            success: true,
+
+            source: "LinkedIn guest jobs endpoint",
+
+            search: {
+                keywords,
+                location,
+                timeValue,
+                timeUnit,
+                seconds,
+                workplace:
+                    workplace
+                        ? workplace.split(",")
+                        : [],
+                skills:
+                    skills
+                        ? skills.split(",")
+                        : [],
+                sort
+            },
+
+            count: validJobs.length,
+
+            jobs: validJobs,
+
+            linkedin: {
+                status: response.status,
+                responseLength: html.length
+            }
+
+        }),
+        {
+            status: 200,
+
+            headers: {
+                "Content-Type": "application/json",
+                "Cache-Control": "no-store"
+            }
+        }
+    );
 }
 
 
 /*
- * Remove HTML tags and clean whitespace.
+ * Clean text extracted from HTML
  */
+
 function cleanText(value) {
 
     if (!value) {
@@ -244,8 +344,9 @@ function cleanText(value) {
 
 
 /*
- * Clean LinkedIn job URL.
+ * Clean LinkedIn URL
  */
+
 function cleanUrl(value) {
 
     if (!value) {
