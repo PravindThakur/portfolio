@@ -12,7 +12,7 @@
 
     <meta
         name="description"
-        content="Latest job opportunities in Corporate Actions, Reference Data, Capital Markets, Asset Servicing, Trade Settlement and Business Analysis."
+        content="Latest job opportunities from the last 30 days in Corporate Actions, Reference Data, Capital Markets, Asset Servicing, Trade Settlement and Business Analysis."
     />
 
     <meta
@@ -24,6 +24,7 @@
 
 
     <!-- Favicon -->
+
     <link
         rel="icon"
         type="image/x-icon"
@@ -31,7 +32,8 @@
     />
 
 
-    <!-- Google Font -->
+    <!-- Google Fonts -->
+
     <link
         rel="preconnect"
         href="https://fonts.googleapis.com"
@@ -50,13 +52,15 @@
 
 
     <!-- Bootstrap Icons -->
+
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css"
         rel="stylesheet"
     />
 
 
-    <!-- Core theme CSS -->
+    <!-- Site CSS -->
+
     <link
         href="css/styles.css"
         rel="stylesheet"
@@ -65,92 +69,230 @@
 
     <style>
 
-        /* Compact job list */
+        /*
+         * --------------------------------------------------
+         * Job card
+         * --------------------------------------------------
+         */
 
         .job-card {
+
             transition:
                 transform 0.15s ease,
                 box-shadow 0.15s ease;
 
-            border-radius: 0.9rem !important;
+            border-radius:
+                0.85rem !important;
+
         }
 
 
         .job-card:hover {
-            transform: translateY(-1px);
+
+            transform:
+                translateY(-1px);
 
             box-shadow:
-                0 0.4rem 1rem rgba(0, 0, 0, 0.08) !important;
+                0 0.4rem 1rem
+                rgba(0, 0, 0, 0.08)
+                !important;
+
         }
 
 
+        /*
+         * --------------------------------------------------
+         * Job title
+         * --------------------------------------------------
+         */
+
         .job-title {
-            color: #212529;
-            text-decoration: none;
+
+            color:
+                #212529;
+
+            text-decoration:
+                none;
+
+            font-size:
+                0.92rem;
+
         }
 
 
         .job-title:hover {
-            color: #6f42c1;
+
+            color:
+                #6f42c1;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Company
+         * --------------------------------------------------
+         */
 
         .job-company {
-            font-size: 0.88rem;
-            font-weight: 600;
+
+            font-size:
+                0.82rem;
+
+            font-weight:
+                600;
+
         }
 
 
+        /*
+         * --------------------------------------------------
+         * Job metadata
+         * --------------------------------------------------
+         */
+
         .job-meta {
-            color: #6c757d;
-            font-size: 0.78rem;
+
+            color:
+                #6c757d;
+
+            font-size:
+                0.75rem;
+
         }
 
 
         .job-separator {
-            color: #adb5bd;
-            margin: 0 0.35rem;
+
+            color:
+                #adb5bd;
+
+            margin:
+                0 0.3rem;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * LinkedIn link
+         * --------------------------------------------------
+         */
 
         .job-link {
-            white-space: nowrap;
-            font-size: 0.78rem;
-            text-decoration: none;
+
+            white-space:
+                nowrap;
+
+            font-size:
+                0.75rem;
+
+            text-decoration:
+                none;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Loading
+         * --------------------------------------------------
+         */
 
         .loading-spinner {
-            width: 1.1rem;
-            height: 1.1rem;
+
+            width:
+                1rem;
+
+            height:
+                1rem;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Status
+         * --------------------------------------------------
+         */
 
         .search-status {
-            min-height: 20px;
-            font-size: 0.8rem;
+
+            min-height:
+                20px;
+
+            font-size:
+                0.78rem;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Refresh information
+         * --------------------------------------------------
+         */
+
+        .refresh-info {
+
+            font-size:
+                0.72rem;
+
+            color:
+                #6c757d;
+
+        }
+
+
+        /*
+         * --------------------------------------------------
+         * Job wrapper
+         * --------------------------------------------------
+         */
 
         .jobs-wrapper {
-            max-width: 900px;
+
+            max-width:
+                900px;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Card spacing
+         * --------------------------------------------------
+         */
 
         .job-card .card-body {
-            padding: 0.9rem 1.1rem !important;
+
+            padding:
+                0.8rem 1rem !important;
+
         }
 
+
+        /*
+         * --------------------------------------------------
+         * Mobile
+         * --------------------------------------------------
+         */
 
         @media (max-width: 576px) {
 
             .job-card .card-body {
-                padding: 0.85rem !important;
+
+                padding:
+                    0.8rem !important;
+
             }
 
 
             .job-link {
-                margin-top: 0.4rem;
+
+                margin-top:
+                    0.35rem;
+
             }
 
         }
@@ -166,7 +308,9 @@
 <main class="flex-shrink-0">
 
 
-    <!-- Navigation -->
+    <!-- =====================================================
+         Navigation
+         ===================================================== -->
 
     <nav
         class="navbar navbar-expand-lg navbar-light bg-white py-3"
@@ -180,7 +324,9 @@
                 href="index.html"
             >
 
-                <span class="fw-bolder text-primary">
+                <span
+                    class="fw-bolder text-primary"
+                >
                     Pravind Thakur
                 </span>
 
@@ -197,7 +343,9 @@
                 aria-label="Toggle navigation"
             >
 
-                <span class="navbar-toggler-icon"></span>
+                <span
+                    class="navbar-toggler-icon"
+                ></span>
 
             </button>
 
@@ -210,6 +358,7 @@
                 <ul
                     class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder"
                 >
+
 
                     <li class="nav-item">
 
@@ -270,6 +419,7 @@
 
                     </li>
 
+
                 </ul>
 
             </div>
@@ -280,27 +430,37 @@
 
 
 
-    <!-- Jobs Section -->
+    <!-- =====================================================
+         Jobs Section
+         ===================================================== -->
 
     <section class="py-4">
 
         <div class="container px-5 mb-4">
 
 
-            <!-- Header -->
+            <!-- Page heading -->
 
-            <div class="text-center mb-4">
+            <div
+                class="text-center mb-4"
+            >
 
-                <h1 class="display-6 fw-bolder mb-2">
+                <h1
+                    class="display-6 fw-bolder mb-2"
+                >
 
-                    <span class="text-gradient d-inline">
+                    <span
+                        class="text-gradient d-inline"
+                    >
                         Latest Jobs
                     </span>
 
                 </h1>
 
 
-                <p class="text-muted small mb-0">
+                <p
+                    class="text-muted small mb-1"
+                >
 
                     Corporate Actions · Reference Data · Capital Markets ·
                     Asset Servicing · Trade Settlement · Business Analysis ·
@@ -308,9 +468,21 @@
 
                 </p>
 
+
+                <div
+                    class="refresh-info"
+                    id="refreshInfo"
+                >
+
+                    Last 30 days · Refreshes every 15 minutes
+
+                </div>
+
             </div>
 
 
+
+            <!-- Job list -->
 
             <div
                 class="row justify-content-center"
@@ -357,7 +529,9 @@
 
 
 
-<!-- Footer -->
+<!-- =========================================================
+     Footer
+     ========================================================= -->
 
 <footer
     class="bg-white py-4 mt-auto"
@@ -369,10 +543,17 @@
             class="row align-items-center justify-content-center"
         >
 
-            <div class="col-auto text-center">
+            <div
+                class="col-auto text-center"
+            >
 
-                <div class="small m-0">
-                    &copy; Pravind Thakur. All rights reserved.
+                <div
+                    class="small m-0"
+                >
+
+                    &copy; Pravind Thakur.
+                    All rights reserved.
+
                 </div>
 
             </div>
@@ -392,7 +573,7 @@
 ></script>
 
 
-<!-- Core theme JS -->
+<!-- Site JS -->
 
 <script
     src="js/scripts.js"
@@ -402,248 +583,893 @@
 
 <script>
 
-const jobsContainer =
-    document.getElementById(
-        "jobsContainer"
-    );
+    /*
+     * =========================================================
+     * Configuration
+     * =========================================================
+     */
+
+    const REFRESH_INTERVAL_MINUTES = 15;
+
+    const REFRESH_INTERVAL_MS =
+        REFRESH_INTERVAL_MINUTES *
+        60 *
+        1000;
+
+    const ARCHIVE_DAYS = 30;
 
 
-const searchStatus =
-    document.getElementById(
-        "searchStatus"
-    );
+    /*
+     * =========================================================
+     * Elements
+     * =========================================================
+     */
 
-
-
-/*
- * Escape HTML
- */
-
-function escapeHtml(
-    value
-) {
-
-    if (!value) {
-        return "";
-    }
-
-
-    return String(value)
-
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-
-        .replace(
-            /</g,
-            "&lt;"
-        )
-
-        .replace(
-            />/g,
-            "&gt;"
-        )
-
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-
-        .replace(
-            /'/g,
-            "&#039;"
+    const jobsContainer =
+        document.getElementById(
+            "jobsContainer"
         );
 
-}
+
+    const searchStatus =
+        document.getElementById(
+            "searchStatus"
+        );
+
+
+    const refreshInfo =
+        document.getElementById(
+            "refreshInfo"
+        );
+
+
+    /*
+     * =========================================================
+     * State
+     * =========================================================
+     */
+
+    let lastRefreshedAt =
+        null;
+
+
+    let nextRefreshAt =
+        null;
+
+
+    let refreshTimer =
+        null;
+
+
+    let countdownTimer =
+        null;
 
 
 
-/*
- * Render jobs
- */
+    /*
+     * =========================================================
+     * HTML escaping
+     * =========================================================
+     */
 
-function renderJobs(
-    jobs
-) {
-
-    if (
-        !jobs ||
-        jobs.length === 0
+    function escapeHtml(
+        value
     ) {
 
-        jobsContainer.innerHTML = `
+        if (
+            value === null ||
+            value === undefined
+        ) {
 
-            <div
-                class="card border-0 shadow-sm rounded-4"
-            >
+            return "";
 
-                <div
-                    class="card-body py-4 text-center"
-                >
+        }
 
-                    <i
-                        class="bi bi-search text-muted fs-4"
-                    ></i>
 
-                    <div
-                        class="fw-semibold mt-2"
-                    >
-                        No jobs found
-                    </div>
+        return String(
+            value
+        )
 
-                    <div
-                        class="text-muted small"
-                    >
-                        No matching opportunities were found.
-                    </div>
+            .replace(
+                /&/g,
+                "&amp;"
+            )
 
-                </div>
+            .replace(
+                /</g,
+                "&lt;"
+            )
 
-            </div>
+            .replace(
+                />/g,
+                "&gt;"
+            )
 
-        `;
+            .replace(
+                /"/g,
+                "&quot;"
+            )
 
-        return;
+            .replace(
+                /'/g,
+                "&#039;"
+            );
+
     }
 
 
 
     /*
-     * Always sort newest first.
+     * =========================================================
+     * Format refresh date
+     * =========================================================
      */
 
-    jobs.sort(
-        (a, b) => {
+    function formatDateTime(
+        isoDate
+    ) {
 
-            const dateA =
-                new Date(
-                    a.postedAt || 0
-                ).getTime();
+        if (
+            !isoDate
+        ) {
 
-
-            const dateB =
-                new Date(
-                    b.postedAt || 0
-                ).getTime();
-
-
-            return dateB - dateA;
+            return "Not available";
 
         }
-    );
+
+
+        const date =
+            new Date(
+                isoDate
+            );
+
+
+        if (
+            Number.isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return "Not available";
+
+        }
+
+
+        return date.toLocaleString(
+            undefined,
+            {
+
+                day:
+                    "2-digit",
+
+                month:
+                    "short",
+
+                year:
+                    "numeric",
+
+                hour:
+                    "2-digit",
+
+                minute:
+                    "2-digit"
+
+            }
+        );
+
+    }
 
 
 
-    jobsContainer.innerHTML =
+    /*
+     * =========================================================
+     * Format countdown
+     * =========================================================
+     */
 
-        jobs.map(
-            job => {
+    function formatCountdown(
+        milliseconds
+    ) {
 
-                return `
+        if (
+            milliseconds <= 0
+        ) {
+
+            return "refreshing now";
+
+        }
+
+
+        const totalSeconds =
+            Math.ceil(
+                milliseconds /
+                1000
+            );
+
+
+        const minutes =
+            Math.floor(
+                totalSeconds /
+                60
+            );
+
+
+        const seconds =
+            totalSeconds %
+            60;
+
+
+        if (
+            minutes > 0
+        ) {
+
+            return `${minutes} min ${seconds
+                .toString()
+                .padStart(2, "0")} sec`;
+
+        }
+
+
+        return `${seconds} sec`;
+
+    }
+
+
+
+    /*
+     * =========================================================
+     * Update refresh information
+     * =========================================================
+     */
+
+    function updateRefreshInfo() {
+
+        if (
+            !lastRefreshedAt
+        ) {
+
+            refreshInfo.innerHTML = `
+
+                Last 30 days
+                · Refreshes every ${REFRESH_INTERVAL_MINUTES} minutes
+
+            `;
+
+            return;
+
+        }
+
+
+        const refreshedText =
+            formatDateTime(
+                lastRefreshedAt
+            );
+
+
+        let countdownText =
+            "";
+
+
+        if (
+            nextRefreshAt
+        ) {
+
+            const remaining =
+                nextRefreshAt -
+                Date.now();
+
+
+            countdownText =
+                formatCountdown(
+                    remaining
+                );
+
+        }
+
+
+        refreshInfo.innerHTML = `
+
+            Last refreshed:
+            <strong>
+                ${escapeHtml(refreshedText)}
+            </strong>
+
+            &nbsp;·&nbsp;
+
+            Refreshes every
+            <strong>
+                ${REFRESH_INTERVAL_MINUTES} minutes
+            </strong>
+
+            &nbsp;·&nbsp;
+
+            Next refresh in
+            <strong>
+                ${escapeHtml(countdownText)}
+            </strong>
+
+        `;
+
+    }
+
+
+
+    /*
+     * =========================================================
+     * Countdown
+     * =========================================================
+     */
+
+    function startCountdown() {
+
+        if (
+            countdownTimer
+        ) {
+
+            clearInterval(
+                countdownTimer
+            );
+
+        }
+
+
+        countdownTimer =
+            setInterval(
+                () => {
+
+                    updateRefreshInfo();
+
+                },
+                1000
+            );
+
+    }
+
+
+
+    /*
+     * =========================================================
+     * Render jobs
+     * =========================================================
+     */
+
+    function renderJobs(
+        jobs
+    ) {
+
+        /*
+         * Always enforce the 30-day
+         * restriction on the frontend too.
+         */
+
+        const cutoff =
+            Date.now() -
+            ARCHIVE_DAYS *
+            24 *
+            60 *
+            60 *
+            1000;
+
+
+        jobs =
+            (jobs || [])
+                .filter(
+                    job => {
+
+                        const postedTime =
+                            new Date(
+                                job.postedAt || 0
+                            ).getTime();
+
+
+                        return (
+                            Number.isFinite(
+                                postedTime
+                            ) &&
+                            postedTime >=
+                            cutoff
+                        );
+
+                    }
+                );
+
+
+        /*
+         * Sort strictly by postedAt.
+         */
+
+        jobs.sort(
+            (
+                a,
+                b
+            ) => {
+
+                const dateA =
+                    new Date(
+                        a.postedAt || 0
+                    ).getTime();
+
+
+                const dateB =
+                    new Date(
+                        b.postedAt || 0
+                    ).getTime();
+
+
+                return dateB - dateA;
+
+            }
+        );
+
+
+        /*
+         * No jobs.
+         */
+
+        if (
+            jobs.length === 0
+        ) {
+
+            jobsContainer.innerHTML = `
+
+                <div
+                    class="card border-0 shadow-sm rounded-4"
+                >
 
                     <div
-                        class="card border-0 shadow-sm mb-2 job-card"
+                        class="card-body py-4 text-center"
                     >
 
+                        <i
+                            class="bi bi-search text-muted fs-4"
+                        ></i>
+
                         <div
-                            class="card-body"
+                            class="fw-semibold mt-2"
                         >
+                            No jobs found
+                        </div>
+
+                        <div
+                            class="text-muted small"
+                        >
+                            No matching jobs were found
+                            in the last 30 days.
+                        </div>
+
+                    </div>
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        /*
+         * Render compact job rows.
+         */
+
+        jobsContainer.innerHTML =
+
+            jobs
+                .map(
+                    job => {
+
+                        return `
 
                             <div
-                                class="d-flex align-items-center justify-content-between gap-3"
+                                class="card border-0 shadow-sm mb-2 job-card"
                             >
 
-
-                                <!-- Job Information -->
-
                                 <div
-                                    class="flex-grow-1 min-width-0"
+                                    class="card-body"
                                 >
 
                                     <div
-                                        class="mb-1"
+                                        class="d-flex align-items-center justify-content-between gap-3"
                                     >
 
-                                        <a
-                                            class="job-title fw-bold"
-                                            href="${escapeHtml(job.url)}"
-                                            target="_blank"
-                                            rel="noopener noreferrer"
+
+                                        <!-- Job information -->
+
+                                        <div
+                                            class="flex-grow-1 min-width-0"
                                         >
 
-                                            ${escapeHtml(job.title)}
 
-                                        </a>
+                                            <div
+                                                class="mb-1"
+                                            >
 
-                                    </div>
+                                                <a
+                                                    class="job-title fw-bold"
+                                                    href="${escapeHtml(job.url)}"
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
 
+                                                    ${escapeHtml(job.title)}
 
-                                    <div
-                                        class="job-meta"
-                                    >
+                                                </a>
 
-                                        <span
-                                            class="job-company text-dark"
-                                        >
-
-                                            ${escapeHtml(job.company)}
-
-                                        </span>
-
-
-                                        <span
-                                            class="job-separator"
-                                        >
-                                            ·
-                                        </span>
+                                            </div>
 
 
-                                        <span>
-                                            ${escapeHtml(job.location || "India")}
-                                        </span>
+                                            <div
+                                                class="job-meta"
+                                            >
+
+                                                <span
+                                                    class="job-company text-dark"
+                                                >
+
+                                                    ${escapeHtml(
+                                                        job.company
+                                                    )}
+
+                                                </span>
 
 
-                                        <span
-                                            class="job-separator"
-                                        >
-                                            ·
-                                        </span>
+                                                <span
+                                                    class="job-separator"
+                                                >
+                                                    ·
+                                                </span>
 
 
-                                        <span>
-                                            ${escapeHtml(job.posted)}
-                                        </span>
+                                                <span>
+
+                                                    ${escapeHtml(
+                                                        job.location ||
+                                                        "India"
+                                                    )}
+
+                                                </span>
+
+
+                                                <span
+                                                    class="job-separator"
+                                                >
+                                                    ·
+                                                </span>
+
+
+                                                <span>
+
+                                                    ${escapeHtml(
+                                                        job.posted
+                                                    )}
+
+                                                </span>
+
+                                            </div>
+
+                                        </div>
+
+
+
+                                        <!-- LinkedIn -->
+
+                                        <div>
+
+                                            <a
+                                                class="job-link text-dark"
+                                                href="${escapeHtml(job.url)}"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                title="View job on LinkedIn"
+                                            >
+
+                                                <i
+                                                    class="bi bi-linkedin me-1"
+                                                ></i>
+
+                                                View
+
+                                            </a>
+
+                                        </div>
+
 
                                     </div>
 
                                 </div>
 
+                            </div>
+
+                        `;
+
+                    }
+                )
+                .join("");
+
+    }
 
 
-                                <!-- LinkedIn -->
 
-                                <div>
+    /*
+     * =========================================================
+     * Fetch jobs
+     * =========================================================
+     */
 
-                                    <a
-                                        class="job-link text-dark"
-                                        href="${escapeHtml(job.url)}"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        title="View job on LinkedIn"
-                                    >
+    async function searchJobs(
+        isAutomaticRefresh = false
+    ) {
 
-                                        <i
-                                            class="bi bi-linkedin me-1"
-                                        ></i>
+        if (
+            !isAutomaticRefresh
+        ) {
 
-                                        View
+            searchStatus.innerHTML = `
 
-                                    </a>
+                <span
+                    class="spinner-border loading-spinner me-2"
+                    role="status"
+                ></span>
 
-                                </div>
+                Fetching latest jobs...
+
+            `;
+
+        } else {
+
+            searchStatus.innerHTML = `
+
+                <span
+                    class="spinner-border loading-spinner me-2"
+                    role="status"
+                ></span>
+
+                Checking for new jobs...
+
+            `;
+
+        }
 
 
+        try {
+
+            /*
+             * These parameters are sent for clarity.
+             * The backend enforces its own 30-day policy.
+             */
+
+            const params =
+                new URLSearchParams({
+
+                    keywords:
+                        "Corporate Actions Reference Data Capital Markets Asset Servicing Trade Settlement Business Analyst Production Support",
+
+                    location:
+                        "India",
+
+                    timeValue:
+                        "30",
+
+                    timeUnit:
+                        "days",
+
+                    sort:
+                        "newest"
+
+                });
+
+
+            const response =
+                await fetch(
+
+                    `/api/jobs?${params.toString()}`,
+
+                    {
+
+                        method:
+                            "GET",
+
+                        cache:
+                            "no-store"
+
+                    }
+
+                );
+
+
+            if (
+                !response.ok
+            ) {
+
+                throw new Error(
+                    `HTTP ${response.status}`
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (
+                !data.success
+            ) {
+
+                throw new Error(
+                    data.error ||
+                    "Unable to load jobs"
+                );
+
+            }
+
+
+            /*
+             * -------------------------------------------------
+             * Jobs
+             * -------------------------------------------------
+             */
+
+            const jobs =
+                data.jobs || [];
+
+
+            renderJobs(
+                jobs
+            );
+
+
+            /*
+             * -------------------------------------------------
+             * Refresh timestamp
+             * -------------------------------------------------
+             */
+
+            if (
+                data.refreshedAt
+            ) {
+
+                lastRefreshedAt =
+                    data.refreshedAt;
+
+            }
+
+
+            /*
+             * -------------------------------------------------
+             * Next refresh
+             * -------------------------------------------------
+             */
+
+            if (
+                lastRefreshedAt
+            ) {
+
+                const refreshedTime =
+                    new Date(
+                        lastRefreshedAt
+                    ).getTime();
+
+
+                nextRefreshAt =
+                    refreshedTime +
+                    REFRESH_INTERVAL_MS;
+
+            } else {
+
+                nextRefreshAt =
+                    Date.now() +
+                    REFRESH_INTERVAL_MS;
+
+            }
+
+
+            updateRefreshInfo();
+
+
+            /*
+             * -------------------------------------------------
+             * Status
+             * -------------------------------------------------
+             */
+
+            let statusText =
+                `${jobs.length} jobs`;
+
+
+            if (
+                data.newlyAdded &&
+                data.newlyAdded > 0
+            ) {
+
+                statusText +=
+                    ` · ${data.newlyAdded} new`;
+
+            }
+
+
+            statusText +=
+                " · Latest first";
+
+
+            searchStatus.innerHTML = `
+
+                <span
+                    class="text-success fw-semibold"
+                >
+
+                    <i
+                        class="bi bi-check-circle me-1"
+                    ></i>
+
+                    ${escapeHtml(
+                        statusText
+                    )}
+
+                </span>
+
+            `;
+
+
+        } catch (
+            error
+        ) {
+
+            console.error(
+                error
+            );
+
+
+            searchStatus.innerHTML = `
+
+                <span
+                    class="text-danger fw-semibold"
+                >
+
+                    <i
+                        class="bi bi-exclamation-circle me-1"
+                    ></i>
+
+                    Unable to refresh jobs
+
+                </span>
+
+            `;
+
+
+            /*
+             * Do not erase the existing job list
+             * during an automatic refresh failure.
+             */
+
+            if (
+                !isAutomaticRefresh
+            ) {
+
+                jobsContainer.innerHTML = `
+
+                    <div
+                        class="card border-0 shadow-sm rounded-4"
+                    >
+
+                        <div
+                            class="card-body py-4 text-center"
+                        >
+
+                            <i
+                                class="bi bi-exclamation-triangle text-warning fs-4"
+                            ></i>
+
+                            <div
+                                class="fw-semibold mt-2"
+                            >
+                                Jobs temporarily unavailable
+                            </div>
+
+                            <div
+                                class="text-muted small"
+                            >
+                                Please try again later.
                             </div>
 
                         </div>
@@ -653,215 +1479,98 @@ function renderJobs(
                 `;
 
             }
-        ).join("");
-
-}
-
-
-
-/*
- * Fetch jobs automatically
- */
-
-async function searchJobs() {
-
-    searchStatus.innerHTML = `
-
-        <span
-            class="spinner-border loading-spinner me-2"
-            role="status"
-        ></span>
-
-        Fetching latest jobs...
-
-    `;
-
-
-    jobsContainer.innerHTML = "";
-
-
-
-    try {
-
-
-        /*
-         * These keywords are predefined.
-         *
-         * Visitors do not need to search manually.
-         */
-
-        const keywords =
-            "Corporate Actions Reference Data Capital Markets Trade Settlement Asset Servicing Business Analyst Production Support SQL SWIFT";
-
-
-        const location =
-            "India";
-
-
-        const timeValue =
-            30;
-
-
-        const timeUnit =
-            "days";
-
-
-        const sort =
-            "newest";
-
-
-        const params =
-            new URLSearchParams({
-
-                keywords,
-                location,
-                timeValue,
-                timeUnit,
-                sort
-
-            });
-
-
-
-        const response =
-            await fetch(
-                `/api/jobs?${params.toString()}`,
-                {
-                    cache: "no-store"
-                }
-            );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                `HTTP ${response.status}`
-            );
 
         }
-
-
-
-        const data =
-            await response.json();
-
-
-
-        if (!data.success) {
-
-            throw new Error(
-                data.error ||
-                "Unable to load jobs"
-            );
-
-        }
-
-
-
-        const jobs =
-            data.jobs || [];
-
-
-
-        renderJobs(
-            jobs
-        );
-
-
-
-        searchStatus.innerHTML = `
-
-            <span
-                class="text-success fw-semibold"
-            >
-
-                <i
-                    class="bi bi-check-circle me-1"
-                ></i>
-
-                ${jobs.length} jobs
-
-            </span>
-
-            <span
-                class="text-muted"
-            >
-
-                &nbsp;·&nbsp; Latest first
-
-            </span>
-
-        `;
-
-
-    } catch (error) {
-
-
-        console.error(
-            error
-        );
-
-
-        searchStatus.innerHTML = `
-
-            <span
-                class="text-danger fw-semibold"
-            >
-
-                <i
-                    class="bi bi-exclamation-circle me-1"
-                ></i>
-
-                Unable to load jobs
-
-            </span>
-
-        `;
-
-
-        jobsContainer.innerHTML = `
-
-            <div
-                class="card border-0 shadow-sm rounded-4"
-            >
-
-                <div
-                    class="card-body py-4 text-center"
-                >
-
-                    <i
-                        class="bi bi-exclamation-triangle text-warning fs-4"
-                    ></i>
-
-                    <div
-                        class="fw-semibold mt-2"
-                    >
-                        Jobs temporarily unavailable
-                    </div>
-
-                    <div
-                        class="text-muted small"
-                    >
-                        Please try again later.
-                    </div>
-
-                </div>
-
-            </div>
-
-        `;
 
     }
 
-}
+
+
+    /*
+     * =========================================================
+     * Automatic 15-minute refresh
+     * =========================================================
+     */
+
+    function startAutomaticRefresh() {
+
+        if (
+            refreshTimer
+        ) {
+
+            clearInterval(
+                refreshTimer
+            );
+
+        }
+
+
+        refreshTimer =
+            setInterval(
+                async () => {
+
+                    await searchJobs(
+                        true
+                    );
+
+
+                    /*
+                     * Reset the countdown
+                     * after the refresh.
+                     */
+
+                    if (
+                        lastRefreshedAt
+                    ) {
+
+                        nextRefreshAt =
+                            new Date(
+                                lastRefreshedAt
+                            ).getTime() +
+                            REFRESH_INTERVAL_MS;
+
+                    } else {
+
+                        nextRefreshAt =
+                            Date.now() +
+                            REFRESH_INTERVAL_MS;
+
+                    }
+
+
+                    updateRefreshInfo();
+
+                },
+
+                REFRESH_INTERVAL_MS
+
+            );
+
+    }
 
 
 
-/*
- * Automatically load jobs when page opens.
- */
+    /*
+     * =========================================================
+     * Initial load
+     * =========================================================
+     */
 
-searchJobs();
+    searchJobs();
+
+
+    /*
+     * Start countdown.
+     */
+
+    startCountdown();
+
+
+    /*
+     * Start automatic refresh.
+     */
+
+    startAutomaticRefresh();
 
 </script>
 
