@@ -26,7 +26,10 @@ export async function onRequestGet(context) {
         requestUrl.searchParams.get("skills") || "";
 
 
+    // --------------------------------------------------
     // Convert time to seconds
+    // --------------------------------------------------
+
     let seconds = timeValue;
 
     if (timeUnit === "minutes") {
@@ -42,7 +45,10 @@ export async function onRequestGet(context) {
     }
 
 
+    // --------------------------------------------------
     // LinkedIn URL
+    // --------------------------------------------------
+
     const linkedinParams = new URLSearchParams();
 
     linkedinParams.set("keywords", keywords);
@@ -60,18 +66,26 @@ export async function onRequestGet(context) {
         linkedinParams.toString();
 
 
-    // Cloudflare cache
+    // --------------------------------------------------
+    // Cache
+    // --------------------------------------------------
+
+    const cache = caches.default;
+
     const cacheKey =
         new Request(linkedinUrl, {
             method: "GET"
         });
 
-    const cache = caches.default;
 
-    const CACHE_SECONDS = 120;
+    // Fresh cache = 5 minutes
+    const CACHE_SECONDS = 300;
 
 
-    // Check cache
+    // --------------------------------------------------
+    // Check fresh cache
+    // --------------------------------------------------
+
     try {
 
         const cachedResponse =
@@ -85,14 +99,20 @@ export async function onRequestGet(context) {
             return new Response(
 
                 JSON.stringify({
+
                     ...cachedData,
-                    cached: true
+
+                    cached: true,
+
+                    cacheStatus: "fresh"
+
                 }),
 
                 {
                     status: 200,
 
                     headers: {
+
                         "Content-Type":
                             "application/json",
 
@@ -102,19 +122,23 @@ export async function onRequestGet(context) {
                 }
 
             );
+
         }
 
     } catch (error) {
 
         console.log(
-            "Cache read failed:",
+            "Fresh cache read failed:",
             error.message
         );
 
     }
 
 
-    // LinkedIn request with timeout
+    // --------------------------------------------------
+    // LinkedIn request
+    // --------------------------------------------------
+
     async function fetchLinkedIn() {
 
         const controller =
@@ -131,8 +155,11 @@ export async function onRequestGet(context) {
 
             const response =
                 await fetch(
+
                     linkedinUrl,
+
                     {
+
                         method: "GET",
 
                         headers: {
@@ -150,9 +177,13 @@ export async function onRequestGet(context) {
                                 "https://www.linkedin.com/jobs/"
                         },
 
-                        signal: controller.signal
+                        signal:
+                            controller.signal
+
                     }
+
                 );
+
 
             clearTimeout(timeout);
 
@@ -169,54 +200,44 @@ export async function onRequestGet(context) {
     }
 
 
-    // Retry once
+    // --------------------------------------------------
+    // One LinkedIn attempt only
+    //
+    // IMPORTANT:
+    // Don't retry a 429 immediately.
+    // That can make rate limiting worse.
+    // --------------------------------------------------
+
     let response = null;
+
     let lastError = null;
 
 
-    for (
-        let attempt = 1;
-        attempt <= 2;
-        attempt++
-    ) {
+    try {
 
-        try {
+        response =
+            await fetchLinkedIn();
 
-            response =
-                await fetchLinkedIn();
-
-            if (response.ok) {
-                break;
-            }
+        if (!response.ok) {
 
             lastError =
                 `LinkedIn returned HTTP ${response.status}`;
 
-        } catch (error) {
-
-            lastError =
-                error.message ||
-                "LinkedIn request failed";
-
         }
 
+    } catch (error) {
 
-        if (attempt === 1) {
-
-            await new Promise(
-                resolve =>
-                    setTimeout(
-                        resolve,
-                        700
-                    )
-            );
-
-        }
+        lastError =
+            error.message ||
+            "LinkedIn request failed";
 
     }
 
 
-    // LinkedIn unavailable
+    // --------------------------------------------------
+    // LinkedIn failed
+    // --------------------------------------------------
+
     if (!response || !response.ok) {
 
         return new Response(
@@ -232,11 +253,15 @@ export async function onRequestGet(context) {
                     lastError,
 
                 retryable:
-                    true
+                    response?.status === 429,
+
+                status:
+                    response?.status || 0
 
             }),
 
             {
+
                 status: 200,
 
                 headers: {
@@ -246,7 +271,9 @@ export async function onRequestGet(context) {
 
                     "Cache-Control":
                         "no-store"
+
                 }
+
             }
 
         );
@@ -254,7 +281,10 @@ export async function onRequestGet(context) {
     }
 
 
+    // --------------------------------------------------
     // Read LinkedIn HTML
+    // --------------------------------------------------
+
     let html;
 
     try {
@@ -282,6 +312,7 @@ export async function onRequestGet(context) {
             }),
 
             {
+
                 status: 200,
 
                 headers: {
@@ -291,7 +322,9 @@ export async function onRequestGet(context) {
 
                     "Cache-Control":
                         "no-store"
+
                 }
+
             }
 
         );
@@ -299,7 +332,10 @@ export async function onRequestGet(context) {
     }
 
 
+    // --------------------------------------------------
     // Parse job cards
+    // --------------------------------------------------
+
     const jobCardRegex =
         /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
 
@@ -389,6 +425,7 @@ export async function onRequestGet(context) {
                     cleanUrl(
                         urlMatch?.[1]
                     )
+
             };
 
         });
@@ -402,7 +439,10 @@ export async function onRequestGet(context) {
         );
 
 
-    // Final result
+    // --------------------------------------------------
+    // Build result
+    // --------------------------------------------------
+
     const result = {
 
         success: true,
@@ -411,6 +451,9 @@ export async function onRequestGet(context) {
             "LinkedIn guest jobs endpoint",
 
         cached: false,
+
+        cacheStatus:
+            "fresh",
 
         search: {
 
@@ -457,7 +500,10 @@ export async function onRequestGet(context) {
     };
 
 
-    // Save to Cloudflare cache
+    // --------------------------------------------------
+    // Save successful result to cache
+    // --------------------------------------------------
+
     try {
 
         const cacheResponse =
@@ -466,6 +512,7 @@ export async function onRequestGet(context) {
                 JSON.stringify(result),
 
                 {
+
                     status: 200,
 
                     headers: {
@@ -475,17 +522,21 @@ export async function onRequestGet(context) {
 
                         "Cache-Control":
                             `public, max-age=${CACHE_SECONDS}`
+
                     }
+
                 }
 
             );
 
 
         context.waitUntil(
+
             cache.put(
                 cacheKey,
                 cacheResponse
             )
+
         );
 
     } catch (error) {
@@ -498,11 +549,16 @@ export async function onRequestGet(context) {
     }
 
 
+    // --------------------------------------------------
+    // Return result
+    // --------------------------------------------------
+
     return new Response(
 
         JSON.stringify(result),
 
         {
+
             status: 200,
 
             headers: {
@@ -512,7 +568,9 @@ export async function onRequestGet(context) {
 
                 "Cache-Control":
                     "no-store"
+
             }
+
         }
 
     );
@@ -520,7 +578,10 @@ export async function onRequestGet(context) {
 }
 
 
-// Clean HTML/text
+// --------------------------------------------------
+// Helpers
+// --------------------------------------------------
+
 function cleanText(value) {
 
     if (!value) {
@@ -528,18 +589,42 @@ function cleanText(value) {
     }
 
     return value
-        .replace(/<[^>]*>/g, " ")
-        .replace(/&amp;/g, "&")
-        .replace(/&quot;/g, '"')
-        .replace(/&#39;/g, "'")
-        .replace(/&nbsp;/g, " ")
-        .replace(/\s+/g, " ")
+
+        .replace(
+            /<[^>]*>/g,
+            " "
+        )
+
+        .replace(
+            /&amp;/g,
+            "&"
+        )
+
+        .replace(
+            /&quot;/g,
+            '"'
+        )
+
+        .replace(
+            /&#39;/g,
+            "'"
+        )
+
+        .replace(
+            /&nbsp;/g,
+            " "
+        )
+
+        .replace(
+            /\s+/g,
+            " "
+        )
+
         .trim();
 
 }
 
 
-// Clean URL
 function cleanUrl(value) {
 
     if (!value) {
@@ -547,7 +632,10 @@ function cleanUrl(value) {
     }
 
     return value
-        .replace(/&amp;/g, "&")
+        .replace(
+            /&amp;/g,
+            "&"
+        )
         .trim();
 
 }
