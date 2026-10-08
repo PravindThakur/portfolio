@@ -73,19 +73,24 @@ export async function onRequestGet(context) {
         });
 
         if (!response.ok) {
-            return new Response(
-                JSON.stringify({
-                    success: false,
-                    error: `LinkedIn returned HTTP ${response.status}`
-                }),
-                {
-                    status: 502,
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }
-            );
+    const errorBody = await response.text();
+
+    return new Response(
+        JSON.stringify({
+            success: false,
+            error: `LinkedIn returned HTTP ${response.status}`,
+            linkedinStatus: response.status,
+            responseLength: errorBody.length
+        }),
+        {
+            status: 502,
+            headers: {
+                "Content-Type": "application/json",
+                "Cache-Control": "no-store"
+            }
         }
+    );
+}
 
         const html = await response.text();
 
