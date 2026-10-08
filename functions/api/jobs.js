@@ -1,132 +1,143 @@
+/**
+ * Cloudflare Pages Function
+ *
+ * Purpose:
+ * - Fetch relevant LinkedIn jobs for India
+ * - Keep a rolling 30-day archive
+ * - Refresh LinkedIn at most once every 15 minutes
+ * - Deduplicate jobs by LinkedIn Job ID
+ * - Sort strictly by LinkedIn postedAt
+ * - Automatically remove jobs older than 30 days
+ *
+ * No D1 database required.
+ * Uses Cloudflare Cache API.
+ */
+
+const ARCHIVE_DAYS = 30;
+
+const REFRESH_MINUTES = 15;
+const REFRESH_SECONDS = REFRESH_MINUTES * 60;
+
+const ARCHIVE_CACHE_KEY =
+    "https://pravindthakur.com/__job_archive_v3";
+
+const REFRESH_CACHE_KEY =
+    "https://pravindthakur.com/__job_refresh_v3";
+
+const LINKEDIN_URL =
+    "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search";
+
+
 export async function onRequestGet(context) {
 
-    /*
-     * =========================================================
-     * SETTINGS
-     * =========================================================
-     */
+    const request =
+        context.request;
 
-    // Keep jobs for 30 days
-    const ARCHIVE_DAYS = 30;
+    const cache =
+        caches.default;
 
-    // Contact LinkedIn at most once every 15 minutes
-    const REFRESH_SECONDS = 15 * 60;
+    const now =
+        new Date();
 
-    const now = new Date();
-
-    const cutoff = new Date(
+    const cutoffTime =
         now.getTime() -
-        ARCHIVE_DAYS * 24 * 60 * 60 * 1000
-    );
+        ARCHIVE_DAYS *
+        24 *
+        60 *
+        60 *
+        1000;
 
 
     /*
-     * =========================================================
-     * CACHE
-     *
-     * We use Cloudflare Cache as a lightweight rolling archive.
-     *
-     * No D1 database is required.
-     * =========================================================
+     * ---------------------------------------------------------
+     * 1. Read existing archive
+     * ---------------------------------------------------------
      */
 
-    const cache = caches.default;
-
-    const origin =
-        new URL(context.request.url).origin;
-
-
-    /*
-     * Cache containing our accumulated 30-day job archive.
-     */
-
-    const archiveUrl =
-        `${origin}/__job_archive_v2`;
-
-
-    /*
-     * Cache used to control how often we contact LinkedIn.
-     */
-
-    const refreshUrl =
-        `${origin}/__job_refresh_v2`;
-
-
-    const archiveKey =
-        new Request(
-            archiveUrl,
-            {
-                method: "GET"
-            }
-        );
-
-
-    const refreshKey =
-        new Request(
-            refreshUrl,
-            {
-                method: "GET"
-            }
-        );
-
-
-    /*
-     * =========================================================
-     * 1. READ EXISTING JOB ARCHIVE
-     * =========================================================
-     */
-
-    let archive = [];
+    let archiveData = {
+        jobs: [],
+        refreshedAt: null
+    };
 
 
     try {
 
-        const cachedArchive =
+        const archiveResponse =
             await cache.match(
-                archiveKey
+                ARCHIVE_CACHE_KEY
             );
 
 
-        if (cachedArchive) {
+        if (archiveResponse) {
 
-            archive =
-                await cachedArchive.json();
+            const parsed =
+                await archiveResponse.json();
+
+
+            /*
+             * Support both the new object format
+             * and the older array format.
+             */
+
+            if (
+                Array.isArray(parsed)
+            ) {
+
+                archiveData.jobs =
+                    parsed;
+
+            } else {
+
+                archiveData.jobs =
+                    Array.isArray(parsed.jobs)
+                        ? parsed.jobs
+                        : [];
+
+                archiveData.refreshedAt =
+                    parsed.refreshedAt ||
+                    null;
+
+            }
 
         }
 
     } catch (error) {
 
-        console.log(
-            "Archive read failed:",
-            error.message
+        console.error(
+            "Archive read error:",
+            error
         );
-
-        archive = [];
 
     }
 
 
+    let jobs =
+        archiveData.jobs || [];
+
+
+    let refreshedAt =
+        archiveData.refreshedAt || null;
+
+
     /*
-     * =========================================================
-     * 2. REMOVE JOBS OLDER THAN 30 DAYS
-     * =========================================================
+     * ---------------------------------------------------------
+     * 2. Remove jobs older than 30 days
+     * ---------------------------------------------------------
      */
 
-    archive =
-        archive.filter(
+    jobs =
+        jobs.filter(
             job => {
 
-                const postedAt =
+                const postedTime =
                     new Date(
-                        job.postedAt
-                    );
+                        job.postedAt || 0
+                    ).getTime();
 
 
                 return (
-                    !isNaN(
-                        postedAt.getTime()
-                    ) &&
-                    postedAt >= cutoff
+                    postedTime >=
+                    cutoffTime
                 );
 
             }
@@ -134,157 +145,97 @@ export async function onRequestGet(context) {
 
 
     /*
-     * =========================================================
-     * 3. CHECK LINKEDIN REFRESH STATUS
-     * =========================================================
+     * ---------------------------------------------------------
+     * 3. Check whether LinkedIn refresh is required
+     * ---------------------------------------------------------
      */
 
-    let shouldRefresh = true;
+    let shouldRefresh =
+        true;
 
 
     try {
 
-        const refreshCache =
+        const refreshResponse =
             await cache.match(
-                refreshKey
+                REFRESH_CACHE_KEY
             );
 
 
-        if (refreshCache) {
+        if (refreshResponse) {
 
-            shouldRefresh = false;
+            shouldRefresh =
+                false;
 
         }
 
     } catch (error) {
 
-        console.log(
-            "Refresh cache check failed:",
-            error.message
+        console.error(
+            "Refresh marker error:",
+            error
         );
 
     }
 
 
-    /*
-     * =========================================================
-     * VARIABLES FOR RESPONSE
-     * =========================================================
-     */
+    let newlyAdded =
+        0;
 
-    let linkedinStatus = 0;
-
-    let linkedinError = null;
-
-    let newlyDiscovered = 0;
+    let linkedinStatus =
+        "not_refreshed";
 
 
     /*
-     * =========================================================
-     * 4. FETCH LINKEDIN
-     * =========================================================
-     *
-     * Only one LinkedIn request is made during a refresh.
-     *
-     * This is intentional.
-     *
-     * Multiple rapid LinkedIn requests previously caused
-     * HTTP 429 rate limiting.
-     * =========================================================
+     * ---------------------------------------------------------
+     * 4. Refresh LinkedIn if required
+     * ---------------------------------------------------------
      */
 
     if (shouldRefresh) {
 
+        linkedinStatus =
+            "refreshing";
 
-        /*
-         * -----------------------------------------------------
-         * SEARCH TERMS
-         * -----------------------------------------------------
-         */
-
-        const keywords =
-            'Corporate Actions OR ' +
-            'Reference Data OR ' +
-            'Capital Markets OR ' +
-            'Asset Servicing OR ' +
-            'Trade Settlement OR ' +
-            '"Business Analyst" OR ' +
-            '"Business Analysis" OR ' +
-            '"Production Support" OR ' +
-            '"Application Support" OR ' +
-            '"L2 Support" OR ' +
-            '"L3 Support" OR ' +
-            '"Production Analyst"';
-
-
-        const location =
-            "India";
-
-
-        /*
-         * Search the last 30 days.
-         */
-
-        const seconds =
-            ARCHIVE_DAYS *
-            24 *
-            60 *
-            60;
-
-
-        const params =
-            new URLSearchParams();
-
-
-        params.set(
-            "keywords",
-            keywords
-        );
-
-
-        params.set(
-            "location",
-            location
-        );
-
-
-        params.set(
-            "f_TPR",
-            `r${seconds}`
-        );
-
-
-        /*
-         * DD = Date Descending
-         *
-         * LinkedIn should return newest jobs first,
-         * but we ALSO sort ourselves later.
-         */
-
-        params.set(
-            "sortBy",
-            "DD"
-        );
-
-
-        params.set(
-            "start",
-            "0"
-        );
-
-
-        const linkedinUrl =
-            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?" +
-            params.toString();
-
-
-        /*
-         * -----------------------------------------------------
-         * CALL LINKEDIN
-         * -----------------------------------------------------
-         */
 
         try {
+
+            const keywords =
+                "Corporate Actions OR " +
+                "Reference Data OR " +
+                "Capital Markets OR " +
+                "Asset Servicing OR " +
+                "Trade Settlement OR " +
+                "\"Business Analyst\" OR " +
+                "\"Business Analysis\" OR " +
+                "\"Production Support\" OR " +
+                "\"Application Support\" OR " +
+                "\"L2 Support\" OR " +
+                "\"L3 Support\" OR " +
+                "\"Production Analyst\"";
+
+
+            const params =
+                new URLSearchParams({
+
+                    keywords,
+                    location: "India",
+
+                    f_TPR:
+                        "r2592000",
+
+                    sortBy:
+                        "DD",
+
+                    start:
+                        "0"
+
+                });
+
+
+            const linkedinUrl =
+                `${LINKEDIN_URL}?${params.toString()}`;
+
 
             const controller =
                 new AbortController();
@@ -292,42 +243,38 @@ export async function onRequestGet(context) {
 
             const timeout =
                 setTimeout(
-                    () => controller.abort(),
+                    () => {
+                        controller.abort();
+                    },
                     8000
                 );
 
 
-            const response =
+            const linkedinResponse =
                 await fetch(
                     linkedinUrl,
                     {
 
-                        method:
-                            "GET",
+                        method: "GET",
 
+                        headers: {
 
-                        headers:
-                            {
+                            "User-Agent":
+                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154.0.0.0 Safari/537.36",
 
-                                "User-Agent":
-                                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
-                                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
-                                    "Chrome/154.0.0.0 Safari/537.36",
+                            "Accept":
+                                "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
 
+                            "Accept-Language":
+                                "en-US,en;q=0.9",
 
-                                "Accept":
-                                    "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                            "Cache-Control":
+                                "no-cache",
 
+                            "Pragma":
+                                "no-cache"
 
-                                "Accept-Language":
-                                    "en-US,en;q=0.9",
-
-
-                                "Referer":
-                                    "https://www.linkedin.com/jobs/"
-
-                            },
-
+                        },
 
                         signal:
                             controller.signal
@@ -341,466 +288,249 @@ export async function onRequestGet(context) {
             );
 
 
-            linkedinStatus =
-                response.status;
-
-
-            /*
-             * -------------------------------------------------
-             * SUCCESSFUL LINKEDIN RESPONSE
-             * -------------------------------------------------
-             */
-
-            if (response.ok) {
-
-
-                const html =
-                    await response.text();
-
-
-                /*
-                 * =============================================
-                 * PARSE JOB CARDS
-                 * =============================================
-                 */
-
-                const jobCardRegex =
-                    /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
-
-
-                const cards = [];
-
-                let match;
-
-
-                while (
-                    (
-                        match =
-                            jobCardRegex.exec(
-                                html
-                            )
-                    ) !== null
-                ) {
-
-                    cards.push(
-                        match[1]
-                    );
-
-                }
-
-
-                const discoveredJobs = [];
-
-
-                /*
-                 * =============================================
-                 * EXTRACT EACH JOB
-                 * =============================================
-                 */
-
-                for (
-                    const card of cards
-                ) {
-
-
-                    /*
-                     * Job title
-                     */
-
-                    const titleMatch =
-                        card.match(
-                            /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
-                        );
-
-
-                    /*
-                     * Company
-                     */
-
-                    const companyMatch =
-                        card.match(
-                            /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
-                        );
-
-
-                    /*
-                     * Location
-                     */
-
-                    const locationMatch =
-                        card.match(
-                            /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
-                        );
-
-
-                    /*
-                     * LinkedIn job URL
-                     */
-
-                    const urlMatch =
-                        card.match(
-                            /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
-                        );
-
-
-                    /*
-                     * LinkedIn posting timestamp
-                     */
-
-                    const timeMatch =
-                        card.match(
-                            /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
-                        );
-
-
-                    /*
-                     * LinkedIn Job ID
-                     */
-
-                    const idMatch =
-                        card.match(
-                            /data-entity-urn="urn:li:jobPosting:(\d+)"/i
-                        );
-
-
-                    const jobId =
-                        idMatch?.[1] ||
-                        "";
-
-
-                    const title =
-                        cleanText(
-                            titleMatch?.[1]
-                        );
-
-
-                    const company =
-                        cleanText(
-                            companyMatch?.[1]
-                        );
-
-
-                    const location =
-                        cleanText(
-                            locationMatch?.[1]
-                        );
-
-
-                    const posted =
-                        cleanText(
-                            timeMatch?.[2]
-                        );
-
-
-                    const postedAt =
-                        timeMatch?.[1] ||
-                        "";
-
-
-                    const url =
-                        cleanUrl(
-                            urlMatch?.[1]
-                        );
-
-
-                    /*
-                     * -------------------------------------------------
-                     * Ignore incomplete jobs
-                     * -------------------------------------------------
-                     */
-
-                    if (
-                        !jobId ||
-                        !title ||
-                        !company ||
-                        !url ||
-                        !postedAt
-                    ) {
-
-                        continue;
-
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * Validate posting date
-                     * -------------------------------------------------
-                     */
-
-                    const postedDate =
-                        new Date(
-                            postedAt
-                        );
-
-
-                    if (
-                        isNaN(
-                            postedDate.getTime()
-                        )
-                    ) {
-
-                        continue;
-
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * Don't store jobs older than 30 days
-                     * -------------------------------------------------
-                     */
-
-                    if (
-                        postedDate <
-                        cutoff
-                    ) {
-
-                        continue;
-
-                    }
-
-
-                    /*
-                     * -------------------------------------------------
-                     * Add to discovered jobs
-                     * -------------------------------------------------
-                     */
-
-                    discoveredJobs.push({
-
-                        jobId:
-                            jobId,
-
-                        title:
-                            title,
-
-                        company:
-                            company,
-
-                        location:
-                            location,
-
-                        posted:
-                            posted,
-
-                        postedAt:
-                            postedDate.toISOString(),
-
-                        url:
-                            url,
-
-                        discoveredAt:
-                            now.toISOString()
-
-                    });
-
-                }
-
-
-                /*
-                 * =============================================
-                 * MERGE WITH EXISTING ARCHIVE
-                 * =============================================
-                 *
-                 * LinkedIn Job ID is used for deduplication.
-                 * =============================================
-                 */
-
-                const existingIds =
-                    new Set(
-                        archive.map(
-                            job =>
-                                job.jobId
-                        )
-                    );
-
-
-                for (
-                    const job of discoveredJobs
-                ) {
-
-                    /*
-                     * New job
-                     */
-
-                    if (
-                        !existingIds.has(
-                            job.jobId
-                        )
-                    ) {
-
-                        archive.push(
-                            job
-                        );
-
-
-                        existingIds.add(
-                            job.jobId
-                        );
-
-
-                        newlyDiscovered++;
-
-                    }
-
-                }
-
-
-                /*
-                 * =============================================
-                 * SAVE UPDATED ARCHIVE
-                 * =============================================
-                 */
-
-                try {
-
-                    await cache.put(
-
-                        archiveKey,
-
-                        new Response(
-
-                            JSON.stringify(
-                                archive
-                            ),
-
-                            {
-                                status:
-                                    200,
-
-                                headers:
-                                    {
-                                        "Content-Type":
-                                            "application/json",
-
-                                        /*
-                                         * Cache the archive for
-                                         * 30 days.
-                                         */
-                                        "Cache-Control":
-                                            `public, max-age=${ARCHIVE_DAYS * 24 * 60 * 60}`
-                                    }
-                            }
-
-                        )
-
-                    );
-
-                } catch (error) {
-
-                    console.log(
-                        "Archive cache write failed:",
-                        error.message
-                    );
-
-                }
-
-
-            } else {
-
-
-                /*
-                 * -------------------------------------------------
-                 * LINKEDIN ERROR
-                 * -------------------------------------------------
-                 */
-
-                linkedinError =
-                    `LinkedIn returned HTTP ${response.status}`;
+            if (
+                !linkedinResponse.ok
+            ) {
+
+                throw new Error(
+                    `LinkedIn HTTP ${linkedinResponse.status}`
+                );
 
             }
 
 
-        } catch (error) {
-
-            linkedinError =
-                error.message ||
-                "LinkedIn request failed";
-
-        }
+            const html =
+                await linkedinResponse.text();
 
 
-        /*
-         * =====================================================
-         * 5. MARK LINKEDIN AS REFRESHED
-         * =====================================================
-         *
-         * This prevents another LinkedIn request for 15 minutes.
-         *
-         * Even if LinkedIn gives us 429, we don't immediately
-         * hammer LinkedIn again.
-         * =====================================================
-         */
+            const fetchedJobs =
+                parseLinkedInJobs(
+                    html
+                );
 
-        try {
 
-            await cache.put(
+            /*
+             * -------------------------------------------------
+             * Merge jobs
+             * -------------------------------------------------
+             */
 
-                refreshKey,
+            const existingIds =
+                new Set(
+                    jobs
+                        .map(
+                            job =>
+                                String(
+                                    job.jobId
+                                )
+                        )
+                );
 
+
+            for (
+                const job of fetchedJobs
+            ) {
+
+                const postedTime =
+                    new Date(
+                        job.postedAt
+                    ).getTime();
+
+
+                /*
+                 * Ignore jobs outside
+                 * the 30-day window.
+                 */
+
+                if (
+                    !Number.isFinite(
+                        postedTime
+                    )
+                ) {
+
+                    continue;
+
+                }
+
+
+                if (
+                    postedTime <
+                    cutoffTime
+                ) {
+
+                    continue;
+
+                }
+
+
+                const jobId =
+                    String(
+                        job.jobId
+                    );
+
+
+                if (
+                    existingIds.has(
+                        jobId
+                    )
+                ) {
+
+                    continue;
+
+                }
+
+
+                jobs.push(
+                    job
+                );
+
+                existingIds.add(
+                    jobId
+                );
+
+                newlyAdded++;
+
+            }
+
+
+            /*
+             * LinkedIn was successfully
+             * refreshed.
+             */
+
+            refreshedAt =
+                new Date().toISOString();
+
+
+            linkedinStatus =
+                "success";
+
+
+            /*
+             * -------------------------------------------------
+             * Save refresh marker
+             * -------------------------------------------------
+             *
+             * This prevents repeated LinkedIn
+             * requests for 15 minutes.
+             */
+
+            const refreshMarker =
                 new Response(
-
                     JSON.stringify({
 
-                        refreshedAt:
-                            now.toISOString()
+                        refreshedAt
 
                     }),
-
                     {
 
-                        status:
-                            200,
+                        headers: {
 
-                        headers:
-                            {
-                                "Content-Type":
-                                    "application/json",
+                            "Content-Type":
+                                "application/json",
 
-                                "Cache-Control":
-                                    `public, max-age=${REFRESH_SECONDS}`
-                            }
+                            "Cache-Control":
+                                `public, max-age=${REFRESH_SECONDS}`
+
+                        }
 
                     }
+                );
 
-                )
 
+            await cache.put(
+                REFRESH_CACHE_KEY,
+                refreshMarker
             );
+
 
         } catch (error) {
 
-            console.log(
-                "Refresh marker write failed:",
-                error.message
+            console.error(
+                "LinkedIn refresh error:",
+                error
+            );
+
+
+            linkedinStatus =
+                "error";
+
+
+            /*
+             * Even if LinkedIn fails,
+             * create a 15-minute marker.
+             *
+             * This prevents the website
+             * from hammering LinkedIn.
+             */
+
+            const refreshMarker =
+                new Response(
+                    JSON.stringify({
+
+                        attemptedAt:
+                            new Date().toISOString(),
+
+                        error:
+                            String(
+                                error.message ||
+                                error
+                            )
+
+                    }),
+                    {
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "Cache-Control":
+                                `public, max-age=${REFRESH_SECONDS}`
+
+                        }
+
+                    }
+                );
+
+
+            await cache.put(
+                REFRESH_CACHE_KEY,
+                refreshMarker
             );
 
         }
+
+    } else {
+
+        linkedinStatus =
+            "cached";
 
     }
 
 
     /*
-     * =========================================================
-     * 6. FINAL 30-DAY CLEANUP
-     * =========================================================
+     * ---------------------------------------------------------
+     * 5. Final 30-day cleanup
+     * ---------------------------------------------------------
      */
 
-    archive =
-        archive.filter(
+    jobs =
+        jobs.filter(
             job => {
 
-                const postedAt =
+                const postedTime =
                     new Date(
-                        job.postedAt
-                    );
+                        job.postedAt || 0
+                    ).getTime();
 
 
                 return (
-                    !isNaN(
-                        postedAt.getTime()
+                    Number.isFinite(
+                        postedTime
                     ) &&
-                    postedAt >= cutoff
+                    postedTime >=
+                    cutoffTime
                 );
 
             }
@@ -808,47 +538,66 @@ export async function onRequestGet(context) {
 
 
     /*
-     * =========================================================
-     * 7. STRICT NEWEST-FIRST SORT
-     * =========================================================
-     *
-     * THIS IS THE IMPORTANT PART.
-     *
-     * We sort using LinkedIn's actual posting timestamp.
-     *
-     * NOT:
-     * - discovery time
-     * - cache time
-     * - array position
-     * - LinkedIn response order
-     *
-     * Therefore:
-     *
-     * 10 minutes ago
-     *       ↓
-     * 30 minutes ago
-     *       ↓
-     * 2 hours ago
-     *       ↓
-     * 1 day ago
-     *       ↓
-     * 5 days ago
-     *
-     * =========================================================
+     * ---------------------------------------------------------
+     * 6. Deduplicate again
+     * ---------------------------------------------------------
      */
 
-    archive.sort(
-        (a, b) => {
+    const uniqueJobs =
+        new Map();
+
+
+    for (
+        const job of jobs
+    ) {
+
+        if (
+            !job ||
+            !job.jobId
+        ) {
+
+            continue;
+
+        }
+
+
+        uniqueJobs.set(
+            String(
+                job.jobId
+            ),
+            job
+        );
+
+    }
+
+
+    jobs =
+        Array.from(
+            uniqueJobs.values()
+        );
+
+
+    /*
+     * ---------------------------------------------------------
+     * 7. Sort strictly by actual LinkedIn postedAt
+     * ---------------------------------------------------------
+     */
+
+    jobs.sort(
+        (
+            a,
+            b
+        ) => {
 
             const dateA =
                 new Date(
-                    a.postedAt
+                    a.postedAt || 0
                 ).getTime();
 
 
             const dateB =
                 new Date(
-                    b.postedAt
+                    b.postedAt || 0
                 ).getTime();
 
 
@@ -859,9 +608,63 @@ export async function onRequestGet(context) {
 
 
     /*
-     * =========================================================
-     * 8. RETURN RESULTS
-     * =========================================================
+     * ---------------------------------------------------------
+     * 8. Save archive
+     * ---------------------------------------------------------
+     */
+
+    const archivePayload = {
+
+        jobs,
+
+        refreshedAt
+
+    };
+
+
+    try {
+
+        const archiveResponse =
+            new Response(
+                JSON.stringify(
+                    archivePayload
+                ),
+                {
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Cache-Control":
+                            `public, max-age=${ARCHIVE_DAYS * 24 * 60 * 60}`
+
+                    }
+
+                }
+            );
+
+
+        await cache.put(
+            ARCHIVE_CACHE_KEY,
+            archiveResponse
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Archive save error:",
+            error
+        );
+
+    }
+
+
+    /*
+     * ---------------------------------------------------------
+     * 9. Return response
+     * ---------------------------------------------------------
      */
 
     return new Response(
@@ -872,22 +675,30 @@ export async function onRequestGet(context) {
                 true,
 
             count:
-                archive.length,
+                jobs.length,
 
-            newlyAdded:
-                newlyDiscovered,
+            newlyAdded,
 
             retention:
                 "30 days",
 
-            refreshInterval:
-                "15 minutes",
+            refreshIntervalMinutes:
+                REFRESH_MINUTES,
+
+            refreshedAt,
+
+            nextRefreshInMinutes:
+                REFRESH_MINUTES,
 
             sorted:
-                "newest first",
+                "postedAt descending",
 
-            searchProfile:
-                [
+            searchProfile: {
+
+                location:
+                    "India",
+
+                keywords: [
                     "Corporate Actions",
                     "Reference Data",
                     "Capital Markets",
@@ -900,42 +711,30 @@ export async function onRequestGet(context) {
                     "L2 Support",
                     "L3 Support",
                     "Production Analyst"
-                ],
+                ]
+
+            },
 
             linkedin:
-                {
+                linkedinStatus,
 
-                    refreshed:
-                        shouldRefresh,
-
-                    status:
-                        linkedinStatus,
-
-                    error:
-                        linkedinError
-
-                },
-
-            jobs:
-                archive
+            jobs
 
         }),
 
         {
 
-            status:
-                200,
+            status: 200,
 
-            headers:
-                {
+            headers: {
 
-                    "Content-Type":
-                        "application/json",
+                "Content-Type":
+                    "application/json",
 
-                    "Cache-Control":
-                        "no-store"
+                "Cache-Control":
+                    "no-store, no-cache, must-revalidate"
 
-                }
+            }
 
         }
 
@@ -945,93 +744,533 @@ export async function onRequestGet(context) {
 
 
 /*
- * =========================================================
- * TEXT CLEANING
- * =========================================================
+ * ============================================================
+ * LinkedIn HTML parser
+ * ============================================================
+ */
+
+function parseLinkedInJobs(
+    html
+) {
+
+    const jobs = [];
+
+
+    /*
+     * LinkedIn guest endpoint returns
+     * job cards inside <li> elements.
+     */
+
+    const cardRegex =
+        /<li[\s\S]*?base-card[\s\S]*?<\/li>/gi;
+
+
+    const cards =
+        html.match(
+            cardRegex
+        ) || [];
+
+
+    for (
+        const card of cards
+    ) {
+
+        try {
+
+            /*
+             * Job ID
+             */
+
+            const idMatch =
+                card.match(
+                    /data-entity-urn="urn:li:jobPosting:(\d+)"/i
+                );
+
+
+            if (
+                !idMatch
+            ) {
+
+                continue;
+
+            }
+
+
+            const jobId =
+                idMatch[1];
+
+
+            /*
+             * Job title
+             */
+
+            const titleMatch =
+                card.match(
+                    /base-search-card__title[^>]*>([\s\S]*?)<\/h3>/i
+                );
+
+
+            const title =
+                cleanText(
+                    titleMatch
+                        ? titleMatch[1]
+                        : ""
+                );
+
+
+            /*
+             * Company
+             */
+
+            const companyMatch =
+                card.match(
+                    /base-search-card__subtitle[^>]*>([\s\S]*?)<\/h4>/i
+                );
+
+
+            const company =
+                cleanText(
+                    companyMatch
+                        ? companyMatch[1]
+                        : ""
+                );
+
+
+            /*
+             * Location
+             */
+
+            const locationMatch =
+                card.match(
+                    /job-search-card__location[^>]*>([\s\S]*?)<\/span>/i
+                );
+
+
+            const location =
+                cleanText(
+                    locationMatch
+                        ? locationMatch[1]
+                        : ""
+                );
+
+
+            /*
+             * Posted text
+             */
+
+            const postedMatch =
+                card.match(
+                    /date[^>]*>([\s\S]*?)<\/time>/i
+                );
+
+
+            const posted =
+                cleanText(
+                    postedMatch
+                        ? postedMatch[1]
+                        : ""
+                );
+
+
+            /*
+             * URL
+             */
+
+            const urlMatch =
+                card.match(
+                    /base-card__full-link[^>]*href="([^"]+)"/i
+                );
+
+
+            let url =
+                urlMatch
+                    ? urlMatch[1]
+                    : "";
+
+
+            url =
+                cleanUrl(
+                    url
+                );
+
+
+            /*
+             * Normalize LinkedIn relative URLs.
+             */
+
+            if (
+                url &&
+                url.startsWith("/")
+            ) {
+
+                url =
+                    "https://www.linkedin.com" +
+                    url;
+
+            }
+
+
+            /*
+             * Convert LinkedIn relative
+             * posted text into timestamp.
+             */
+
+            const postedAt =
+                normalizePostedDate(
+                    posted
+                );
+
+
+            /*
+             * Ignore incomplete records.
+             */
+
+            if (
+                !jobId ||
+                !title ||
+                !company ||
+                !postedAt
+            ) {
+
+                continue;
+
+            }
+
+
+            jobs.push({
+
+                jobId,
+
+                title,
+
+                company,
+
+                location,
+
+                posted,
+
+                postedAt,
+
+                url,
+
+                discoveredAt:
+                    new Date().toISOString()
+
+            });
+
+
+        } catch (error) {
+
+            console.error(
+                "Card parsing error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    return jobs;
+
+}
+
+
+/*
+ * ============================================================
+ * Convert LinkedIn "2 days ago", "1 week ago", etc.
+ * to an ISO timestamp.
+ * ============================================================
+ */
+
+function normalizePostedDate(
+    posted
+) {
+
+    if (
+        !posted
+    ) {
+
+        return null;
+
+    }
+
+
+    const value =
+        posted
+            .toLowerCase()
+            .trim();
+
+
+    const now =
+        Date.now();
+
+
+    /*
+     * Just now
+     */
+
+    if (
+        value.includes("just now")
+    ) {
+
+        return new Date(
+            now
+        ).toISOString();
+
+    }
+
+
+    /*
+     * Minutes
+     */
+
+    const minuteMatch =
+        value.match(
+            /(\d+)\s*minute/
+        );
+
+
+    if (
+        minuteMatch
+    ) {
+
+        return new Date(
+            now -
+            Number(
+                minuteMatch[1]
+            ) *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    /*
+     * Hours
+     */
+
+    const hourMatch =
+        value.match(
+            /(\d+)\s*hour/
+        );
+
+
+    if (
+        hourMatch
+    ) {
+
+        return new Date(
+            now -
+            Number(
+                hourMatch[1]
+            ) *
+            60 *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    /*
+     * Days
+     */
+
+    const dayMatch =
+        value.match(
+            /(\d+)\s*day/
+        );
+
+
+    if (
+        dayMatch
+    ) {
+
+        return new Date(
+            now -
+            Number(
+                dayMatch[1]
+            ) *
+            24 *
+            60 *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    /*
+     * Weeks
+     */
+
+    const weekMatch =
+        value.match(
+            /(\d+)\s*week/
+        );
+
+
+    if (
+        weekMatch
+    ) {
+
+        return new Date(
+            now -
+            Number(
+                weekMatch[1]
+            ) *
+            7 *
+            24 *
+            60 *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    /*
+     * Months
+     */
+
+    const monthMatch =
+        value.match(
+            /(\d+)\s*month/
+        );
+
+
+    if (
+        monthMatch
+    ) {
+
+        return new Date(
+            now -
+            Number(
+                monthMatch[1]
+            ) *
+            30 *
+            24 *
+            60 *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    /*
+     * LinkedIn sometimes returns
+     * "30+ days ago".
+     */
+
+    if (
+        value.includes("30+")
+    ) {
+
+        return new Date(
+            now -
+            31 *
+            24 *
+            60 *
+            60 *
+            1000
+        ).toISOString();
+
+    }
+
+
+    return null;
+
+}
+
+
+/*
+ * ============================================================
+ * Clean HTML text
+ * ============================================================
  */
 
 function cleanText(
     value
 ) {
 
-    if (!value) {
+    if (
+        !value
+    ) {
 
         return "";
 
     }
 
 
-    return String(value)
-
+    return String(
+        value
+    )
         .replace(
             /<[^>]*>/g,
             " "
         )
-
         .replace(
             /&amp;/g,
             "&"
         )
-
         .replace(
             /&quot;/g,
             '"'
         )
-
         .replace(
             /&#39;/g,
             "'"
         )
-
+        .replace(
+            /&apos;/g,
+            "'"
+        )
         .replace(
             /&nbsp;/g,
             " "
         )
-
-        .replace(
-            /&ndash;/g,
-            "-"
-        )
-
-        .replace(
-            /&mdash;/g,
-            "-"
-        )
-
         .replace(
             /\s+/g,
             " "
         )
-
         .trim();
 
 }
 
 
 /*
- * =========================================================
- * URL CLEANING
- * =========================================================
+ * ============================================================
+ * Clean URL
+ * ============================================================
  */
 
 function cleanUrl(
     value
 ) {
 
-    if (!value) {
+    if (
+        !value
+    ) {
 
         return "";
 
     }
 
 
-    return String(value)
-
+    return String(
+        value
+    )
         .replace(
             /&amp;/g,
             "&"
         )
-
+        .replace(
+            /\\u002F/g,
+            "/"
+        )
         .trim();
 
 }
