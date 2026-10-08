@@ -393,7 +393,7 @@
     const status = document.getElementById("status");
     const results = document.getElementById("results");
 
-    status.innerHTML = "Searching...";
+    status.innerHTML = "Searching LinkedIn...";
     results.innerHTML = "";
 
     const keywords =
@@ -462,60 +462,140 @@
         );
 
         if (!response.ok) {
-            throw new Error("API request failed");
+            throw new Error(
+                `API request failed: ${response.status}`
+            );
         }
 
         const data = await response.json();
 
         console.log("API response:", data);
 
+        /*
+         * Check API response
+         */
+
+        if (!data.success) {
+            throw new Error(
+                data.error || "Job search failed"
+            );
+        }
+
+        /*
+         * No jobs found
+         */
+
+        if (!data.jobs || data.jobs.length === 0) {
+
+            status.innerHTML =
+                "No jobs found for your search.";
+
+            results.innerHTML = `
+                <div class="job-card">
+                    <div class="job-title">
+                        No jobs found
+                    </div>
+
+                    <div class="job-meta">
+                        Try increasing the posted-within time
+                        or changing your keywords/location.
+                    </div>
+                </div>
+            `;
+
+            return;
+        }
+
+        /*
+         * Show result count
+         */
+
         status.innerHTML =
-            "API connection successful. Filters received by Cloudflare.";
+            `${data.count} jobs found`;
 
-        results.innerHTML = `
-            <div class="job-card">
-                <div class="job-title">
-                    Backend received your search
-                </div>
+        /*
+         * Display jobs
+         */
 
-                <div class="job-meta">
-                    Keywords: ${data.filters.keywords}
-                </div>
+        results.innerHTML = data.jobs.map(job => {
 
-                <div class="job-meta">
-                    Location: ${data.filters.location}
-                </div>
+            return `
+                <div class="job-card">
 
-                <div class="job-meta">
-                    Posted within:
-                    ${data.filters.minutes} minutes
-                </div>
+                    <div class="job-title">
+                        ${escapeHtml(job.title)}
+                    </div>
 
-                <div class="job-meta">
-                    Workplace:
-                    ${data.filters.workplace.join(", ") || "None"}
-                </div>
+                    <div class="job-meta">
+                        <strong>
+                            ${escapeHtml(job.company)}
+                        </strong>
+                    </div>
 
-                <div class="job-meta">
-                    Skills:
-                    ${data.filters.skills.join(", ") || "None"}
-                </div>
+                    <div class="job-meta">
+                        📍 ${escapeHtml(job.location || "India")}
+                    </div>
 
-                <div class="job-meta">
-                    Sort:
-                    ${data.filters.sort}
+                    <div class="job-meta">
+                        🕒 ${escapeHtml(job.posted || "Recently posted")}
+                    </div>
+
+                    <div style="margin-top: 15px;">
+                        <a
+                            href="${job.url}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="btn btn-primary"
+                        >
+                            View on LinkedIn
+                        </a>
+                    </div>
+
                 </div>
-            </div>
-        `;
+            `;
+
+        }).join("");
 
     } catch (error) {
 
-        console.error(error);
+        console.error("Job search error:", error);
 
         status.innerHTML =
-            "Unable to connect to the Job Search API.";
+            "Unable to load jobs.";
 
+        results.innerHTML = `
+            <div class="job-card">
+
+                <div class="job-title">
+                    Something went wrong
+                </div>
+
+                <div class="job-meta">
+                    ${escapeHtml(error.message)}
+                </div>
+
+            </div>
+        `;
     }
+}
+
+
+/*
+ * Safely escape text before displaying it
+ */
+
+function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 
