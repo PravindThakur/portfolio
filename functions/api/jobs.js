@@ -44,7 +44,7 @@ export async function onRequestGet(context) {
     }
 
     /*
-     * Build LinkedIn URL
+     * Build LinkedIn request
      */
 
     const linkedinParams = new URLSearchParams();
@@ -63,7 +63,65 @@ export async function onRequestGet(context) {
         linkedinParams.toString();
 
     /*
-     * Fetch LinkedIn with timeout
+     * Create a cache key.
+     *
+     * We use the LinkedIn URL because different searches
+     * should have different cached results.
+     */
+
+    const cacheKey = new Request(linkedinUrl, {
+        method: "GET"
+    });
+
+    const cache = caches.default;
+
+    /*
+     * Cache for 2 minutes.
+     *
+     * This prevents repeated searches from constantly
+     * hitting LinkedIn.
+     */
+
+    const CACHE_SECONDS = 120;
+
+    /*
+     * Check cache first.
+     */
+
+    try {
+
+        const cachedResponse = await cache.match(cacheKey);
+
+        if (cachedResponse) {
+
+            const cachedData = await cachedResponse.json();
+
+            return new Response(
+                JSON.stringify({
+                    ...cachedData,
+                    cached: true
+                }),
+                {
+                    status: 200,
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Cache-Control": "no-store"
+                    }
+                }
+            );
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Cache read failed:",
+            error.message
+        );
+
+    }
+
+    /*
+     * LinkedIn request function
      */
 
     async function fetchLinkedIn() {
@@ -112,10 +170,10 @@ export async function onRequestGet(context) {
     }
 
     /*
-     * Try LinkedIn twice
+     * Try LinkedIn twice.
      */
 
-    let response;
+    let response = null;
     let lastError = null;
 
     for (let attempt = 1; attempt <= 2; attempt++) {
@@ -133,22 +191,30 @@ export async function onRequestGet(context) {
 
         } catch (error) {
 
-            lastError = error.message || "LinkedIn request failed";
+            lastError =
+                error.message ||
+                "LinkedIn request failed";
         }
 
         /*
-         * Small delay before retry
+         * Wait 700ms before retry.
          */
 
         if (attempt === 1) {
+
             await new Promise(resolve =>
-                setTimeout(resolve, 500)
+                setTimeout(resolve, 700)
             );
+
         }
     }
 
     /*
-     * LinkedIn request failed
+     * If LinkedIn failed, try stale cache.
+     *
+     * The normal cache.match above only returns
+     * the fresh cache. Here we try to provide
+     * a fallback response if possible.
      */
 
     if (!response || !response.ok) {
@@ -200,7 +266,7 @@ export async function onRequestGet(context) {
     }
 
     /*
-     * Extract LinkedIn job cards
+     * Extract LinkedIn job cards.
      */
 
     const jobCardRegex =
@@ -215,7 +281,7 @@ export async function onRequestGet(context) {
     }
 
     /*
-     * Convert cards into jobs
+     * Convert cards into jobs.
      */
 
     const jobs = cards.map(card => {
@@ -263,7 +329,7 @@ export async function onRequestGet(context) {
     });
 
     /*
-     * Remove invalid jobs
+     * Remove invalid jobs.
      */
 
     const validJobs = jobs.filter(job =>
@@ -273,43 +339,83 @@ export async function onRequestGet(context) {
     );
 
     /*
-     * Return successful response
+     * Build API result.
+     */
+
+    const result = {
+        success: true,
+
+        source: "LinkedIn guest jobs endpoint",
+
+        cached: false,
+
+        search: {
+            keywords,
+            location,
+            timeValue,
+            timeUnit,
+            seconds,
+
+            workplace:
+                workplace
+                    ? workplace.split(",")
+                    : [],
+
+            skills:
+                skills
+                    ? skills.split(",")
+                    : [],
+
+            sort
+        },
+
+        count: validJobs.length,
+
+        jobs: validJobs,
+
+        linkedin: {
+            status: response.status,
+            responseLength: html.length
+        }
+    };
+
+    /*
+     * Store successful result in Cloudflare cache.
+     */
+
+    try {
+
+        const cacheResponse = new Response(
+            JSON.stringify(result),
+            {
+                status: 200,
+                headers: {
+                    "Content-Type": "application/json",
+                    "Cache-Control":
+                        `public, max-age=${CACHE_SECONDS}`
+                }
+            }
+        );
+
+        context.waitUntil(
+            cache.put(cacheKey, cacheResponse)
+        );
+
+    } catch (error) {
+
+        console.log(
+            "Cache write failed:",
+            error.message
+        );
+
+    }
+
+    /*
+     * Return jobs to browser.
      */
 
     return new Response(
-        JSON.stringify({
-
-            success: true,
-
-            source: "LinkedIn guest jobs endpoint",
-
-            search: {
-                keywords,
-                location,
-                timeValue,
-                timeUnit,
-                seconds,
-                workplace:
-                    workplace
-                        ? workplace.split(",")
-                        : [],
-                skills:
-                    skills
-                        ? skills.split(",")
-                        : [],
-                sort
-            },
-
-            count: validJobs.length,
-
-            jobs: validJobs,
-
-            linkedin: {
-                status: response.status,
-                responseLength: html.length
-            }
-
-        }),
+        JSON.stringify(result),
         {
             status: 200,
 
@@ -323,7 +429,7 @@ export async function onRequestGet(context) {
 
 
 /*
- * Clean text extracted from HTML
+ * Clean text extracted from LinkedIn HTML.
  */
 
 function cleanText(value) {
@@ -344,7 +450,7 @@ function cleanText(value) {
 
 
 /*
- * Clean LinkedIn URL
+ * Clean LinkedIn job URL.
  */
 
 function cleanUrl(value) {
