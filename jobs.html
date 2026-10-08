@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Job Search | Pravind Thakur</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            margin-bottom: 25px;
+        }
+
+        .search-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 15px;
+        }
+
+        .time-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .time-row input {
+            width: 120px;
+        }
+
+        .time-row select {
+            flex: 1;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: normal;
+        }
+
+        .checkbox-item input {
+            width: auto;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            background: white;
+        }
+
+        .skill.active {
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .search-btn {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .reset-btn {
+            background: #e9ecef;
+        }
+
+        .status {
+            margin-top: 25px;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+        }
+
+        .results {
+            margin-top: 25px;
+        }
+
+        .job-card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .job-title {
+            font-size: 19px;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .job-company {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .job-meta {
+            margin-top: 8px;
+            color: #666;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #eef2f7;
+            padding: 5px 9px;
+            border-radius: 5px;
+            margin: 8px 5px 0 0;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Job Search</h1>
+
+    <div class="search-panel">
+
+        <!-- Search keywords -->
+        <div class="form-group">
+            <label for="keywords">Search keywords</label>
+
+            <input
+                type="text"
+                id="keywords"
+                value="Business Analyst"
+                placeholder="Business Analyst, Reference Data..."
+            >
+        </div>
+
+        <!-- Posted within -->
+        <div class="form-group">
+
+            <label>Posted within</label>
+
+            <div class="time-row">
+
+                <input
+                    type="number"
+                    id="timeValue"
+                    value="60"
+                    min="1"
+                >
+
+                <select id="timeUnit">
+                    <option value="minutes">Minutes</option>
+                    <option value="hours">Hours</option>
+                    <option value="days">Days</option>
+                </select>
+
+            </div>
+
+        </div>
+
+        <!-- Location -->
+        <div class="form-group">
+
+            <label for="location">Location</label>
+
+            <select id="location">
+
+                <option value="India">India</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Pune">Pune</option>
+                <option value="Bengaluru">Bengaluru</option>
+                <option value="Gurugram">Gurugram</option>
+                <option value="Hyderabad">Hyderabad</option>
+                <option value="Chennai">Chennai</option>
+                <option value="Delhi NCR">Delhi NCR</option>
+                <option value="Kolkata">Kolkata</option>
+
+            </select>
+
+        </div>
+
+        <!-- Workplace -->
+        <div class="form-group">
+
+            <label>Workplace</label>
+
+            <div class="checkbox-group">
+
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Remote" checked>
+                    Remote
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" value="Hybrid" checked>
+                    Hybrid
+                </label>
+
+                <label class="checkbox-item">
+                    <input type="checkbox" value="On-site" checked>
+                    On-site
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Skills -->
+        <div class="form-group">
+
+            <label>Skills</label>
+
+            <div class="skills">
+
+                <div class="skill active" data-skill="Corporate Actions">
+                    Corporate Actions
+                </div>
+
+                <div class="skill active" data-skill="Reference Data">
+                    Reference Data
+                </div>
+
+                <div class="skill active" data-skill="Capital Markets">
+                    Capital Markets
+                </div>
+
+                <div class="skill" data-skill="Trade Settlement">
+                    Trade Settlement
+                </div>
+
+                <div class="skill" data-skill="Asset Servicing">
+                    Asset Servicing
+                </div>
+
+                <div class="skill" data-skill="Production Support">
+                    Production Support
+                </div>
+
+                <div class="skill" data-skill="SQL">
+                    SQL
+                </div>
+
+                <div class="skill" data-skill="SWIFT">
+                    SWIFT
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Sort -->
+        <div class="form-group">
+
+            <label for="sort">Sort</label>
+
+            <select id="sort">
+
+                <option value="newest">
+                    Newest first
+                </option>
+
+                <option value="oldest">
+                    Oldest first
+                </option>
+
+                <option value="relevance">
+                    Relevance
+                </option>
+
+            </select>
+
+        </div>
+
+        <!-- Buttons -->
+        <div class="buttons">
+
+            <button
+                class="search-btn"
+                onclick="searchJobs()"
+            >
+                SEARCH
+            </button>
+
+            <button
+                class="reset-btn"
+                onclick="resetSearch()"
+            >
+                RESET
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Status -->
+    <div
+        id="status"
+        class="status"
+    >
+        Ready to search.
+    </div>
+
+    <!-- Results -->
+    <div
+        id="results"
+        class="results"
+    ></div>
+
+</div>
+
+<script>
+
+    /*
+     * Select skills
+     */
+
+    document.querySelectorAll(".skill").forEach(skill => {
+
+        skill.addEventListener("click", () => {
+
+            skill.classList.toggle("active");
+
+        });
+
+    });
+
+
+    /*
+     * Search jobs
+     */
+
+    async function searchJobs() {
+
+        const status = document.getElementById("status");
+        const results = document.getElementById("results");
+
+        status.innerHTML = "Searching...";
+        results.innerHTML = "";
+
+        try {
+
+            const response = await fetch("/api/jobs");
+
+            if (!response.ok) {
+                throw new Error("API request failed");
+            }
+
+            const data = await response.json();
+
+            console.log("API response:", data);
+
+            if (data.success) {
+
+                status.innerHTML =
+                    "API connection successful. Job-source connection will be added next.";
+
+            } else {
+
+                status.innerHTML =
+                    "API returned an unexpected response.";
+
+            }
+
+        } catch (error) {
+
+            console.error(error);
+
+            status.innerHTML =
+                "Unable to connect to the Job Search API.";
+
+        }
+
+    }
+
+
+    /*
+     * Reset
+     */
+
+    function resetSearch() {
+
+        document.getElementById("keywords").value =
+            "Business Analyst";
+
+        document.getElementById("timeValue").value =
+            60;
+
+        document.getElementById("timeUnit").value =
+            "minutes";
+
+        document.getElementById("location").value =
+            "India";
+
+        document.getElementById("sort").value =
+            "newest";
+
+        document.querySelectorAll(".skill").forEach(skill => {
+
+            skill.classList.remove("active");
+
+        });
+
+        document.querySelectorAll(
+            '.checkbox-item input'
+        ).forEach(box => {
+
+            box.checked = true;
+
+        });
+
+        document.getElementById("status").innerHTML =
+            "Ready to search.";
+
+        document.getElementById("results").innerHTML =
+            "";
+
+    }
+
+</script>
+
+</body>
+</html>
