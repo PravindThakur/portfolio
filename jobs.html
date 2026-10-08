@@ -1,648 +1,1704 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Job Search - Find relevant Business Analyst, Corporate Actions, Reference Data and Capital Markets opportunities."
+    >
 
     <title>Job Search | Pravind Thakur</title>
 
+
     <style>
+
         * {
             box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #f5f7fa;
-            color: #222;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Roboto,
+                Arial,
+                sans-serif;
+
+            background: #f5f7fb;
+            color: #1f2937;
         }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 20px 30px;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .brand {
+            text-decoration: none;
+            color: #111827;
+            font-size: 22px;
+            font-weight: 700;
+        }
+
+        .nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav a {
+            text-decoration: none;
+            color: #4b5563;
+            font-size: 14px;
+        }
+
+        .nav a:hover {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           MAIN
+        ========================================= */
 
         .container {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px 60px;
         }
 
-        h1 {
-            margin-bottom: 25px;
+        .page-title {
+            margin-bottom: 8px;
+            font-size: 32px;
+            font-weight: 700;
+            color: #111827;
         }
+
+        .page-subtitle {
+            margin-bottom: 30px;
+            color: #6b7280;
+            font-size: 15px;
+        }
+
+
+        /* =========================================
+           SEARCH PANEL
+        ========================================= */
 
         .search-panel {
-            background: white;
-            padding: 25px;
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
             border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow:
+                0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns:
+                2fr
+                1fr
+                1fr
+                1fr;
+
+            gap: 16px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
         }
 
-        label {
-            display: block;
-            font-weight: bold;
-            margin-bottom: 8px;
+        .form-group label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
         }
 
         input,
         select {
             width: 100%;
-            padding: 11px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 15px;
+            height: 42px;
+
+            padding: 0 12px;
+
+            border: 1px solid #d1d5db;
+            border-radius: 7px;
+
+            background: #ffffff;
+
+            font-size: 14px;
+            color: #111827;
+
+            outline: none;
         }
 
+        input:focus,
+        select:focus {
+            border-color: #2563eb;
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.10);
+        }
+
+
+        /* =========================================
+           TIME
+        ========================================= */
+
         .time-row {
+            display: grid;
+
+            grid-template-columns:
+                1fr
+                1fr;
+
+            gap: 8px;
+        }
+
+
+        /* =========================================
+           FILTERS
+        ========================================= */
+
+        .filters-section {
+            margin-top: 22px;
+        }
+
+        .filter-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-row {
             display: flex;
+            flex-wrap: wrap;
             gap: 10px;
         }
 
-        .time-row input {
-            width: 120px;
-        }
-
-        .time-row select {
-            flex: 1;
-        }
-
-        .checkbox-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
         .checkbox-item {
-            display: flex;
+            display: inline-flex;
             align-items: center;
-            gap: 6px;
-            font-weight: normal;
+            gap: 7px;
+
+            padding: 8px 12px;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 20px;
+
+            background: #f9fafb;
+
+            font-size: 13px;
+            color: #4b5563;
+
+            cursor: pointer;
+        }
+
+        .checkbox-item:hover {
+            border-color: #c7d2fe;
+            background: #f5f7ff;
         }
 
         .checkbox-item input {
             width: auto;
+            height: auto;
         }
+
+
+        /* =========================================
+           SKILLS
+        ========================================= */
 
         .skills {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 9px;
         }
 
         .skill {
-            border: 1px solid #ccc;
-            padding: 8px 12px;
+            padding: 8px 13px;
+
+            border: 1px solid #d1d5db;
             border-radius: 20px;
+
+            background: #ffffff;
+
+            color: #4b5563;
+
+            font-size: 13px;
+
             cursor: pointer;
-            background: white;
+
+            transition:
+                background 0.15s,
+                border-color 0.15s,
+                color 0.15s;
+        }
+
+        .skill:hover {
+            border-color: #9ca3af;
         }
 
         .skill.active {
-            background: #0d6efd;
-            color: white;
-            border-color: #0d6efd;
+            background: #111827;
+            border-color: #111827;
+            color: #ffffff;
         }
 
-        .buttons {
-            display: flex;
-            gap: 10px;
+
+        /* =========================================
+           SEARCH BUTTON
+        ========================================= */
+
+        .search-button-row {
             margin-top: 25px;
+            display: flex;
+            justify-content: flex-end;
         }
 
-        button {
+        .search-button {
+            border: 0;
+
             padding: 12px 25px;
-            border: none;
-            border-radius: 6px;
+
+            border-radius: 7px;
+
+            background: #2563eb;
+            color: #ffffff;
+
+            font-size: 14px;
+            font-weight: 600;
+
             cursor: pointer;
-            font-size: 15px;
+
+            transition:
+                background 0.15s,
+                transform 0.1s;
         }
 
-        .search-btn {
-            background: #0d6efd;
-            color: white;
+        .search-button:hover {
+            background: #1d4ed8;
         }
 
-        .reset-btn {
-            background: #e9ecef;
+        .search-button:active {
+            transform: translateY(1px);
         }
+
+
+        /* =========================================
+           STATUS
+        ========================================= */
 
         .status {
-            margin-top: 25px;
-            padding: 15px;
-            background: #fff;
-            border-radius: 8px;
+            margin-bottom: 18px;
+
+            font-size: 14px;
+            color: #6b7280;
         }
+
+        .status strong {
+            color: #111827;
+        }
+
+
+        /* =========================================
+           RESULTS
+        ========================================= */
 
         .results {
-            margin-top: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
+
+        /* =========================================
+           JOB CARD
+        ========================================= */
+
         .job-card {
-            background: white;
-            padding: 20px;
-            margin-bottom: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+
+            padding: 22px;
+
+            box-shadow:
+                0 2px 7px rgba(0, 0, 0, 0.035);
+
+            transition:
+                border-color 0.15s,
+                box-shadow 0.15s;
+        }
+
+        .job-card:hover {
+            border-color: #cbd5e1;
+
+            box-shadow:
+                0 5px 18px rgba(0, 0, 0, 0.06);
+        }
+
+
+        /* =========================================
+           JOB TOP
+        ========================================= */
+
+        .job-top {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: flex-start;
+
+            gap: 20px;
+        }
+
+        .job-main {
+            min-width: 0;
         }
 
         .job-title {
+            margin-bottom: 7px;
+
             font-size: 19px;
-            font-weight: bold;
-            margin-bottom: 6px;
+            line-height: 1.35;
+
+            font-weight: 700;
+
+            color: #111827;
         }
 
         .job-company {
-            font-weight: bold;
-            color: #555;
+            margin-bottom: 10px;
+
+            font-size: 14px;
+            font-weight: 600;
+
+            color: #374151;
         }
+
+
+        /* =========================================
+           MATCH BADGE
+        ========================================= */
+
+        .match-box {
+            flex-shrink: 0;
+
+            min-width: 95px;
+
+            text-align: center;
+
+            padding: 9px 12px;
+
+            border-radius: 9px;
+
+            background: #f3f4f6;
+        }
+
+        .match-score {
+            font-size: 22px;
+            line-height: 1;
+
+            font-weight: 800;
+
+            color: #111827;
+        }
+
+        .match-label {
+            margin-top: 4px;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            color: #6b7280;
+        }
+
+
+        /* =========================================
+           MATCH COLORS
+        ========================================= */
+
+        .match-excellent {
+            background: #ecfdf5;
+        }
+
+        .match-excellent .match-score {
+            color: #047857;
+        }
+
+        .match-strong {
+            background: #eff6ff;
+        }
+
+        .match-strong .match-score {
+            color: #1d4ed8;
+        }
+
+        .match-good {
+            background: #f0fdf4;
+        }
+
+        .match-good .match-score {
+            color: #15803d;
+        }
+
+        .match-moderate {
+            background: #fffbeb;
+        }
+
+        .match-moderate .match-score {
+            color: #b45309;
+        }
+
+        .match-low {
+            background: #f3f4f6;
+        }
+
+        .match-low .match-score {
+            color: #6b7280;
+        }
+
+
+        /* =========================================
+           JOB META
+        ========================================= */
 
         .job-meta {
-            margin-top: 8px;
-            color: #666;
-        }
+            display: flex;
 
-        .tag {
-            display: inline-block;
-            background: #eef2f7;
-            padding: 5px 9px;
-            border-radius: 5px;
-            margin: 8px 5px 0 0;
+            flex-wrap: wrap;
+
+            gap: 16px;
+
+            margin-top: 4px;
+
+            color: #6b7280;
+
             font-size: 13px;
         }
+
+        .meta-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+
+        /* =========================================
+           MATCHED SKILLS
+        ========================================= */
+
+        .matched-section {
+            margin-top: 17px;
+            padding-top: 15px;
+
+            border-top: 1px solid #f0f1f3;
+        }
+
+        .matched-title {
+            margin-bottom: 8px;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            color: #6b7280;
+
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .matched-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+        }
+
+        .matched-skill {
+            padding: 5px 9px;
+
+            border-radius: 5px;
+
+            background: #eff6ff;
+
+            color: #1d4ed8;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+
+        /* =========================================
+           SNIPPET
+        ========================================= */
+
+        .job-snippet {
+            margin-top: 15px;
+
+            color: #6b7280;
+
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+
+        /* =========================================
+           CARD FOOTER
+        ========================================= */
+
+        .job-footer {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-top: 18px;
+            padding-top: 15px;
+
+            border-top: 1px solid #f0f1f3;
+        }
+
+        .match-note {
+            color: #9ca3af;
+            font-size: 11px;
+        }
+
+        .linkedin-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 9px 15px;
+
+            border-radius: 6px;
+
+            background: #0a66c2;
+            color: #ffffff;
+
+            text-decoration: none;
+
+            font-size: 13px;
+            font-weight: 600;
+
+            white-space: nowrap;
+        }
+
+        .linkedin-button:hover {
+            background: #084f96;
+        }
+
+
+        /* =========================================
+           EMPTY / ERROR
+        ========================================= */
+
+        .empty-card {
+            background: #ffffff;
+
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+
+            padding: 40px 25px;
+
+            text-align: center;
+        }
+
+        .empty-title {
+            margin-bottom: 8px;
+
+            font-size: 18px;
+            font-weight: 700;
+
+            color: #111827;
+        }
+
+        .empty-text {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+
+        /* =========================================
+           LOADING
+        ========================================= */
+
+        .loading {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spinner {
+            width: 15px;
+            height: 15px;
+
+            border: 2px solid #dbeafe;
+            border-top-color: #2563eb;
+
+            border-radius: 50%;
+
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .form-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .job-top {
+                flex-direction: column;
+            }
+
+            .match-box {
+                align-self: flex-start;
+            }
+        }
+
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 16px 18px;
+            }
+
+            .header-inner {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .nav {
+                gap: 14px;
+                flex-wrap: wrap;
+            }
+
+            .container {
+                padding: 25px 14px 45px;
+            }
+
+            .page-title {
+                font-size: 27px;
+            }
+
+            .search-panel {
+                padding: 18px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .job-card {
+                padding: 18px;
+            }
+
+            .job-footer {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .linkedin-button {
+                width: 100%;
+            }
+        }
+
     </style>
+
 </head>
+
 
 <body>
 
-<div class="container">
 
-    <h1>Job Search</h1>
+    <!-- =========================================
+         HEADER
+    ========================================== -->
 
-    <div class="search-panel">
+    <header class="header">
 
-        <!-- Search keywords -->
-        <div class="form-group">
-            <label for="keywords">Search keywords</label>
+        <div class="header-inner">
 
-            <input
-                type="text"
-                id="keywords"
-                value="Business Analyst"
-                placeholder="Business Analyst, Reference Data..."
+            <a
+                href="index.html"
+                class="brand"
             >
+                Pravind Thakur
+            </a>
+
+            <nav class="nav">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="resume.html">
+                    Resume
+                </a>
+
+                <a href="projects.html">
+                    Projects
+                </a>
+
+                <a href="jobs.html">
+                    Jobs
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+            </nav>
+
         </div>
 
-        <!-- Posted within -->
-        <div class="form-group">
+    </header>
 
-            <label>Posted within</label>
 
-            <div class="time-row">
+    <!-- =========================================
+         MAIN
+    ========================================== -->
 
-                <input
-                    type="number"
-                    id="timeValue"
-                    value="60"
-                    min="1"
+    <main class="container">
+
+        <h1 class="page-title">
+            Job Search
+        </h1>
+
+        <div class="page-subtitle">
+            Search recent opportunities and see how closely they match your professional profile.
+        </div>
+
+
+        <!-- =====================================
+             SEARCH PANEL
+        ====================================== -->
+
+        <section class="search-panel">
+
+
+            <div class="form-grid">
+
+
+                <!-- Keywords -->
+
+                <div class="form-group">
+
+                    <label for="keywords">
+                        Keywords
+                    </label>
+
+                    <input
+                        type="text"
+                        id="keywords"
+                        value="Business Analyst"
+                        placeholder="e.g. Business Analyst"
+                    >
+
+                </div>
+
+
+                <!-- Location -->
+
+                <div class="form-group">
+
+                    <label for="location">
+                        Location
+                    </label>
+
+                    <input
+                        type="text"
+                        id="location"
+                        value="India"
+                        placeholder="e.g. India"
+                    >
+
+                </div>
+
+
+                <!-- Posted within -->
+
+                <div class="form-group">
+
+                    <label>
+                        Posted within
+                    </label>
+
+                    <div class="time-row">
+
+                        <input
+                            type="number"
+                            id="timeValue"
+                            value="60"
+                            min="1"
+                        >
+
+                        <select id="timeUnit">
+
+                            <option value="minutes">
+                                Minutes
+                            </option>
+
+                            <option value="hours">
+                                Hours
+                            </option>
+
+                            <option value="days">
+                                Days
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Sort -->
+
+                <div class="form-group">
+
+                    <label for="sort">
+                        Sort
+                    </label>
+
+                    <select id="sort">
+
+                        <option value="newest">
+                            Newest
+                        </option>
+
+                        <option value="oldest">
+                            Oldest
+                        </option>
+
+                        <option value="relevance">
+                            Relevance
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 WORKPLACE
+            ================================== -->
+
+            <div class="filters-section">
+
+                <div class="filter-title">
+                    Workplace
+                </div>
+
+                <div class="checkbox-row">
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            value="Remote"
+                        >
+
+                        Remote
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            value="Hybrid"
+                        >
+
+                        Hybrid
+
+                    </label>
+
+
+                    <label class="checkbox-item">
+
+                        <input
+                            type="checkbox"
+                            value="On-site"
+                        >
+
+                        On-site
+
+                    </label>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SKILLS
+            ================================== -->
+
+            <div class="filters-section">
+
+                <div class="filter-title">
+                    Skills
+                </div>
+
+                <div class="skills">
+
+                    <div
+                        class="skill"
+                        data-skill="Corporate Actions"
+                    >
+                        Corporate Actions
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="Reference Data"
+                    >
+                        Reference Data
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="Capital Markets"
+                    >
+                        Capital Markets
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="Trade Settlement"
+                    >
+                        Trade Settlement
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="Asset Servicing"
+                    >
+                        Asset Servicing
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="Production Support"
+                    >
+                        Production Support
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="SQL"
+                    >
+                        SQL
+                    </div>
+
+                    <div
+                        class="skill"
+                        data-skill="SWIFT"
+                    >
+                        SWIFT
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =================================
+                 SEARCH BUTTON
+            ================================== -->
+
+            <div class="search-button-row">
+
+                <button
+                    type="button"
+                    class="search-button"
+                    id="searchButton"
+                    onclick="searchJobs()"
                 >
-
-                <select id="timeUnit">
-                    <option value="minutes">Minutes</option>
-                    <option value="hours">Hours</option>
-                    <option value="days">Days</option>
-                </select>
+                    Search Jobs
+                </button>
 
             </div>
 
+        </section>
+
+
+        <!-- =====================================
+             STATUS
+        ====================================== -->
+
+        <div
+            id="status"
+            class="status"
+        >
+            Enter your search criteria and click Search Jobs.
         </div>
 
-        <!-- Location -->
-        <div class="form-group">
 
-            <label for="location">Location</label>
+        <!-- =====================================
+             RESULTS
+        ====================================== -->
 
-            <select id="location">
+        <div
+            id="results"
+            class="results"
+        ></div>
 
-                <option value="India">India</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Pune">Pune</option>
-                <option value="Bengaluru">Bengaluru</option>
-                <option value="Gurugram">Gurugram</option>
-                <option value="Hyderabad">Hyderabad</option>
-                <option value="Chennai">Chennai</option>
-                <option value="Delhi NCR">Delhi NCR</option>
-                <option value="Kolkata">Kolkata</option>
+    </main>
 
-            </select>
 
-        </div>
+    <script>
 
-        <!-- Workplace -->
-        <div class="form-group">
 
-            <label>Workplace</label>
+        // =========================================
+        // SEARCH JOBS
+        // =========================================
 
-            <div class="checkbox-group">
+        async function searchJobs() {
 
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Remote" checked>
-                    Remote
-                </label>
+            const status =
+                document.getElementById("status");
 
-                <label class="checkbox-item">
-                    <input type="checkbox" value="Hybrid" checked>
-                    Hybrid
-                </label>
+            const results =
+                document.getElementById("results");
 
-                <label class="checkbox-item">
-                    <input type="checkbox" value="On-site" checked>
-                    On-site
-                </label>
+            const searchButton =
+                document.getElementById("searchButton");
 
-            </div>
 
-        </div>
+            // -------------------------------------
+            // Read form values
+            // -------------------------------------
 
-        <!-- Skills -->
-        <div class="form-group">
+            const keywords =
+                document
+                    .getElementById("keywords")
+                    .value
+                    .trim();
 
-            <label>Skills</label>
+            const timeValue =
+                document
+                    .getElementById("timeValue")
+                    .value;
 
-            <div class="skills">
+            const timeUnit =
+                document
+                    .getElementById("timeUnit")
+                    .value;
 
-                <div class="skill active" data-skill="Corporate Actions">
-                    Corporate Actions
-                </div>
+            const location =
+                document
+                    .getElementById("location")
+                    .value
+                    .trim();
 
-                <div class="skill active" data-skill="Reference Data">
-                    Reference Data
-                </div>
+            const sort =
+                document
+                    .getElementById("sort")
+                    .value;
 
-                <div class="skill active" data-skill="Capital Markets">
-                    Capital Markets
-                </div>
 
-                <div class="skill" data-skill="Trade Settlement">
-                    Trade Settlement
-                </div>
+            // -------------------------------------
+            // Workplace
+            // -------------------------------------
 
-                <div class="skill" data-skill="Asset Servicing">
-                    Asset Servicing
-                </div>
+            const workplace =
+                Array.from(
+                    document.querySelectorAll(
+                        '.checkbox-item input:checked'
+                    )
+                )
+                .map(input => input.value)
+                .join(",");
 
-                <div class="skill" data-skill="Production Support">
-                    Production Support
-                </div>
 
-                <div class="skill" data-skill="SQL">
-                    SQL
-                </div>
+            // -------------------------------------
+            // Skills
+            // -------------------------------------
 
-                <div class="skill" data-skill="SWIFT">
-                    SWIFT
-                </div>
+            const skills =
+                Array.from(
+                    document.querySelectorAll(
+                        ".skill.active"
+                    )
+                )
+                .map(skill =>
+                    skill.dataset.skill
+                )
+                .join(",");
 
-            </div>
 
-        </div>
+            // -------------------------------------
+            // Build API parameters
+            // -------------------------------------
 
-        <!-- Sort -->
-        <div class="form-group">
+            const params =
+                new URLSearchParams({
 
-            <label for="sort">Sort</label>
+                    keywords,
 
-            <select id="sort">
+                    timeValue,
 
-                <option value="newest">
-                    Newest first
-                </option>
+                    timeUnit,
 
-                <option value="oldest">
-                    Oldest first
-                </option>
+                    location,
 
-                <option value="relevance">
-                    Relevance
-                </option>
+                    workplace,
 
-            </select>
+                    skills,
 
-        </div>
+                    sort
 
-        <!-- Buttons -->
-        <div class="buttons">
+                });
 
-            <button
-                class="search-btn"
-                onclick="searchJobs()"
-            >
-                SEARCH
-            </button>
 
-            <button
-                class="reset-btn"
-                onclick="resetSearch()"
-            >
-                RESET
-            </button>
+            // -------------------------------------
+            // Loading state
+            // -------------------------------------
 
-        </div>
-
-    </div>
-
-    <!-- Status -->
-    <div
-        id="status"
-        class="status"
-    >
-        Ready to search.
-    </div>
-
-    <!-- Results -->
-    <div
-        id="results"
-        class="results"
-    ></div>
-
-</div>
-
-<script>
-
-    /*
-     * Select skills
-     */
-
-    document.querySelectorAll(".skill").forEach(skill => {
-
-        skill.addEventListener("click", () => {
-
-            skill.classList.toggle("active");
-
-        });
-
-    });
-
-
-    /*
-     * Search jobs
-     */
-
-    async function searchJobs() {
-
-    const status = document.getElementById("status");
-    const results = document.getElementById("results");
-
-    status.innerHTML = "Searching LinkedIn...";
-    results.innerHTML = "";
-
-    const keywords =
-        document.getElementById("keywords").value.trim();
-
-    const timeValue =
-        document.getElementById("timeValue").value;
-
-    const timeUnit =
-        document.getElementById("timeUnit").value;
-
-    const location =
-        document.getElementById("location").value;
-
-    const sort =
-        document.getElementById("sort").value;
-
-    /*
-     * Selected workplace types
-     */
-
-    const workplace = Array.from(
-        document.querySelectorAll(
-            '.checkbox-item input:checked'
-        )
-    )
-    .map(input => input.value)
-    .join(",");
-
-    /*
-     * Selected skills
-     */
-
-    const skills = Array.from(
-        document.querySelectorAll(".skill.active")
-    )
-    .map(skill => skill.dataset.skill)
-    .join(",");
-
-    /*
-     * Build API URL
-     */
-
-    const params = new URLSearchParams({
-
-        keywords: keywords,
-
-        timeValue: timeValue,
-
-        timeUnit: timeUnit,
-
-        location: location,
-
-        workplace: workplace,
-
-        skills: skills,
-
-        sort: sort
-
-    });
-
-    try {
-
-        const response = await fetch(
-            `/api/jobs?${params.toString()}`
-        );
-
-        if (!response.ok) {
-            throw new Error(
-                `API request failed: ${response.status}`
-            );
-        }
-
-        const data = await response.json();
-
-        console.log("API response:", data);
-
-        /*
-         * Check API response
-         */
-
-        if (!data.success) {
-            throw new Error(
-                data.error || "Job search failed"
-            );
-        }
-
-        /*
-         * No jobs found
-         */
-
-        if (!data.jobs || data.jobs.length === 0) {
-
-            status.innerHTML =
-                "No jobs found for your search.";
-
-            results.innerHTML = `
-                <div class="job-card">
-                    <div class="job-title">
-                        No jobs found
-                    </div>
-
-                    <div class="job-meta">
-                        Try increasing the posted-within time
-                        or changing your keywords/location.
-                    </div>
-                </div>
+            status.innerHTML = `
+                <span class="loading">
+                    <span class="spinner"></span>
+                    Searching LinkedIn...
+                </span>
             `;
 
-            return;
+            results.innerHTML = "";
+
+            searchButton.disabled = true;
+
+            searchButton.textContent =
+                "Searching...";
+
+
+            // -------------------------------------
+            // API request
+            // -------------------------------------
+
+            try {
+
+                const response =
+                    await fetch(
+                        `/api/jobs?${params.toString()}`
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        `API request failed: ${response.status}`
+                    );
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "Job API response:",
+                    data
+                );
+
+
+                // ---------------------------------
+                // Backend error
+                // ---------------------------------
+
+                if (!data.success) {
+
+                    throw new Error(
+                        data.error ||
+                        "Job search failed"
+                    );
+                }
+
+
+                // ---------------------------------
+                // No jobs
+                // ---------------------------------
+
+                if (
+                    !data.jobs ||
+                    data.jobs.length === 0
+                ) {
+
+                    status.innerHTML =
+                        "No jobs found for your search.";
+
+                    results.innerHTML = `
+
+                        <div class="empty-card">
+
+                            <div class="empty-title">
+                                No jobs found
+                            </div>
+
+                            <div class="empty-text">
+                                Try increasing the posted-within
+                                time or changing your keywords
+                                or location.
+                            </div>
+
+                        </div>
+
+                    `;
+
+                    return;
+                }
+
+
+                // ---------------------------------
+                // Sort by match score
+                // ---------------------------------
+
+                const jobs =
+                    [...data.jobs].sort(
+                        (a, b) =>
+                            (b.matchScore || 0) -
+                            (a.matchScore || 0)
+                    );
+
+
+                // ---------------------------------
+                // Status
+                // ---------------------------------
+
+                status.innerHTML = `
+
+                    <strong>
+                        ${data.count}
+                    </strong>
+
+                    jobs found
+
+                    <span style="margin-left:8px;">
+                        •
+                        Ranked by profile match
+                    </span>
+
+                    ${
+                        data.cached
+                            ? `
+                                <span style="margin-left:8px;">
+                                    • Cached result
+                                </span>
+                              `
+                            : ""
+                    }
+
+                `;
+
+
+                // ---------------------------------
+                // Render cards
+                // ---------------------------------
+
+                results.innerHTML =
+                    jobs
+                        .map(job =>
+                            createJobCard(job)
+                        )
+                        .join("");
+
+
+            } catch (error) {
+
+                console.error(
+                    "Job search error:",
+                    error
+                );
+
+
+                status.innerHTML =
+                    "Unable to load jobs.";
+
+
+                results.innerHTML = `
+
+                    <div class="empty-card">
+
+                        <div class="empty-title">
+                            Something went wrong
+                        </div>
+
+                        <div class="empty-text">
+                            ${escapeHtml(
+                                error.message
+                            )}
+                        </div>
+
+                    </div>
+
+                `;
+
+            } finally {
+
+                searchButton.disabled = false;
+
+                searchButton.textContent =
+                    "Search Jobs";
+            }
         }
 
-        /*
-         * Show result count
-         */
 
-        status.innerHTML =
-            `${data.count} jobs found`;
+        // =========================================
+        // CREATE JOB CARD
+        // =========================================
 
-        /*
-         * Display jobs
-         */
+        function createJobCard(job) {
 
-        results.innerHTML = data.jobs.map(job => {
+            const score =
+                Number(job.matchScore) || 0;
+
+
+            // -------------------------------------
+            // Match class
+            // -------------------------------------
+
+            let matchClass =
+                "match-low";
+
+            if (score >= 80) {
+
+                matchClass =
+                    "match-excellent";
+
+            } else if (score >= 65) {
+
+                matchClass =
+                    "match-strong";
+
+            } else if (score >= 45) {
+
+                matchClass =
+                    "match-good";
+
+            } else if (score >= 25) {
+
+                matchClass =
+                    "match-moderate";
+            }
+
+
+            // -------------------------------------
+            // Match label
+            // -------------------------------------
+
+            const matchLevel =
+                job.matchLevel ||
+                "Low";
+
+
+            // -------------------------------------
+            // Matched skills
+            // -------------------------------------
+
+            const matchedSkills =
+                Array.isArray(
+                    job.matchedSkills
+                )
+                    ? job.matchedSkills
+                    : [];
+
+
+            const matchedSkillsHtml =
+                matchedSkills.length > 0
+
+                    ? `
+
+                        <div class="matched-section">
+
+                            <div class="matched-title">
+                                Matched skills
+                            </div>
+
+                            <div class="matched-skills">
+
+                                ${
+                                    matchedSkills
+                                        .map(skill => `
+                                            <span
+                                                class="matched-skill"
+                                            >
+                                                ${escapeHtml(
+                                                    skill
+                                                )}
+                                            </span>
+                                        `)
+                                        .join("")
+                                }
+
+                            </div>
+
+                        </div>
+
+                    `
+
+                    : "";
+
+
+            // -------------------------------------
+            // Snippet
+            // -------------------------------------
+
+            const snippetHtml =
+                job.snippet
+
+                    ? `
+
+                        <div class="job-snippet">
+                            ${escapeHtml(
+                                job.snippet
+                            )}
+                        </div>
+
+                      `
+
+                    : "";
+
+
+            // -------------------------------------
+            // Return card
+            // -------------------------------------
 
             return `
-                <div class="job-card">
 
-                    <div class="job-title">
-                        ${escapeHtml(job.title)}
+                <article class="job-card">
+
+
+                    <div class="job-top">
+
+
+                        <div class="job-main">
+
+
+                            <div class="job-title">
+                                ${escapeHtml(
+                                    job.title
+                                )}
+                            </div>
+
+
+                            <div class="job-company">
+                                ${escapeHtml(
+                                    job.company
+                                )}
+                            </div>
+
+
+                            <div class="job-meta">
+
+
+                                <span class="meta-item">
+
+                                    📍
+
+                                    ${escapeHtml(
+                                        job.location ||
+                                        "India"
+                                    )}
+
+                                </span>
+
+
+                                <span class="meta-item">
+
+                                    🕒
+
+                                    ${escapeHtml(
+                                        job.posted ||
+                                        "Recently posted"
+                                    )}
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div
+                            class="match-box ${matchClass}"
+                        >
+
+                            <div class="match-score">
+                                ${score}%
+                            </div>
+
+                            <div class="match-label">
+                                ${escapeHtml(
+                                    matchLevel
+                                )}
+                            </div>
+
+                        </div>
+
+
                     </div>
 
-                    <div class="job-meta">
-                        <strong>
-                            ${escapeHtml(job.company)}
-                        </strong>
-                    </div>
 
-                    <div class="job-meta">
-                        📍 ${escapeHtml(job.location || "India")}
-                    </div>
+                    ${matchedSkillsHtml}
 
-                    <div class="job-meta">
-                        🕒 ${escapeHtml(job.posted || "Recently posted")}
-                    </div>
 
-                    <div style="margin-top: 15px;">
+                    ${snippetHtml}
+
+
+                    <div class="job-footer">
+
+
+                        <div class="match-note">
+
+                            Initial match based on
+                            available job information
+
+                        </div>
+
+
                         <a
-                            href="${job.url}"
+                            href="${escapeHtml(
+                                job.url
+                            )}"
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="btn btn-primary"
+                            class="linkedin-button"
                         >
                             View on LinkedIn
                         </a>
+
+
                     </div>
 
-                </div>
+
+                </article>
+
             `;
-
-        }).join("");
-
-    } catch (error) {
-
-        console.error("Job search error:", error);
-
-        status.innerHTML =
-            "Unable to load jobs.";
-
-        results.innerHTML = `
-            <div class="job-card">
-
-                <div class="job-title">
-                    Something went wrong
-                </div>
-
-                <div class="job-meta">
-                    ${escapeHtml(error.message)}
-                </div>
-
-            </div>
-        `;
-    }
-}
+        }
 
 
-/*
- * Safely escape text before displaying it
- */
+        // =========================================
+        // SKILL CLICK HANDLER
+        // =========================================
 
-function escapeHtml(value) {
+        document
+            .querySelectorAll(".skill")
+            .forEach(skill => {
 
-    if (value === null || value === undefined) {
-        return "";
-    }
+                skill.addEventListener(
+                    "click",
+                    function () {
 
-    return String(value)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-}
+                        this.classList.toggle(
+                            "active"
+                        );
+
+                    }
+                );
+
+            });
 
 
-    /*
-     * Reset
-     */
+        // =========================================
+        // ESCAPE HTML
+        // =========================================
 
-    function resetSearch() {
+        function escapeHtml(value) {
 
-        document.getElementById("keywords").value =
-            "Business Analyst";
+            if (
+                value === null ||
+                value === undefined
+            ) {
 
-        document.getElementById("timeValue").value =
-            60;
+                return "";
+            }
 
-        document.getElementById("timeUnit").value =
-            "minutes";
+            return String(value)
 
-        document.getElementById("location").value =
-            "India";
+                .replace(
+                    /&/g,
+                    "&amp;"
+                )
 
-        document.getElementById("sort").value =
-            "newest";
+                .replace(
+                    /</g,
+                    "&lt;"
+                )
 
-        document.querySelectorAll(".skill").forEach(skill => {
+                .replace(
+                    />/g,
+                    "&gt;"
+                )
 
-            skill.classList.remove("active");
+                .replace(
+                    /"/g,
+                    "&quot;"
+                )
 
-        });
+                .replace(
+                    /'/g,
+                    "&#039;"
+                );
+        }
 
-        document.querySelectorAll(
-            '.checkbox-item input'
-        ).forEach(box => {
 
-            box.checked = true;
+        // =========================================
+        // INITIAL SEARCH
+        // =========================================
 
-        });
+        searchJobs();
 
-        document.getElementById("status").innerHTML =
-            "Ready to search.";
+    </script>
 
-        document.getElementById("results").innerHTML =
-            "";
-
-    }
-
-</script>
 
 </body>
+
 </html>
