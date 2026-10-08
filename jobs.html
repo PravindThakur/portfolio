@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Job search and career opportunities curated by Pravind Thakur." />
+        <meta name="description" content="Latest job opportunities in Corporate Actions, Reference Data, Capital Markets, Asset Servicing, Trade Settlement and Business Analysis." />
         <meta name="author" content="Pravind Thakur" />
         <title>Pravind Thakur | Jobs</title>
 
@@ -42,77 +42,9 @@
             color: #6f42c1;
         }
 
-        .filter-card {
-            background: #fff;
-        }
-
-        .skill-pill {
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .skill-pill input {
-            display: none;
-        }
-
-        .skill-pill label {
-            cursor: pointer;
-            border: 1px solid #dee2e6;
-            border-radius: 50rem;
-            padding: 7px 13px;
-            font-size: 0.82rem;
-            margin: 3px;
-            display: inline-block;
-            background: #fff;
-            transition: all 0.2s ease;
-        }
-
-        .skill-pill input:checked + label {
-            background: #212529;
-            color: #fff;
-            border-color: #212529;
-        }
-
-        .match-badge {
-            font-size: 0.75rem;
-            border-radius: 50rem;
-            padding: 5px 10px;
-            font-weight: 700;
-        }
-
-        .match-excellent {
-            background: #198754;
-            color: #fff;
-        }
-
-        .match-strong {
-            background: #0d6efd;
-            color: #fff;
-        }
-
-        .match-good {
-            background: #6f42c1;
-            color: #fff;
-        }
-
-        .match-moderate {
-            background: #fd7e14;
-            color: #fff;
-        }
-
-        .match-low {
-            background: #6c757d;
-            color: #fff;
-        }
-
         .job-meta {
             color: #6c757d;
             font-size: 0.9rem;
-        }
-
-        .job-skills span {
-            margin-right: 5px;
-            margin-bottom: 5px;
         }
 
         .loading-spinner {
@@ -122,6 +54,19 @@
 
         .search-status {
             min-height: 24px;
+        }
+
+        .job-number {
+            min-width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: #f1f3f5;
+            color: #495057;
+            font-weight: 700;
+            font-size: 0.85rem;
         }
     </style>
 </head>
@@ -146,27 +91,47 @@
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
+
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home</a>
+                            <a class="nav-link" href="index.html">
+                                Home
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="Professional.html">Professional</a>
+                            <a class="nav-link" href="Professional.html">
+                                Professional
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="Personal.html">Personal</a>
+                            <a class="nav-link" href="Personal.html">
+                                Personal
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link active" href="jobs.html">Jobs</a>
+                            <a class="nav-link active" href="jobs.html">
+                                Jobs
+                            </a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="contact.html">
+                                Contact
+                            </a>
                         </li>
+
                     </ul>
+
                 </div>
             </div>
         </nav>
@@ -179,13 +144,18 @@
 
                 <!-- Page Header -->
                 <div class="text-center mb-5">
+
                     <h1 class="display-5 fw-bolder mb-0">
-                        <span class="text-gradient d-inline">Job Search</span>
+                        <span class="text-gradient d-inline">
+                            Latest Jobs
+                        </span>
                     </h1>
 
                     <p class="text-muted mt-3 mb-0">
-                        Find recent opportunities and discover jobs that match my professional profile.
+                        Latest opportunities across Corporate Actions, Reference Data,
+                        Capital Markets, Asset Servicing, Trade Settlement and Business Analysis.
                     </p>
+
                 </div>
 
 
@@ -193,294 +163,24 @@
 
                     <div class="col-lg-11 col-xl-9 col-xxl-8">
 
-
-                        <!-- Search Card -->
-                        <div class="card overflow-hidden shadow rounded-4 border-0 mb-5 filter-card">
-
-                            <div class="card-body p-4 p-md-5">
-
-                                <h2 class="fw-bolder fs-3 mb-4">
-                                    <i class="bi bi-search me-2"></i>Search Jobs
-                                </h2>
-
-                                <form id="jobSearchForm">
-
-                                    <!-- Keywords -->
-                                    <div class="mb-4">
-                                        <label for="keywords" class="form-label fw-bold">
-                                            Keywords
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            class="form-control form-control-lg"
-                                            id="keywords"
-                                            value="Business Analyst"
-                                            placeholder="e.g. Business Analyst, Reference Data, Corporate Actions" />
-                                    </div>
-
-
-                                    <!-- Location -->
-                                    <div class="mb-4">
-                                        <label for="location" class="form-label fw-bold">
-                                            Location
-                                        </label>
-
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="location"
-                                            value="India"
-                                            placeholder="e.g. India, Mumbai, Bengaluru" />
-                                    </div>
-
-
-                                    <div class="row">
-
-                                        <!-- Posted Within -->
-                                        <div class="col-md-6 mb-4">
-
-                                            <label class="form-label fw-bold">
-                                                Posted Within
-                                            </label>
-
-                                            <div class="input-group">
-
-                                                <input
-                                                    type="number"
-                                                    class="form-control"
-                                                    id="timeValue"
-                                                    value="60"
-                                                    min="1" />
-
-                                                <select
-                                                    class="form-select"
-                                                    id="timeUnit">
-
-                                                    <option value="minutes" selected>Minutes</option>
-                                                    <option value="hours">Hours</option>
-                                                    <option value="days">Days</option>
-
-                                                </select>
-
-                                            </div>
-                                        </div>
-
-
-                                        <!-- Sort -->
-                                        <div class="col-md-6 mb-4">
-
-                                            <label for="sort" class="form-label fw-bold">
-                                                Sort By
-                                            </label>
-
-                                            <select class="form-select" id="sort">
-
-                                                <option value="newest" selected>
-                                                    Newest
-                                                </option>
-
-                                                <option value="oldest">
-                                                    Oldest
-                                                </option>
-
-                                                <option value="relevance">
-                                                    Relevance
-                                                </option>
-
-                                            </select>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- Workplace -->
-                                    <div class="mb-4">
-
-                                        <label class="form-label fw-bold d-block">
-                                            Workplace
-                                        </label>
-
-                                        <div class="form-check form-check-inline">
-
-                                            <input
-                                                class="form-check-input workplace"
-                                                type="checkbox"
-                                                value="Remote"
-                                                id="remote" />
-
-                                            <label class="form-check-label" for="remote">
-                                                Remote
-                                            </label>
-
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-
-                                            <input
-                                                class="form-check-input workplace"
-                                                type="checkbox"
-                                                value="Hybrid"
-                                                id="hybrid" />
-
-                                            <label class="form-check-label" for="hybrid">
-                                                Hybrid
-                                            </label>
-
-                                        </div>
-
-                                        <div class="form-check form-check-inline">
-
-                                            <input
-                                                class="form-check-input workplace"
-                                                type="checkbox"
-                                                value="On-site"
-                                                id="onsite" />
-
-                                            <label class="form-check-label" for="onsite">
-                                                On-site
-                                            </label>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- Skills -->
-                                    <div class="mb-4">
-
-                                        <label class="form-label fw-bold d-block">
-                                            Skills
-                                        </label>
-
-                                        <div class="skill-pill">
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Corporate Actions"
-                                                id="skillCorporateActions" />
-
-                                            <label for="skillCorporateActions">
-                                                Corporate Actions
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Reference Data"
-                                                id="skillReferenceData" />
-
-                                            <label for="skillReferenceData">
-                                                Reference Data
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Capital Markets"
-                                                id="skillCapitalMarkets" />
-
-                                            <label for="skillCapitalMarkets">
-                                                Capital Markets
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Trade Settlement"
-                                                id="skillTradeSettlement" />
-
-                                            <label for="skillTradeSettlement">
-                                                Trade Settlement
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Asset Servicing"
-                                                id="skillAssetServicing" />
-
-                                            <label for="skillAssetServicing">
-                                                Asset Servicing
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="Production Support"
-                                                id="skillProductionSupport" />
-
-                                            <label for="skillProductionSupport">
-                                                Production Support
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="SQL"
-                                                id="skillSQL" />
-
-                                            <label for="skillSQL">
-                                                SQL
-                                            </label>
-
-
-                                            <input
-                                                type="checkbox"
-                                                class="skill"
-                                                value="SWIFT"
-                                                id="skillSWIFT" />
-
-                                            <label for="skillSWIFT">
-                                                SWIFT
-                                            </label>
-
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- Search Button -->
-                                    <div class="text-center pt-2">
-
-                                        <button
-                                            type="submit"
-                                            class="btn btn-primary btn-lg px-4">
-
-                                            <i class="bi bi-search me-2"></i>
-                                            Search Jobs
-
-                                        </button>
-
-                                    </div>
-
-                                </form>
-
-                            </div>
-                        </div>
-
-
-                        <!-- Status -->
+                        <!-- Search Status -->
                         <div
                             id="searchStatus"
                             class="search-status text-center mb-4 text-muted">
+
+                            <span class="spinner-border loading-spinner me-2" role="status"></span>
+                            Fetching latest jobs...
+
                         </div>
 
 
-                        <!-- Results -->
+                        <!-- Jobs -->
                         <div id="jobsContainer"></div>
 
-
                     </div>
+
                 </div>
+
             </div>
 
         </section>
@@ -519,9 +219,11 @@
 
     <script>
 
-        const form = document.getElementById("jobSearchForm");
-        const jobsContainer = document.getElementById("jobsContainer");
-        const searchStatus = document.getElementById("searchStatus");
+        const jobsContainer =
+            document.getElementById("jobsContainer");
+
+        const searchStatus =
+            document.getElementById("searchStatus");
 
 
         function escapeHtml(value) {
@@ -534,28 +236,7 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
-        }
 
-
-        function getMatchClass(level) {
-
-            switch (level) {
-
-                case "Excellent":
-                    return "match-excellent";
-
-                case "Strong":
-                    return "match-strong";
-
-                case "Good":
-                    return "match-good";
-
-                case "Moderate":
-                    return "match-moderate";
-
-                default:
-                    return "match-low";
-            }
         }
 
 
@@ -564,39 +245,53 @@
             if (!jobs || jobs.length === 0) {
 
                 jobsContainer.innerHTML = `
+
                     <div class="card shadow rounded-4 border-0">
+
                         <div class="card-body p-5 text-center">
+
                             <i class="bi bi-search fs-1 text-muted"></i>
-                            <h3 class="fw-bolder mt-3">No jobs found</h3>
+
+                            <h3 class="fw-bolder mt-3">
+                                No jobs found
+                            </h3>
+
                             <p class="text-muted mb-0">
-                                Try changing your keywords, location or posted time.
+                                No matching opportunities were found at the moment.
                             </p>
+
                         </div>
+
                     </div>
+
                 `;
 
                 return;
             }
 
 
-            jobsContainer.innerHTML = jobs.map(job => {
+            /*
+             * Sort strictly by posting time.
+             *
+             * LinkedIn returns the jobs in posting order,
+             * but we keep the explicit sort here so that the
+             * newest jobs always appear first.
+             */
 
-                const matchedSkills =
-                    job.matchedSkills || [];
+            jobs.sort((a, b) => {
 
-                const skillHtml =
-                    matchedSkills.length > 0
-                        ? matchedSkills.map(skill =>
-                            `<span class="badge bg-light text-dark border">${escapeHtml(skill)}</span>`
-                          ).join("")
-                        : "";
+                const dateA =
+                    new Date(a.postedAt || 0).getTime();
+
+                const dateB =
+                    new Date(b.postedAt || 0).getTime();
+
+                return dateB - dateA;
+
+            });
 
 
-                const snippet =
-                    job.snippet
-                        ? `<p class="text-muted mb-3">${escapeHtml(job.snippet)}</p>`
-                        : "";
-
+            jobsContainer.innerHTML = jobs.map((job, index) => {
 
                 return `
 
@@ -604,7 +299,12 @@
 
                         <div class="card-body p-4 p-md-5">
 
-                            <div class="d-flex flex-column flex-md-row justify-content-between align-items-start gap-3">
+                            <div class="d-flex align-items-start gap-3">
+
+                                <div class="job-number">
+                                    ${index + 1}
+                                </div>
+
 
                                 <div class="flex-grow-1">
 
@@ -626,6 +326,7 @@
                                     <div class="job-meta mb-2">
 
                                         <i class="bi bi-building me-1"></i>
+
                                         ${escapeHtml(job.company)}
 
                                     </div>
@@ -634,6 +335,7 @@
                                     <div class="job-meta mb-2">
 
                                         <i class="bi bi-geo-alt me-1"></i>
+
                                         ${escapeHtml(job.location)}
 
                                     </div>
@@ -642,64 +344,31 @@
                                     <div class="job-meta">
 
                                         <i class="bi bi-clock me-1"></i>
-                                        ${escapeHtml(job.posted)}
+
+                                        <strong>
+                                            ${escapeHtml(job.posted)}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div class="mt-4">
+
+                                        <a
+                                            class="btn btn-outline-dark"
+                                            href="${escapeHtml(job.url)}"
+                                            target="_blank"
+                                            rel="noopener">
+
+                                            <i class="bi bi-linkedin me-2"></i>
+
+                                            View Job on LinkedIn
+
+                                        </a>
 
                                     </div>
 
                                 </div>
-
-
-                                <div class="text-md-end">
-
-                                    <span class="match-badge ${getMatchClass(job.matchLevel)}">
-
-                                        ${escapeHtml(job.matchScore)}% Match
-
-                                    </span>
-
-                                    <div class="small text-muted mt-2">
-
-                                        ${escapeHtml(job.matchLevel)}
-
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            ${snippet}
-
-
-                            ${
-                                matchedSkills.length > 0
-                                ? `
-                                    <div class="job-skills mt-3">
-
-                                        <div class="small fw-bold text-muted mb-2">
-                                            Matched Skills
-                                        </div>
-
-                                        ${skillHtml}
-
-                                    </div>
-                                  `
-                                : ""
-                            }
-
-
-                            <div class="mt-4">
-
-                                <a
-                                    class="btn btn-outline-dark"
-                                    href="${escapeHtml(job.url)}"
-                                    target="_blank"
-                                    rel="noopener">
-
-                                    <i class="bi bi-linkedin me-2"></i>
-                                    View on LinkedIn
-
-                                </a>
 
                             </div>
 
@@ -710,65 +379,70 @@
                 `;
 
             }).join("");
+
         }
 
 
         async function searchJobs() {
 
-            const keywords =
-                document.getElementById("keywords").value.trim();
-
-            const location =
-                document.getElementById("location").value.trim();
-
-            const timeValue =
-                document.getElementById("timeValue").value;
-
-            const timeUnit =
-                document.getElementById("timeUnit").value;
-
-            const sort =
-                document.getElementById("sort").value;
-
-
-            const workplace =
-                [...document.querySelectorAll(".workplace:checked")]
-                .map(el => el.value)
-                .join(",");
-
-
-            const skills =
-                [...document.querySelectorAll(".skill:checked")]
-                .map(el => el.value)
-                .join(",");
-
-
             searchStatus.innerHTML = `
-                <span class="spinner-border loading-spinner me-2" role="status"></span>
-                Searching latest jobs...
-            `;
 
+                <span
+                    class="spinner-border loading-spinner me-2"
+                    role="status">
+                </span>
+
+                Fetching latest jobs...
+
+            `;
 
             jobsContainer.innerHTML = "";
 
 
             try {
 
-                const params = new URLSearchParams({
+                /*
+                 * These are the predefined skills/profile keywords.
+                 *
+                 * No search controls are exposed to the visitor.
+                 */
 
-                    keywords,
-                    location,
-                    timeValue,
-                    timeUnit,
-                    workplace,
-                    skills,
-                    sort
+                const keywords =
+                    "Corporate Actions Reference Data Capital Markets Trade Settlement Asset Servicing Business Analyst Production Support SQL SWIFT";
 
-                });
+
+                const location =
+                    "India";
+
+
+                const timeValue =
+                    7;
+
+
+                const timeUnit =
+                    "days";
+
+
+                const sort =
+                    "newest";
+
+
+                const params =
+                    new URLSearchParams({
+
+                        keywords,
+                        location,
+                        timeValue,
+                        timeUnit,
+                        sort
+
+                    });
 
 
                 const response =
-                    await fetch(`/api/jobs?${params.toString()}`);
+                    await fetch(
+                        `/api/jobs?${params.toString()}`
+                    );
 
 
                 const data =
@@ -784,20 +458,8 @@
                 }
 
 
-                let jobs =
+                const jobs =
                     data.jobs || [];
-
-
-                /*
-                 * The backend already calculates the match score.
-                 * Sort by match score for the most useful result first.
-                 */
-
-                jobs.sort(
-                    (a, b) =>
-                        (b.matchScore || 0) -
-                        (a.matchScore || 0)
-                );
 
 
                 renderJobs(jobs);
@@ -809,13 +471,13 @@
 
                         <i class="bi bi-check-circle me-1"></i>
 
-                        ${jobs.length} jobs found
+                        ${jobs.length} latest jobs
 
                     </span>
 
                     <span class="text-muted">
 
-                        &nbsp;•&nbsp; Results automatically matched to my profile
+                        &nbsp;•&nbsp; Updated automatically
 
                     </span>
 
@@ -825,17 +487,19 @@
 
                 console.error(error);
 
+
                 searchStatus.innerHTML = `
 
                     <span class="text-danger fw-bold">
 
                         <i class="bi bi-exclamation-circle me-1"></i>
 
-                        Something went wrong
+                        Unable to load latest jobs
 
                     </span>
 
                 `;
+
 
                 jobsContainer.innerHTML = `
 
@@ -846,11 +510,10 @@
                             <i class="bi bi-exclamation-triangle fs-1 text-warning"></i>
 
                             <h3 class="fw-bolder mt-3">
-                                Unable to load jobs
+                                Jobs temporarily unavailable
                             </h3>
 
-                            <p class="text-muted">
-                                LinkedIn may be temporarily unavailable.
+                            <p class="text-muted mb-0">
                                 Please try again later.
                             </p>
 
@@ -865,17 +528,8 @@
         }
 
 
-        form.addEventListener("submit", function(event) {
-
-            event.preventDefault();
-
-            searchJobs();
-
-        });
-
-
         /*
-         * Automatically search when the Jobs page opens.
+         * Automatically fetch jobs when the page opens.
          */
         searchJobs();
 
