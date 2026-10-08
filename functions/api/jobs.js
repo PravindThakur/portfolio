@@ -1,972 +1,967 @@
 export async function onRequestGet(context) {
 
-    const requestUrl = new URL(context.request.url);
+    /*
+     * =========================================================
+     * SETTINGS
+     * =========================================================
+     */
 
-    const keywords =
-        requestUrl.searchParams.get("keywords") ||
-        "Business Analyst";
+    // Keep jobs for 30 days
+    const ARCHIVE_DAYS = 30;
 
-    const location =
-        requestUrl.searchParams.get("location") ||
-        "India";
+    // Contact LinkedIn at most once every 15 minutes
+    const REFRESH_SECONDS = 15 * 60;
 
-    const timeValue =
-        Number(requestUrl.searchParams.get("timeValue")) || 60;
+    const now = new Date();
 
-    const timeUnit =
-        requestUrl.searchParams.get("timeUnit") || "minutes";
-
-    const sort =
-        requestUrl.searchParams.get("sort") || "newest";
-
-    const workplace =
-        requestUrl.searchParams.get("workplace") || "";
-
-    const skills =
-        requestUrl.searchParams.get("skills") || "";
-
-
-    // ==================================================
-    // Convert posted-within value to seconds
-    // ==================================================
-
-    let seconds = timeValue;
-
-    if (timeUnit === "minutes") {
-        seconds = timeValue * 60;
-    }
-
-    if (timeUnit === "hours") {
-        seconds = timeValue * 60 * 60;
-    }
-
-    if (timeUnit === "days") {
-        seconds = timeValue * 24 * 60 * 60;
-    }
-
-
-    // ==================================================
-    // Build LinkedIn guest search URL
-    // ==================================================
-
-    const linkedinParams = new URLSearchParams();
-
-    linkedinParams.set("keywords", keywords);
-    linkedinParams.set("location", location);
-    linkedinParams.set("f_TPR", `r${seconds}`);
-
-    linkedinParams.set(
-        "sortBy",
-        sort === "newest" ? "DD" : "R"
+    const cutoff = new Date(
+        now.getTime() -
+        ARCHIVE_DAYS * 24 * 60 * 60 * 1000
     );
 
-    // IMPORTANT:
-    // Only request the first LinkedIn page.
-    // Additional pages can cause HTTP 429.
-    linkedinParams.set("start", "0");
 
-    const linkedinUrl =
-        "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?" +
-        linkedinParams.toString();
-
-
-    // ==================================================
-    // Cloudflare Cache
-    // ==================================================
+    /*
+     * =========================================================
+     * CACHE
+     *
+     * We use Cloudflare Cache as a lightweight rolling archive.
+     *
+     * No D1 database is required.
+     * =========================================================
+     */
 
     const cache = caches.default;
 
-    const cacheKey = new Request(
-        linkedinUrl,
-        {
-            method: "GET"
-        }
-    );
-
-    // 5 minutes
-    const CACHE_SECONDS = 300;
+    const origin =
+        new URL(context.request.url).origin;
 
 
-    // ==================================================
-    // Check cache
-    // ==================================================
+    /*
+     * Cache containing our accumulated 30-day job archive.
+     */
+
+    const archiveUrl =
+        `${origin}/__job_archive_v2`;
+
+
+    /*
+     * Cache used to control how often we contact LinkedIn.
+     */
+
+    const refreshUrl =
+        `${origin}/__job_refresh_v2`;
+
+
+    const archiveKey =
+        new Request(
+            archiveUrl,
+            {
+                method: "GET"
+            }
+        );
+
+
+    const refreshKey =
+        new Request(
+            refreshUrl,
+            {
+                method: "GET"
+            }
+        );
+
+
+    /*
+     * =========================================================
+     * 1. READ EXISTING JOB ARCHIVE
+     * =========================================================
+     */
+
+    let archive = [];
+
 
     try {
 
-        const cachedResponse =
-            await cache.match(cacheKey);
-
-        if (cachedResponse) {
-
-            const cachedData =
-                await cachedResponse.json();
-
-            // Recalculate match score when returning
-            // cached jobs. This allows the scoring logic
-            // to change without another LinkedIn request.
-
-            if (cachedData.jobs) {
-
-                cachedData.jobs =
-                    cachedData.jobs.map(job =>
-                        addMatchScore(job)
-                    );
-            }
-
-            return new Response(
-                JSON.stringify({
-                    ...cachedData,
-                    cached: true,
-                    cacheStatus: "fresh"
-                }),
-                {
-                    status: 200,
-                    headers: {
-                        "Content-Type":
-                            "application/json",
-
-                        "Cache-Control":
-                            "no-store"
-                    }
-                }
+        const cachedArchive =
+            await cache.match(
+                archiveKey
             );
+
+
+        if (cachedArchive) {
+
+            archive =
+                await cachedArchive.json();
+
         }
 
     } catch (error) {
 
         console.log(
-            "Fresh cache read failed:",
+            "Archive read failed:",
             error.message
         );
+
+        archive = [];
+
     }
 
 
-    // ==================================================
-    // LinkedIn request
-    // ==================================================
+    /*
+     * =========================================================
+     * 2. REMOVE JOBS OLDER THAN 30 DAYS
+     * =========================================================
+     */
 
-    async function fetchLinkedIn() {
+    archive =
+        archive.filter(
+            job => {
 
-        const controller =
-            new AbortController();
+                const postedAt =
+                    new Date(
+                        job.postedAt
+                    );
 
-        const timeout =
-            setTimeout(
-                () => controller.abort(),
-                8000
+
+                return (
+                    !isNaN(
+                        postedAt.getTime()
+                    ) &&
+                    postedAt >= cutoff
+                );
+
+            }
+        );
+
+
+    /*
+     * =========================================================
+     * 3. CHECK LINKEDIN REFRESH STATUS
+     * =========================================================
+     */
+
+    let shouldRefresh = true;
+
+
+    try {
+
+        const refreshCache =
+            await cache.match(
+                refreshKey
             );
 
+
+        if (refreshCache) {
+
+            shouldRefresh = false;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "Refresh cache check failed:",
+            error.message
+        );
+
+    }
+
+
+    /*
+     * =========================================================
+     * VARIABLES FOR RESPONSE
+     * =========================================================
+     */
+
+    let linkedinStatus = 0;
+
+    let linkedinError = null;
+
+    let newlyDiscovered = 0;
+
+
+    /*
+     * =========================================================
+     * 4. FETCH LINKEDIN
+     * =========================================================
+     *
+     * Only one LinkedIn request is made during a refresh.
+     *
+     * This is intentional.
+     *
+     * Multiple rapid LinkedIn requests previously caused
+     * HTTP 429 rate limiting.
+     * =========================================================
+     */
+
+    if (shouldRefresh) {
+
+
+        /*
+         * -----------------------------------------------------
+         * SEARCH TERMS
+         * -----------------------------------------------------
+         */
+
+        const keywords =
+            'Corporate Actions OR ' +
+            'Reference Data OR ' +
+            'Capital Markets OR ' +
+            'Asset Servicing OR ' +
+            'Trade Settlement OR ' +
+            '"Business Analyst" OR ' +
+            '"Business Analysis" OR ' +
+            '"Production Support" OR ' +
+            '"Application Support" OR ' +
+            '"L2 Support" OR ' +
+            '"L3 Support" OR ' +
+            '"Production Analyst"';
+
+
+        const location =
+            "India";
+
+
+        /*
+         * Search the last 30 days.
+         */
+
+        const seconds =
+            ARCHIVE_DAYS *
+            24 *
+            60 *
+            60;
+
+
+        const params =
+            new URLSearchParams();
+
+
+        params.set(
+            "keywords",
+            keywords
+        );
+
+
+        params.set(
+            "location",
+            location
+        );
+
+
+        params.set(
+            "f_TPR",
+            `r${seconds}`
+        );
+
+
+        /*
+         * DD = Date Descending
+         *
+         * LinkedIn should return newest jobs first,
+         * but we ALSO sort ourselves later.
+         */
+
+        params.set(
+            "sortBy",
+            "DD"
+        );
+
+
+        params.set(
+            "start",
+            "0"
+        );
+
+
+        const linkedinUrl =
+            "https://www.linkedin.com/jobs-guest/jobs/api/seeMoreJobPostings/search?" +
+            params.toString();
+
+
+        /*
+         * -----------------------------------------------------
+         * CALL LINKEDIN
+         * -----------------------------------------------------
+         */
+
         try {
+
+            const controller =
+                new AbortController();
+
+
+            const timeout =
+                setTimeout(
+                    () => controller.abort(),
+                    8000
+                );
+
 
             const response =
                 await fetch(
                     linkedinUrl,
                     {
-                        method: "GET",
 
-                        headers: {
+                        method:
+                            "GET",
 
-                            "User-Agent":
-                                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154.0.0.0 Safari/537.36",
 
-                            "Accept":
-                                "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        headers:
+                            {
 
-                            "Accept-Language":
-                                "en-US,en;q=0.9",
+                                "User-Agent":
+                                    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                                    "Chrome/154.0.0.0 Safari/537.36",
 
-                            "Referer":
-                                "https://www.linkedin.com/jobs/"
-                        },
+
+                                "Accept":
+                                    "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+
+
+                                "Accept-Language":
+                                    "en-US,en;q=0.9",
+
+
+                                "Referer":
+                                    "https://www.linkedin.com/jobs/"
+
+                            },
+
 
                         signal:
                             controller.signal
+
                     }
                 );
 
-            clearTimeout(timeout);
 
-            return response;
+            clearTimeout(
+                timeout
+            );
+
+
+            linkedinStatus =
+                response.status;
+
+
+            /*
+             * -------------------------------------------------
+             * SUCCESSFUL LINKEDIN RESPONSE
+             * -------------------------------------------------
+             */
+
+            if (response.ok) {
+
+
+                const html =
+                    await response.text();
+
+
+                /*
+                 * =============================================
+                 * PARSE JOB CARDS
+                 * =============================================
+                 */
+
+                const jobCardRegex =
+                    /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
+
+
+                const cards = [];
+
+                let match;
+
+
+                while (
+                    (
+                        match =
+                            jobCardRegex.exec(
+                                html
+                            )
+                    ) !== null
+                ) {
+
+                    cards.push(
+                        match[1]
+                    );
+
+                }
+
+
+                const discoveredJobs = [];
+
+
+                /*
+                 * =============================================
+                 * EXTRACT EACH JOB
+                 * =============================================
+                 */
+
+                for (
+                    const card of cards
+                ) {
+
+
+                    /*
+                     * Job title
+                     */
+
+                    const titleMatch =
+                        card.match(
+                            /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
+                        );
+
+
+                    /*
+                     * Company
+                     */
+
+                    const companyMatch =
+                        card.match(
+                            /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
+                        );
+
+
+                    /*
+                     * Location
+                     */
+
+                    const locationMatch =
+                        card.match(
+                            /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
+                        );
+
+
+                    /*
+                     * LinkedIn job URL
+                     */
+
+                    const urlMatch =
+                        card.match(
+                            /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
+                        );
+
+
+                    /*
+                     * LinkedIn posting timestamp
+                     */
+
+                    const timeMatch =
+                        card.match(
+                            /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
+                        );
+
+
+                    /*
+                     * LinkedIn Job ID
+                     */
+
+                    const idMatch =
+                        card.match(
+                            /data-entity-urn="urn:li:jobPosting:(\d+)"/i
+                        );
+
+
+                    const jobId =
+                        idMatch?.[1] ||
+                        "";
+
+
+                    const title =
+                        cleanText(
+                            titleMatch?.[1]
+                        );
+
+
+                    const company =
+                        cleanText(
+                            companyMatch?.[1]
+                        );
+
+
+                    const location =
+                        cleanText(
+                            locationMatch?.[1]
+                        );
+
+
+                    const posted =
+                        cleanText(
+                            timeMatch?.[2]
+                        );
+
+
+                    const postedAt =
+                        timeMatch?.[1] ||
+                        "";
+
+
+                    const url =
+                        cleanUrl(
+                            urlMatch?.[1]
+                        );
+
+
+                    /*
+                     * -------------------------------------------------
+                     * Ignore incomplete jobs
+                     * -------------------------------------------------
+                     */
+
+                    if (
+                        !jobId ||
+                        !title ||
+                        !company ||
+                        !url ||
+                        !postedAt
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    /*
+                     * -------------------------------------------------
+                     * Validate posting date
+                     * -------------------------------------------------
+                     */
+
+                    const postedDate =
+                        new Date(
+                            postedAt
+                        );
+
+
+                    if (
+                        isNaN(
+                            postedDate.getTime()
+                        )
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    /*
+                     * -------------------------------------------------
+                     * Don't store jobs older than 30 days
+                     * -------------------------------------------------
+                     */
+
+                    if (
+                        postedDate <
+                        cutoff
+                    ) {
+
+                        continue;
+
+                    }
+
+
+                    /*
+                     * -------------------------------------------------
+                     * Add to discovered jobs
+                     * -------------------------------------------------
+                     */
+
+                    discoveredJobs.push({
+
+                        jobId:
+                            jobId,
+
+                        title:
+                            title,
+
+                        company:
+                            company,
+
+                        location:
+                            location,
+
+                        posted:
+                            posted,
+
+                        postedAt:
+                            postedDate.toISOString(),
+
+                        url:
+                            url,
+
+                        discoveredAt:
+                            now.toISOString()
+
+                    });
+
+                }
+
+
+                /*
+                 * =============================================
+                 * MERGE WITH EXISTING ARCHIVE
+                 * =============================================
+                 *
+                 * LinkedIn Job ID is used for deduplication.
+                 * =============================================
+                 */
+
+                const existingIds =
+                    new Set(
+                        archive.map(
+                            job =>
+                                job.jobId
+                        )
+                    );
+
+
+                for (
+                    const job of discoveredJobs
+                ) {
+
+                    /*
+                     * New job
+                     */
+
+                    if (
+                        !existingIds.has(
+                            job.jobId
+                        )
+                    ) {
+
+                        archive.push(
+                            job
+                        );
+
+
+                        existingIds.add(
+                            job.jobId
+                        );
+
+
+                        newlyDiscovered++;
+
+                    }
+
+                }
+
+
+                /*
+                 * =============================================
+                 * SAVE UPDATED ARCHIVE
+                 * =============================================
+                 */
+
+                try {
+
+                    await cache.put(
+
+                        archiveKey,
+
+                        new Response(
+
+                            JSON.stringify(
+                                archive
+                            ),
+
+                            {
+                                status:
+                                    200,
+
+                                headers:
+                                    {
+                                        "Content-Type":
+                                            "application/json",
+
+                                        /*
+                                         * Cache the archive for
+                                         * 30 days.
+                                         */
+                                        "Cache-Control":
+                                            `public, max-age=${ARCHIVE_DAYS * 24 * 60 * 60}`
+                                    }
+                            }
+
+                        )
+
+                    );
+
+                } catch (error) {
+
+                    console.log(
+                        "Archive cache write failed:",
+                        error.message
+                    );
+
+                }
+
+
+            } else {
+
+
+                /*
+                 * -------------------------------------------------
+                 * LINKEDIN ERROR
+                 * -------------------------------------------------
+                 */
+
+                linkedinError =
+                    `LinkedIn returned HTTP ${response.status}`;
+
+            }
+
 
         } catch (error) {
 
-            clearTimeout(timeout);
+            linkedinError =
+                error.message ||
+                "LinkedIn request failed";
 
-            throw error;
-        }
-    }
-
-
-    // ==================================================
-    // Call LinkedIn ONCE
-    // ==================================================
-
-    let response = null;
-
-    let lastError = null;
-
-    try {
-
-        response =
-            await fetchLinkedIn();
-
-        if (!response.ok) {
-
-            lastError =
-                `LinkedIn returned HTTP ${response.status}`;
         }
 
-    } catch (error) {
 
-        lastError =
-            error.message ||
-            "LinkedIn request failed";
-    }
+        /*
+         * =====================================================
+         * 5. MARK LINKEDIN AS REFRESHED
+         * =====================================================
+         *
+         * This prevents another LinkedIn request for 15 minutes.
+         *
+         * Even if LinkedIn gives us 429, we don't immediately
+         * hammer LinkedIn again.
+         * =====================================================
+         */
 
+        try {
 
-    // ==================================================
-    // Handle LinkedIn failure
-    // ==================================================
+            await cache.put(
 
-    if (!response || !response.ok) {
+                refreshKey,
 
-        return new Response(
-            JSON.stringify({
+                new Response(
 
-                success: false,
+                    JSON.stringify({
 
-                error:
-                    "LinkedIn temporarily unavailable",
+                        refreshedAt:
+                            now.toISOString()
 
-                details:
-                    lastError,
+                    }),
 
-                retryable:
-                    response?.status === 429,
+                    {
 
-                status:
-                    response?.status || 0
+                        status:
+                            200,
 
-            }),
-            {
-                status: 200,
+                        headers:
+                            {
+                                "Content-Type":
+                                    "application/json",
 
-                headers: {
-                    "Content-Type":
-                        "application/json",
+                                "Cache-Control":
+                                    `public, max-age=${REFRESH_SECONDS}`
+                            }
 
-                    "Cache-Control":
-                        "no-store"
-                }
-            }
-        );
-    }
-
-
-    // ==================================================
-    // Read LinkedIn HTML
-    // ==================================================
-
-    let html;
-
-    try {
-
-        html =
-            await response.text();
-
-    } catch (error) {
-
-        return new Response(
-            JSON.stringify({
-
-                success: false,
-
-                error:
-                    "Unable to read LinkedIn response",
-
-                details:
-                    error.message,
-
-                retryable: true
-
-            }),
-            {
-                status: 200,
-
-                headers: {
-                    "Content-Type":
-                        "application/json",
-
-                    "Cache-Control":
-                        "no-store"
-                }
-            }
-        );
-    }
-
-
-    // ==================================================
-    // Find LinkedIn job cards
-    // ==================================================
-
-    const jobCardRegex =
-        /<li[^>]*>([\s\S]*?base-card[\s\S]*?)<\/li>/gi;
-
-    const cards = [];
-
-    let match;
-
-    while (
-        (match =
-            jobCardRegex.exec(html)) !== null
-    ) {
-
-        cards.push(match[1]);
-    }
-
-
-    // ==================================================
-    // Parse jobs
-    // ==================================================
-
-    const jobs =
-        cards.map(card => {
-
-            // ------------------------------------------
-            // Title
-            // ------------------------------------------
-
-            const titleMatch =
-                card.match(
-                    /<h3[^>]*class="[^"]*base-search-card__title[^"]*"[^>]*>([\s\S]*?)<\/h3>/i
-                );
-
-
-            // ------------------------------------------
-            // Company
-            // ------------------------------------------
-
-            const companyMatch =
-                card.match(
-                    /<h4[^>]*class="[^"]*base-search-card__subtitle[^"]*"[^>]*>[\s\S]*?<a[^>]*>([\s\S]*?)<\/a>/i
-                );
-
-
-            // ------------------------------------------
-            // Location
-            // ------------------------------------------
-
-            const locationMatch =
-                card.match(
-                    /<span[^>]*class="[^"]*job-search-card__location[^"]*"[^>]*>([\s\S]*?)<\/span>/i
-                );
-
-
-            // ------------------------------------------
-            // LinkedIn URL
-            // ------------------------------------------
-
-            const urlMatch =
-                card.match(
-                    /<a[^>]*class="[^"]*base-card__full-link[^"]*"[^>]*href="([^"]+)"/i
-                );
-
-
-            // ------------------------------------------
-            // Posted time
-            // ------------------------------------------
-
-            const timeMatch =
-                card.match(
-                    /<time[^>]*datetime="([^"]+)"[^>]*>([\s\S]*?)<\/time>/i
-                );
-
-
-            // ------------------------------------------
-            // LinkedIn Job ID
-            // ------------------------------------------
-
-            const idMatch =
-                card.match(
-                    /data-entity-urn="urn:li:jobPosting:(\d+)"/i
-                );
-
-
-            // ------------------------------------------
-            // Job snippet
-            // ------------------------------------------
-
-            const snippetMatch =
-                card.match(
-                    /<p[^>]*class="[^"]*job-search-card__snippet[^"]*"[^>]*>([\s\S]*?)<\/p>/i
-                );
-
-
-            const job = {
-
-                title:
-                    cleanText(
-                        titleMatch?.[1]
-                    ),
-
-                company:
-                    cleanText(
-                        companyMatch?.[1]
-                    ),
-
-                location:
-                    cleanText(
-                        locationMatch?.[1]
-                    ),
-
-                posted:
-                    cleanText(
-                        timeMatch?.[2]
-                    ),
-
-                postedAt:
-                    timeMatch?.[1] || "",
-
-                jobId:
-                    idMatch?.[1] || "",
-
-                url:
-                    cleanUrl(
-                        urlMatch?.[1]
-                    ),
-
-                snippet:
-                    cleanText(
-                        snippetMatch?.[1]
-                    )
-            };
-
-
-            // ------------------------------------------
-            // Calculate match score
-            // ------------------------------------------
-
-            return addMatchScore(job);
-        });
-
-
-    // ==================================================
-    // Remove invalid jobs
-    // ==================================================
-
-    const validJobs =
-        jobs.filter(job =>
-            job.title &&
-            job.company &&
-            job.url
-        );
-
-
-    // ==================================================
-    // Final result
-    // ==================================================
-
-    const result = {
-
-        success: true,
-
-        source:
-            "LinkedIn guest jobs endpoint",
-
-        cached: false,
-
-        cacheStatus:
-            "fresh",
-
-        search: {
-
-            keywords,
-
-            location,
-
-            timeValue,
-
-            timeUnit,
-
-            seconds,
-
-            workplace:
-                workplace
-                    ? workplace.split(",")
-                    : [],
-
-            skills:
-                skills
-                    ? skills.split(",")
-                    : [],
-
-            sort
-        },
-
-        count:
-            validJobs.length,
-
-        jobs:
-            validJobs,
-
-        linkedin: {
-
-            status:
-                response.status,
-
-            responseLength:
-                html.length
-        }
-    };
-
-
-    // ==================================================
-    // Save to Cloudflare cache
-    // ==================================================
-
-    try {
-
-        const cacheResponse =
-            new Response(
-                JSON.stringify(result),
-                {
-                    status: 200,
-
-                    headers: {
-
-                        "Content-Type":
-                            "application/json",
-
-                        "Cache-Control":
-                            `public, max-age=${CACHE_SECONDS}`
                     }
-                }
+
+                )
+
             );
 
-        context.waitUntil(
-            cache.put(
-                cacheKey,
-                cacheResponse
-            )
-        );
+        } catch (error) {
 
-    } catch (error) {
+            console.log(
+                "Refresh marker write failed:",
+                error.message
+            );
 
-        console.log(
-            "Cache write failed:",
-            error.message
-        );
+        }
+
     }
 
 
-    // ==================================================
-    // Return response
-    // ==================================================
+    /*
+     * =========================================================
+     * 6. FINAL 30-DAY CLEANUP
+     * =========================================================
+     */
 
-    return new Response(
-        JSON.stringify(result),
-        {
-            status: 200,
+    archive =
+        archive.filter(
+            job => {
 
-            headers: {
+                const postedAt =
+                    new Date(
+                        job.postedAt
+                    );
 
-                "Content-Type":
-                    "application/json",
 
-                "Cache-Control":
-                    "no-store"
+                return (
+                    !isNaN(
+                        postedAt.getTime()
+                    ) &&
+                    postedAt >= cutoff
+                );
+
             }
+        );
+
+
+    /*
+     * =========================================================
+     * 7. STRICT NEWEST-FIRST SORT
+     * =========================================================
+     *
+     * THIS IS THE IMPORTANT PART.
+     *
+     * We sort using LinkedIn's actual posting timestamp.
+     *
+     * NOT:
+     * - discovery time
+     * - cache time
+     * - array position
+     * - LinkedIn response order
+     *
+     * Therefore:
+     *
+     * 10 minutes ago
+     *       ↓
+     * 30 minutes ago
+     *       ↓
+     * 2 hours ago
+     *       ↓
+     * 1 day ago
+     *       ↓
+     * 5 days ago
+     *
+     * =========================================================
+     */
+
+    archive.sort(
+        (a, b) => {
+
+            const dateA =
+                new Date(
+                    a.postedAt
+                ).getTime();
+
+
+            const dateB =
+                new Date(
+                    b.postedAt
+                ).getTime();
+
+
+            return dateB - dateA;
+
         }
     );
+
+
+    /*
+     * =========================================================
+     * 8. RETURN RESULTS
+     * =========================================================
+     */
+
+    return new Response(
+
+        JSON.stringify({
+
+            success:
+                true,
+
+            count:
+                archive.length,
+
+            newlyAdded:
+                newlyDiscovered,
+
+            retention:
+                "30 days",
+
+            refreshInterval:
+                "15 minutes",
+
+            sorted:
+                "newest first",
+
+            searchProfile:
+                [
+                    "Corporate Actions",
+                    "Reference Data",
+                    "Capital Markets",
+                    "Asset Servicing",
+                    "Trade Settlement",
+                    "Business Analyst",
+                    "Business Analysis",
+                    "Production Support",
+                    "Application Support",
+                    "L2 Support",
+                    "L3 Support",
+                    "Production Analyst"
+                ],
+
+            linkedin:
+                {
+
+                    refreshed:
+                        shouldRefresh,
+
+                    status:
+                        linkedinStatus,
+
+                    error:
+                        linkedinError
+
+                },
+
+            jobs:
+                archive
+
+        }),
+
+        {
+
+            status:
+                200,
+
+            headers:
+                {
+
+                    "Content-Type":
+                        "application/json",
+
+                    "Cache-Control":
+                        "no-store"
+
+                }
+
+        }
+
+    );
+
 }
 
 
-// ======================================================
-// PROFILE-BASED MATCH SCORE
-// ======================================================
-
-function addMatchScore(job) {
-
-    const title =
-        normalize(job.title);
-
-    const snippet =
-        normalize(job.snippet);
-
-    const company =
-        normalize(job.company);
-
-    const location =
-        normalize(job.location);
-
-    const text =
-        `${title} ${snippet} ${company} ${location}`;
-
-
-    // ==================================================
-    // Your professional profile
-    // ==================================================
-
-    const categories = [
-
-        {
-            name: "Corporate Actions",
-            weight: 20,
-
-            keywords: [
-                "corporate action",
-                "corporate actions",
-                "mand",
-                "volu",
-                "chos",
-                "multi-stage",
-                "multistage",
-                "dividend",
-                "stock split",
-                "bonus issue",
-                "rights issue",
-                "entitlement"
-            ]
-        },
-
-        {
-            name: "Reference Data",
-            weight: 20,
-
-            keywords: [
-                "reference data",
-                "reference-data",
-                "static data",
-                "static-data",
-                "security master",
-                "security master data",
-                "business partner data",
-                "instrument data",
-                "master data"
-            ]
-        },
-
-        {
-            name: "Capital Markets",
-            weight: 15,
-
-            keywords: [
-                "capital markets",
-                "capital market",
-                "securities",
-                "securities processing",
-                "investment banking",
-                "financial markets"
-            ]
-        },
-
-        {
-            name: "Trade Settlement",
-            weight: 10,
-
-            keywords: [
-                "trade settlement",
-                "settlement",
-                "trade lifecycle",
-                "trade life cycle",
-                "dvp",
-                "rvp",
-                "dfp",
-                "rfp"
-            ]
-        },
-
-        {
-            name: "Asset Servicing",
-            weight: 10,
-
-            keywords: [
-                "asset servicing",
-                "asset service",
-                "securities services",
-                "custody",
-                "custodian",
-                "corporate services"
-            ]
-        },
-
-        {
-            name: "Production Support",
-            weight: 10,
-
-            keywords: [
-                "production support",
-                "application support",
-                "l2 support",
-                "l3 support",
-                "level 2 support",
-                "level 3 support",
-                "incident management",
-                "problem management",
-                "root cause analysis",
-                "rca",
-                "production"
-            ]
-        },
-
-        {
-            name: "Business Analysis",
-            weight: 10,
-
-            keywords: [
-                "business analyst",
-                "business analysis",
-                "senior business analyst",
-                "requirements",
-                "requirement gathering",
-                "requirements analysis",
-                "functional analysis",
-                "functional analyst",
-                "business requirements",
-                "stakeholder management"
-            ]
-        },
-
-        {
-            name: "SQL",
-            weight: 3,
-
-            keywords: [
-                "sql",
-                "oracle sql",
-                "plsql",
-                "pl/sql",
-                "database",
-                "oracle"
-            ]
-        },
-
-        {
-            name: "SWIFT",
-            weight: 2,
-
-            keywords: [
-                "swift",
-                "mt564",
-                "mt565",
-                "mt566",
-                "mt567",
-                "iso 20022"
-            ]
-        }
-    ];
-
-
-    // ==================================================
-    // Calculate category matches
-    // ==================================================
-
-    const matchedSkills = [];
-
-    let score = 0;
-
-
-    for (const category of categories) {
-
-        let matched = false;
-
-        for (const keyword of category.keywords) {
-
-            if (text.includes(keyword)) {
-
-                matched = true;
-                break;
-            }
-        }
-
-        if (matched) {
-
-            score += category.weight;
-
-            matchedSkills.push(
-                category.name
-            );
-        }
-    }
-
-
-    // ==================================================
-    // Strong title bonuses
-    // ==================================================
-
-    let titleBonus = 0;
-
-    if (
-        title.includes("business analyst")
-    ) {
-
-        titleBonus += 5;
-    }
-
-    if (
-        title.includes("reference data")
-    ) {
-
-        titleBonus += 5;
-    }
-
-    if (
-        title.includes("corporate action")
-    ) {
-
-        titleBonus += 5;
-    }
-
-    if (
-        title.includes("capital market")
-    ) {
-
-        titleBonus += 5;
-    }
-
-    if (
-        title.includes("asset servicing")
-    ) {
-
-        titleBonus += 5;
-    }
-
-
-    // Maximum title bonus = 5
-    // Avoid allowing the bonus to push
-    // score beyond 100.
-
-    titleBonus =
-        Math.min(titleBonus, 5);
-
-
-    score += titleBonus;
-
-
-    // ==================================================
-    // Relevance adjustment
-    // ==================================================
-
-    // A completely unrelated role should not appear
-    // as highly matched simply because it contains
-    // "SQL" or "Oracle".
-
-    const strongCategories =
-        [
-            "Corporate Actions",
-            "Reference Data",
-            "Capital Markets",
-            "Trade Settlement",
-            "Asset Servicing",
-            "Business Analysis"
-        ];
-
-    const strongMatchCount =
-        matchedSkills.filter(skill =>
-            strongCategories.includes(skill)
-        ).length;
-
-
-    if (
-        strongMatchCount === 0 &&
-        score > 20
-    ) {
-
-        score = 20;
-    }
-
-
-    // ==================================================
-    // Cap score
-    // ==================================================
-
-    score =
-        Math.min(
-            Math.round(score),
-            100
-        );
-
-
-    // ==================================================
-    // Match level
-    // ==================================================
-
-    let matchLevel;
-
-    if (score >= 80) {
-
-        matchLevel = "Excellent";
-
-    } else if (score >= 65) {
-
-        matchLevel = "Strong";
-
-    } else if (score >= 45) {
-
-        matchLevel = "Good";
-
-    } else if (score >= 25) {
-
-        matchLevel = "Moderate";
-
-    } else {
-
-        matchLevel = "Low";
-    }
-
-
-    // ==================================================
-    // Return enhanced job
-    // ==================================================
-
-    return {
-
-        ...job,
-
-        matchScore: score,
-
-        matchLevel: matchLevel,
-
-        matchedSkills: matchedSkills
-    };
-}
-
-
-// ======================================================
-// Normalize text
-// ======================================================
-
-function normalize(value) {
+/*
+ * =========================================================
+ * TEXT CLEANING
+ * =========================================================
+ */
+
+function cleanText(
+    value
+) {
 
     if (!value) {
+
         return "";
+
     }
+
 
     return String(value)
-        .toLowerCase()
-        .replace(
-            /[\u2013\u2014]/g,
-            "-"
-        )
-        .replace(
-            /\s+/g,
-            " "
-        )
-        .trim();
-}
-
-
-// ======================================================
-// Clean HTML/text
-// ======================================================
-
-function cleanText(value) {
-
-    if (!value) {
-        return "";
-    }
-
-    return value
 
         .replace(
             /<[^>]*>/g,
@@ -1009,23 +1004,34 @@ function cleanText(value) {
         )
 
         .trim();
+
 }
 
 
-// ======================================================
-// Clean LinkedIn URL
-// ======================================================
+/*
+ * =========================================================
+ * URL CLEANING
+ * =========================================================
+ */
 
-function cleanUrl(value) {
+function cleanUrl(
+    value
+) {
 
     if (!value) {
+
         return "";
+
     }
 
-    return value
+
+    return String(value)
+
         .replace(
             /&amp;/g,
             "&"
         )
+
         .trim();
+
 }
