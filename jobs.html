@@ -390,46 +390,133 @@
 
     async function searchJobs() {
 
-        const status = document.getElementById("status");
-        const results = document.getElementById("results");
+    const status = document.getElementById("status");
+    const results = document.getElementById("results");
 
-        status.innerHTML = "Searching...";
-        results.innerHTML = "";
+    status.innerHTML = "Searching...";
+    results.innerHTML = "";
 
-        try {
+    const keywords =
+        document.getElementById("keywords").value.trim();
 
-            const response = await fetch("/api/jobs");
+    const timeValue =
+        document.getElementById("timeValue").value;
 
-            if (!response.ok) {
-                throw new Error("API request failed");
-            }
+    const timeUnit =
+        document.getElementById("timeUnit").value;
 
-            const data = await response.json();
+    const location =
+        document.getElementById("location").value;
 
-            console.log("API response:", data);
+    const sort =
+        document.getElementById("sort").value;
 
-            if (data.success) {
+    /*
+     * Selected workplace types
+     */
 
-                status.innerHTML =
-                    "API connection successful. Job-source connection will be added next.";
+    const workplace = Array.from(
+        document.querySelectorAll(
+            '.checkbox-item input:checked'
+        )
+    )
+    .map(input => input.value)
+    .join(",");
 
-            } else {
+    /*
+     * Selected skills
+     */
 
-                status.innerHTML =
-                    "API returned an unexpected response.";
+    const skills = Array.from(
+        document.querySelectorAll(".skill.active")
+    )
+    .map(skill => skill.dataset.skill)
+    .join(",");
 
-            }
+    /*
+     * Build API URL
+     */
 
-        } catch (error) {
+    const params = new URLSearchParams({
 
-            console.error(error);
+        keywords: keywords,
 
-            status.innerHTML =
-                "Unable to connect to the Job Search API.";
+        timeValue: timeValue,
 
+        timeUnit: timeUnit,
+
+        location: location,
+
+        workplace: workplace,
+
+        skills: skills,
+
+        sort: sort
+
+    });
+
+    try {
+
+        const response = await fetch(
+            `/api/jobs?${params.toString()}`
+        );
+
+        if (!response.ok) {
+            throw new Error("API request failed");
         }
 
+        const data = await response.json();
+
+        console.log("API response:", data);
+
+        status.innerHTML =
+            "API connection successful. Filters received by Cloudflare.";
+
+        results.innerHTML = `
+            <div class="job-card">
+                <div class="job-title">
+                    Backend received your search
+                </div>
+
+                <div class="job-meta">
+                    Keywords: ${data.filters.keywords}
+                </div>
+
+                <div class="job-meta">
+                    Location: ${data.filters.location}
+                </div>
+
+                <div class="job-meta">
+                    Posted within:
+                    ${data.filters.minutes} minutes
+                </div>
+
+                <div class="job-meta">
+                    Workplace:
+                    ${data.filters.workplace.join(", ") || "None"}
+                </div>
+
+                <div class="job-meta">
+                    Skills:
+                    ${data.filters.skills.join(", ") || "None"}
+                </div>
+
+                <div class="job-meta">
+                    Sort:
+                    ${data.filters.sort}
+                </div>
+            </div>
+        `;
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerHTML =
+            "Unable to connect to the Job Search API.";
+
     }
+}
 
 
     /*
