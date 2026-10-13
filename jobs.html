@@ -85,11 +85,11 @@
 
         .page-wrapper {
             min-height: calc(100vh - 150px);
-            padding: 44px 0 55px;
+            padding: 40px 0 50px;
         }
 
         .page-heading {
-            margin-bottom: 25px;
+            margin-bottom: 24px;
         }
 
         .eyebrow {
@@ -110,7 +110,12 @@
         }
 
         .gradient-text {
-            background: linear-gradient(100deg, var(--blue), var(--pink), var(--orange));
+            background: linear-gradient(
+                100deg,
+                var(--blue),
+                var(--pink),
+                var(--orange)
+            );
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -134,7 +139,7 @@
             align-items: center;
             justify-content: space-between;
             gap: 12px;
-            padding: 13px 16px;
+            padding: 12px 15px;
             border-bottom: 1px solid var(--border);
         }
 
@@ -186,27 +191,33 @@
             cursor: wait;
         }
 
+        /* Five columns: Position, Company, Location, Posted, View */
         .jobs-header,
         .job-row {
             display: grid;
-            grid-template-columns: minmax(0, 2fr) minmax(0, 1.5fr) 90px 75px;
+            grid-template-columns:
+                minmax(180px, 2fr)
+                minmax(130px, 1.3fr)
+                minmax(110px, 1fr)
+                80px
+                65px;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
         }
 
         .jobs-header {
-            padding: 10px 16px;
+            padding: 10px 15px;
             background: #0c0c12;
             border-bottom: 1px solid var(--border);
             color: var(--muted);
             font-size: 10px;
             font-weight: 800;
-            letter-spacing: 0.8px;
+            letter-spacing: 0.7px;
             text-transform: uppercase;
         }
 
         .job-row {
-            padding: 12px 16px;
+            padding: 11px 15px;
             border-bottom: 1px solid #202029;
             transition: background 0.2s ease;
         }
@@ -221,7 +232,7 @@
 
         .job-title {
             min-width: 0;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 700;
             line-height: 1.45;
             overflow-wrap: anywhere;
@@ -236,17 +247,9 @@
             color: var(--gold);
         }
 
-        /* Company and location are rendered together only once. */
-        .job-details {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
-            line-height: 1.45;
-        }
-
         .job-company,
         .job-location {
+            min-width: 0;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -254,7 +257,7 @@
 
         .job-company {
             color: #dedee7;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
         }
 
@@ -265,7 +268,7 @@
 
         .job-posted {
             color: var(--muted);
-            font-size: 11px;
+            font-size: 10px;
             white-space: nowrap;
         }
 
@@ -274,7 +277,7 @@
             align-items: center;
             justify-content: center;
             justify-self: end;
-            padding: 5px 9px;
+            padding: 5px 8px;
             border: 1px solid #3a3424;
             border-radius: 6px;
             color: var(--gold);
@@ -291,7 +294,7 @@
         }
 
         .jobs-message {
-            padding: 42px 18px;
+            padding: 38px 18px;
             text-align: center;
             color: var(--muted);
             font-size: 13px;
@@ -308,10 +311,10 @@
         }
 
         .jobs-footer {
-            padding: 12px 16px;
+            padding: 11px 15px;
             border-top: 1px solid var(--border);
             color: var(--muted);
-            font-size: 11px;
+            font-size: 10px;
             line-height: 1.6;
         }
 
@@ -327,13 +330,36 @@
             color: var(--gold);
         }
 
+        @media (max-width: 991px) {
+            .jobs-header,
+            .job-row {
+                grid-template-columns:
+                    minmax(150px, 1.7fr)
+                    minmax(110px, 1.2fr)
+                    minmax(90px, 1fr)
+                    70px
+                    60px;
+                gap: 8px;
+            }
+
+            .jobs-header {
+                font-size: 9px;
+                padding-right: 10px;
+                padding-left: 10px;
+            }
+
+            .job-row {
+                padding: 10px;
+            }
+        }
+
         @media (max-width: 767px) {
             .page-wrapper {
-                padding: 30px 0 40px;
+                padding: 28px 0 38px;
             }
 
             .page-heading {
-                margin-bottom: 19px;
+                margin-bottom: 18px;
             }
 
             .jobs-toolbar {
@@ -349,9 +375,10 @@
                 display: none;
             }
 
+            /* Compact mobile layout: title, company, location, posted and view. */
             .job-row {
                 grid-template-columns: minmax(0, 1fr) auto;
-                gap: 5px 10px;
+                gap: 4px 10px;
                 padding: 11px 12px;
             }
 
@@ -361,17 +388,15 @@
                 font-size: 12px;
             }
 
-            .job-details {
+            .job-company {
                 grid-column: 1;
                 grid-row: 2;
-                gap: 1px;
-            }
-
-            .job-company {
                 font-size: 11px;
             }
 
             .job-location {
+                grid-column: 1;
+                grid-row: 3;
                 font-size: 10px;
             }
 
@@ -416,7 +441,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">PravindThakur<span class="gradient-text">.com</span></a>
+            <a class="navbar-brand" href="index.html">
+                PravindThakur<span class="gradient-text">.com</span>
+            </a>
 
             <button class="navbar-toggler" type="button"
                     data-bs-toggle="collapse" data-bs-target="#mainNavbar"
@@ -447,12 +474,14 @@
         </div>
     </nav>
 
-    <!-- Jobs -->
+    <!-- Main content -->
     <main class="page-wrapper">
         <div class="container">
             <header class="page-heading">
                 <div class="eyebrow">Career opportunities</div>
-                <h1 class="page-title">Latest <span class="gradient-text">Job Opportunities</span></h1>
+                <h1 class="page-title">
+                    Latest <span class="gradient-text">Job Opportunities</span>
+                </h1>
                 <p class="page-subtitle">
                     Recently collected openings across relevant skills and professional domains.
                 </p>
@@ -463,8 +492,13 @@
                     <div class="jobs-count" id="jobsCount">Loading jobs...</div>
 
                     <div class="jobs-meta">
-                        <span><span class="status-dot"></span><span id="updateStatus">Connecting</span></span>
+                        <span>
+                            <span class="status-dot"></span>
+                            <span id="updateStatus">Connecting</span>
+                        </span>
+
                         <span id="refreshCountdown">Refreshing in 5:00</span>
+
                         <button class="refresh-button" id="refreshButton" type="button">
                             <i class="bi bi-arrow-clockwise"></i> Refresh
                         </button>
@@ -473,7 +507,8 @@
 
                 <div class="jobs-header">
                     <div>Position</div>
-                    <div>Company / Location</div>
+                    <div>Company</div>
+                    <div>Location</div>
                     <div>Posted</div>
                     <div></div>
                 </div>
@@ -487,13 +522,14 @@
 
                 <div class="jobs-footer">
                     Showing jobs posted within the last 30 days, sorted newest first.
-                    Listings are sourced from the configured job feed. Please verify each role
+                    Listings are sourced from the configured job feed. Verify each role
                     and its requirements on the employer's website.
                 </div>
             </section>
         </div>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             © <span id="currentYear"></span> PravindThakur.com
@@ -503,6 +539,7 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
     <script>
         "use strict";
 
@@ -540,9 +577,10 @@
                 return null;
             }
 
-            // Accept Unix timestamps in seconds or milliseconds.
-            if (typeof value === "number" ||
-                (typeof value === "string" && /^\d{10,13}$/.test(value.trim()))) {
+            if (
+                typeof value === "number" ||
+                (typeof value === "string" && /^\d{10,13}$/.test(value.trim()))
+            ) {
                 const numeric = Number(value);
                 const milliseconds = numeric < 100000000000
                     ? numeric * 1000
@@ -587,11 +625,14 @@
                 try {
                     const parsed = new URL(candidate, window.location.origin);
 
-                    if (parsed.protocol === "https:" || parsed.protocol === "http:") {
+                    if (
+                        parsed.protocol === "https:" ||
+                        parsed.protocol === "http:"
+                    ) {
                         return parsed.href;
                     }
                 } catch (_) {
-                    // Try the next candidate.
+                    // Try the next URL candidate.
                 }
             }
 
@@ -608,13 +649,17 @@
         }
 
         function getLocation(job) {
-            return String(
-                job.location ??
+            let location = job.location ??
                 job.jobLocation ??
                 job.job_location ??
                 job.locations ??
-                "Location not specified"
-            ).trim();
+                "Location not specified";
+
+            if (Array.isArray(location)) {
+                location = location.join(", ");
+            }
+
+            return String(location).trim() || "Location not specified";
         }
 
         function getTitle(job) {
@@ -643,12 +688,12 @@
         }
 
         function normalizeJobs(payload) {
-            // Supports either an array or common API response wrappers.
             if (Array.isArray(payload)) return payload;
             if (Array.isArray(payload?.jobs)) return payload.jobs;
             if (Array.isArray(payload?.data)) return payload.data;
             if (Array.isArray(payload?.results)) return payload.results;
             if (Array.isArray(payload?.data?.jobs)) return payload.data.jobs;
+
             return [];
         }
 
@@ -683,53 +728,6 @@
             `;
         }
 
-        function renderJobs(jobs) {
-            if (!jobs.length) {
-                jobsCount.textContent = "0 jobs found";
-                showMessage(
-                    "No jobs posted in the last 30 days were found. Try refreshing later.",
-                    "bi-briefcase"
-                );
-                return;
-            }
-
-            jobsCount.textContent =
-                jobs.length + (jobs.length === 1 ? " job found" : " jobs found");
-
-            jobsList.innerHTML = jobs.map(function (job) {
-                const title = getTitle(job);
-                const company = getCompany(job);
-                const location = getLocation(job);
-                const postedDate = getPostedDate(job);
-                const url = getJobUrl(job);
-
-                const titleMarkup = url
-                    ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
-                    : `<span>${escapeHtml(title)}</span>`;
-
-                const linkMarkup = url
-                    ? `<a class="job-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" aria-label="View ${escapeHtml(title)}">View <span aria-hidden="true">→</span></a>`
-                    : `<span class="job-link" style="opacity:.5;cursor:default">Unavailable</span>`;
-
-                return `
-                    <article class="job-row">
-                        <div class="job-title">${titleMarkup}</div>
-
-                        <div class="job-details">
-                            <span class="job-company" title="${escapeHtml(company)}">${escapeHtml(company)}</span>
-                            <span class="job-location" title="${escapeHtml(location)}">${escapeHtml(location)}</span>
-                        </div>
-
-                        <div class="job-posted" title="${postedDate ? escapeHtml(postedDate.toLocaleString()) : "Posting date unavailable"}">
-                            ${escapeHtml(formatPostedTime(postedDate))}
-                        </div>
-
-                        ${linkMarkup}
-                    </article>
-                `;
-            }).join("");
-        }
-
         function filterAndSortJobs(rawJobs) {
             const now = Date.now();
             const cutoff = now - MAX_JOB_AGE;
@@ -741,7 +739,7 @@
 
                 const postedDate = getPostedDate(job);
 
-                // A valid posting date is required for the 30-day filter.
+                // Exclude entries without a valid date so retention is reliable.
                 if (!postedDate) continue;
 
                 const postedTime = postedDate.getTime();
@@ -763,6 +761,60 @@
             });
         }
 
+        function renderJobs(jobs) {
+            if (!jobs.length) {
+                jobsCount.textContent = "0 jobs found";
+
+                showMessage(
+                    "No jobs posted in the last 30 days were found. Try refreshing later.",
+                    "bi-briefcase"
+                );
+
+                return;
+            }
+
+            jobsCount.textContent =
+                jobs.length + (jobs.length === 1 ? " job found" : " jobs found");
+
+            jobsList.innerHTML = jobs.map(function (job) {
+                const title = getTitle(job);
+                const company = getCompany(job);
+                const location = getLocation(job);
+                const postedDate = getPostedDate(job);
+                const url = getJobUrl(job);
+
+                const titleMarkup = url
+                    ? `<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a>`
+                    : `<span>${escapeHtml(title)}</span>`;
+
+                const linkMarkup = url
+                    ? `<a class="job-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" aria-label="View ${escapeHtml(title)}">View →</a>`
+                    : `<span class="job-link" style="opacity:.5;cursor:default">N/A</span>`;
+
+                return `
+                    <article class="job-row">
+                        <div class="job-title">${titleMarkup}</div>
+
+                        <div class="job-company" title="${escapeHtml(company)}">
+                            ${escapeHtml(company)}
+                        </div>
+
+                        <div class="job-location" title="${escapeHtml(location)}">
+                            ${escapeHtml(location)}
+                        </div>
+
+                        <div class="job-posted"
+                             data-posted="${postedDate ? postedDate.getTime() : ""}"
+                             title="${postedDate ? escapeHtml(postedDate.toLocaleString()) : "Posting date unavailable"}">
+                            ${escapeHtml(formatPostedTime(postedDate))}
+                        </div>
+
+                        ${linkMarkup}
+                    </article>
+                `;
+            }).join("");
+        }
+
         async function loadJobs() {
             if (isLoading) return;
 
@@ -770,11 +822,14 @@
             refreshButton.disabled = true;
             updateStatus.textContent = "Updating";
 
-            // Keep the existing job list visible while refreshing.
-            const hadExistingJobs = jobsList.querySelector(".job-row") !== null;
+            const hadExistingJobs =
+                jobsList.querySelector(".job-row") !== null;
 
             if (!hadExistingJobs) {
-                showMessage("Loading the latest opportunities...", "bi-arrow-repeat");
+                showMessage(
+                    "Loading the latest opportunities...",
+                    "bi-arrow-repeat"
+                );
             }
 
             try {
@@ -806,6 +861,7 @@
 
                 if (updatedAt) {
                     const parsedUpdatedAt = parseDate(updatedAt);
+
                     updateStatus.textContent = parsedUpdatedAt
                         ? "Updated " + formatPostedTime(parsedUpdatedAt)
                         : "Up to date";
@@ -820,6 +876,7 @@
 
                 if (!hadExistingJobs) {
                     jobsCount.textContent = "Unable to load jobs";
+
                     showMessage(
                         "Could not load job listings. Please try again shortly.",
                         "bi-exclamation-circle",
@@ -839,7 +896,21 @@
             const seconds = totalSeconds % 60;
 
             refreshCountdown.textContent =
-                "Refreshing in " + minutes + ":" + String(seconds).padStart(2, "0");
+                "Refreshing in " +
+                minutes + ":" +
+                String(seconds).padStart(2, "0");
+        }
+
+        function updatePostedLabels() {
+            document.querySelectorAll(".job-posted[data-posted]").forEach(
+                function (element) {
+                    const timestamp = Number(element.dataset.posted);
+
+                    if (!Number.isFinite(timestamp) || timestamp <= 0) return;
+
+                    element.textContent = formatPostedTime(new Date(timestamp));
+                }
+            );
         }
 
         refreshButton.addEventListener("click", function () {
@@ -847,32 +918,20 @@
             loadJobs();
         });
 
-        // Initial load.
+        // Load immediately on page open.
         loadJobs();
 
-        // Automatically refresh the feed every five minutes.
+        // Refresh the job feed every five minutes.
         setInterval(function () {
             nextRefreshAt = Date.now() + REFRESH_INTERVAL;
             loadJobs();
         }, REFRESH_INTERVAL);
 
-        // Update the countdown and relative posting ages.
+        // Update the refresh countdown every second.
         setInterval(updateCountdown, 1000);
 
-        setInterval(function () {
-            document.querySelectorAll(".job-posted").forEach(function (element) {
-                const row = element.closest(".job-row");
-                if (!row) return;
-
-                const dateTitle = element.getAttribute("title");
-                if (!dateTitle || dateTitle === "Posting date unavailable") return;
-
-                const date = new Date(dateTitle);
-                if (!Number.isNaN(date.getTime())) {
-                    element.textContent = formatPostedTime(date);
-                }
-            });
-        }, 60000);
+        // Update relative posting times every minute.
+        setInterval(updatePostedLabels, 60000);
 
         updateCountdown();
     </script>
