@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -172,30 +173,7 @@
             background: #ff7777;
         }
 
-        .refresh-button {
-            padding: 5px 9px;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            background: #171720;
-            color: var(--text);
-            font-family: inherit;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: border-color 0.2s, background 0.2s;
-        }
-
-        .refresh-button:hover {
-            background: var(--surface-hover);
-            border-color: var(--gold);
-        }
-
-        .refresh-button:disabled {
-            opacity: 0.55;
-            cursor: wait;
-        }
-
-        /* Desktop: Position, Company, Location, Posted, View */
+        /* Desktop columns: Position, Company, Location, Posted, View */
         .jobs-header,
         .job-row {
             display: grid;
@@ -499,10 +477,6 @@
                         </span>
 
                         <span id="refreshCountdown">Refreshing in 5:00</span>
-
-                        <button class="refresh-button" id="refreshButton" type="button">
-                            <i class="bi bi-arrow-clockwise"></i> Refresh
-                        </button>
                     </div>
                 </div>
 
@@ -533,7 +507,9 @@
     <!-- Footer -->
     <footer id="siteFooter">
         <div class="container">
-            <div>&copy; <span id="currentYear"></span> Pravind Thakur. All rights reserved.</div>
+            <div>
+                &copy; <span id="currentYear"></span> Pravind Thakur. All rights reserved.
+            </div>
         </div>
     </footer>
 
@@ -551,7 +527,6 @@
         const jobsCount = document.getElementById("jobsCount");
         const updateStatus = document.getElementById("updateStatus");
         const refreshCountdown = document.getElementById("refreshCountdown");
-        const refreshButton = document.getElementById("refreshButton");
         const statusDot = document.getElementById("statusDot");
         const currentYearElement = document.getElementById("currentYear");
 
@@ -689,7 +664,7 @@
             ].join("|");
         }
 
-        // The API response is { success: true, count: 47, jobs: [...] }.
+        // API format: { success: true, count: 47, jobs: [...] }
         function normalizeJobs(payload) {
             if (Array.isArray(payload)) return payload;
             if (Array.isArray(payload?.jobs)) return payload.jobs;
@@ -703,8 +678,6 @@
         function formatPostedTime(date) {
             if (!date) return "Date unknown";
 
-            // A timestamp slightly ahead of the local clock should display
-            // as "Just now", not a negative time.
             const difference = Math.max(0, Date.now() - date.getTime());
             const minutes = Math.floor(difference / 60000);
 
@@ -751,8 +724,8 @@
                 const postedDate = getPostedDate(job);
 
                 // Exclude dated jobs older than 30 days.
-                // Retain undated jobs instead of silently losing them.
-                // Slightly future-dated jobs are retained and display "Just now".
+                // Keep undated jobs rather than silently discarding them.
+                // Future timestamps are retained and shown as "Just now".
                 if (postedDate && postedDate.getTime() < cutoff) {
                     continue;
                 }
@@ -778,7 +751,7 @@
                 jobsCount.textContent = "0 jobs found";
 
                 showMessage(
-                    "No jobs are currently available in the feed. Please refresh later.",
+                    "No jobs are currently available in the feed. Please check again later.",
                     "bi-briefcase"
                 );
 
@@ -839,7 +812,6 @@
             if (isLoading) return;
 
             isLoading = true;
-            refreshButton.disabled = true;
             setStatus("Updating");
 
             const hadExistingJobs =
@@ -880,11 +852,6 @@
                 }
 
                 const rawJobs = normalizeJobs(payload);
-
-                if (!Array.isArray(rawJobs)) {
-                    throw new Error("The job feed did not return a valid jobs array.");
-                }
-
                 const jobs = filterAndSortJobs(rawJobs);
 
                 renderJobs(jobs);
@@ -916,13 +883,14 @@
                 console.error("Unable to load jobs:", error);
 
                 const errorMessage = error.name === "AbortError"
-                    ? "The job feed took too long to respond. Please try again."
+                    ? "The job feed took too long to respond. Please try again later."
                     : "Could not load job listings. Please try again shortly.";
 
                 setStatus("Update failed", true);
 
                 if (!hadExistingJobs) {
                     jobsCount.textContent = "Unable to load jobs";
+
                     showMessage(
                         errorMessage,
                         "bi-exclamation-circle",
@@ -932,7 +900,6 @@
             } finally {
                 clearTimeout(timeoutId);
                 isLoading = false;
-                refreshButton.disabled = false;
             }
         }
 
@@ -960,21 +927,16 @@
             );
         }
 
-        refreshButton.addEventListener("click", function () {
-            nextRefreshAt = Date.now() + REFRESH_INTERVAL;
-            loadJobs();
-        });
-
-        // Load jobs as soon as the page opens.
+        // Load jobs immediately when the page opens.
         loadJobs();
 
-        // Automatically reload the feed every five minutes.
+        // Automatically refresh the job feed every five minutes.
         setInterval(function () {
             nextRefreshAt = Date.now() + REFRESH_INTERVAL;
             loadJobs();
         }, REFRESH_INTERVAL);
 
-        // Refresh the countdown every second.
+        // Update the countdown every second.
         setInterval(updateCountdown, 1000);
 
         // Update relative posting times every minute.
