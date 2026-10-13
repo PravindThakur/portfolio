@@ -1,163 +1,953 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Professional experience, PowerPoint, trading and photography by Pravind Thakur" />
-        <meta name="author" content="Pravind Thakur" />
-        <title>Pravind Thakur | Professional</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Pravind Thakur</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Professional.html">Professional</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Personal.html">Personal</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Professional experience, PowerPoint, trading and photography by Pravind Thakur" />
+    <meta name="author" content="Pravind Thakur" />
+
+    <title>Pravind Thakur | Professional</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Existing Site CSS -->
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            color-scheme: dark;
+
+            --c-bg: #07070b;
+            --c-surface: rgba(255, 255, 255, 0.035);
+            --c-surface-hover: rgba(255, 255, 255, 0.06);
+            --c-border: #1c1c24;
+            --c-text: #f2f2f2;
+            --c-muted: #a1a1aa;
+            --c-gold: #f5b942;
+            --c-blue: #6c7bff;
+            --c-pink: #e21e80;
+            --c-orange: #ff8a5c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+            background: var(--c-bg);
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--c-bg) !important;
+            color: var(--c-text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            background: rgba(7, 7, 11, 0.94) !important;
+            border-bottom: 1px solid var(--c-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .navbar-brand {
+            color: var(--c-text) !important;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar .nav-link {
+            color: var(--c-muted) !important;
+            font-weight: 700;
+            transition: color 0.25s ease;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--c-gold) !important;
+        }
+
+        .navbar-toggler {
+            border: 1px solid #343440;
+            padding: 7px 10px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Page background */
+
+        .professional-page {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 72px 0 50px;
+            background:
+                radial-gradient(
+                    ellipse at 8% 5%,
+                    rgba(108, 123, 255, 0.12),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    ellipse at 92% 24%,
+                    rgba(226, 30, 128, 0.08),
+                    transparent 32%
+                ),
+                var(--c-bg);
+        }
+
+        .professional-page::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 50%;
+            width: min(760px, 100%);
+            height: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.65),
+                rgba(226, 30, 128, 0.65),
+                transparent
+            );
+        }
+
+        /* Page heading */
+
+        .page-eyebrow {
+            margin-bottom: 14px;
+            color: var(--c-gold);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            margin: 0;
+            color: var(--c-text);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 800;
+            letter-spacing: -2.5px;
+            line-height: 1.1;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-description {
+            max-width: 620px;
+            margin: 22px auto 0;
+            color: var(--c-muted);
+            font-size: 0.98rem;
+            line-height: 1.9;
+        }
+
+        .heading-divider {
+            width: 72px;
+            height: 3px;
+            margin: 28px auto 0;
+            border-radius: 10px;
+            background: linear-gradient(
+                90deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+        }
+
+        /* Experience sections */
+
+        .experience-section {
+            margin-top: 58px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            color: var(--c-text);
+            font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            text-align: center;
+        }
+
+        .section-heading-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(108, 123, 255, 0.28);
+            border-radius: 13px;
+            background: rgba(108, 123, 255, 0.09);
+            color: var(--c-gold);
+            font-size: 1.15rem;
+        }
+
+        /* Experience cards */
+
+        .experience-card {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 28px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 20px;
+            background: var(--c-surface);
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.15);
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .experience-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 7%;
+            right: 7%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.55),
+                rgba(226, 30, 128, 0.55),
+                transparent
+            );
+            opacity: 0.75;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(226, 30, 128, 0.28);
+            background: var(--c-surface-hover);
+            box-shadow: 0 22px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .experience-card .card-body {
+            padding: clamp(24px, 4vw, 38px);
+        }
+
+        /* Information panel */
+
+        .experience-meta {
+            height: 100%;
+            padding: 25px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .meta-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            margin-bottom: 17px;
+            border: 1px solid rgba(245, 185, 66, 0.22);
+            border-radius: 13px;
+            background: rgba(245, 185, 66, 0.07);
+            color: var(--c-gold);
+            font-size: 1.2rem;
+        }
+
+        .meta-title {
+            margin-bottom: 12px;
+            color: var(--c-text);
+            font-size: 1rem;
+            font-weight: 800;
+            line-height: 1.6;
+        }
+
+        .meta-period {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 6px 10px;
+            border: 1px solid rgba(245, 185, 66, 0.22);
+            border-radius: 8px;
+            background: rgba(245, 185, 66, 0.06);
+            color: var(--c-gold);
+            font-size: 0.77rem;
+            font-weight: 800;
+        }
+
+        .meta-role {
+            margin-bottom: 8px;
+            color: var(--c-muted);
+            font-size: 0.84rem;
+            line-height: 1.6;
+        }
+
+        .meta-role:last-child {
+            margin-bottom: 0;
+        }
+
+        .meta-role i {
+            margin-right: 7px;
+            color: #777bff;
+            font-size: 0.78rem;
+        }
+
+        /* Card descriptions */
+
+        .experience-description {
+            margin: 0 0 20px;
+            color: #c3c3cc;
+            font-size: 0.94rem;
+            line-height: 1.95;
+        }
+
+        .experience-description strong {
+            color: var(--c-text);
+            font-weight: 800;
+        }
+
+        .channel-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 0 0 23px;
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--c-text);
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .stat-pill i {
+            color: var(--c-gold);
+        }
+
+        /* Card links */
+
+        .experience-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--c-gold);
+            font-size: 0.9rem;
+            font-weight: 800;
+            line-height: 1.7;
+            transition:
+                color 0.25s ease,
+                gap 0.25s ease;
+        }
+
+        .experience-link:hover {
+            gap: 14px;
+            color: var(--c-orange);
+        }
+
+        .experience-link i {
+            transition: transform 0.25s ease;
+        }
+
+        .experience-link:hover i {
+            transform: translateX(2px);
+        }
+
+        /* Section-specific icon colors */
+
+        .engineering .section-heading-icon {
+            color: #8e9aff;
+            border-color: rgba(108, 123, 255, 0.3);
+            background: rgba(108, 123, 255, 0.1);
+        }
+
+        .powerpoint .section-heading-icon {
+            color: #ff8a5c;
+            border-color: rgba(255, 138, 92, 0.3);
+            background: rgba(255, 138, 92, 0.08);
+        }
+
+        .trading .section-heading-icon {
+            color: #64d9ae;
+            border-color: rgba(100, 217, 174, 0.25);
+            background: rgba(100, 217, 174, 0.08);
+        }
+
+        .photography .section-heading-icon {
+            color: #ed83c0;
+            border-color: rgba(226, 30, 128, 0.28);
+            background: rgba(226, 30, 128, 0.08);
+        }
+
+        /* Footer */
+
+        .site-footer {
+            padding: 24px 0;
+            border-top: 1px solid var(--c-border);
+            background: var(--c-bg);
+            color: var(--c-muted);
+            font-size: 0.82rem;
+        }
+
+        /* Scroll progress */
+
+        #cScroll {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 767px) {
+            .professional-page {
+                padding: 48px 0 30px;
+            }
+
+            .page-title {
+                letter-spacing: -1.5px;
+            }
+
+            .page-description {
+                font-size: 0.92rem;
+            }
+
+            .experience-section {
+                margin-top: 42px;
+            }
+
+            .experience-card .card-body {
+                padding: 20px;
+            }
+
+            .experience-meta {
+                padding: 21px;
+            }
+
+            .experience-description {
+                margin-top: 22px;
+                font-size: 0.9rem;
+            }
+
+            .section-heading {
+                gap: 9px;
+                font-size: 1.18rem;
+            }
+
+            .section-heading-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Scroll Progress -->
+    <div id="cScroll" aria-hidden="true"></div>
+
+    <main class="flex-shrink-0">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="index.html">
+                    <span class="brand-gradient">Pravind Thakur</span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="Professional.html">Professional</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Professional Page -->
+        <div class="professional-page">
+
+            <div class="container px-4 px-lg-5">
+
+                <!-- Page Heading -->
+                <header class="text-center mb-5">
+
+                    <div class="page-eyebrow">My Journey &amp; Experience</div>
+
+                    <h1 class="page-title">
+                        <span class="gradient-text">Professional</span>
+                    </h1>
+
+                    <p class="page-description">
+                        A journey across technology, financial markets, automation,
+                        and visual storytelling — bringing together analytical thinking
+                        and creative problem-solving.
+                    </p>
+
+                    <div class="heading-divider"></div>
+
+                </header>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-11 col-xl-10 col-xxl-9">
+
+                        <!-- 1. Computer Science & Engineering -->
+                        <section class="experience-section engineering">
+
+                            <h2 class="section-heading">
+                                <span class="section-heading-icon">
+                                    <i class="bi bi-code-slash" aria-hidden="true"></i>
+                                </span>
+                                Computer Science &amp; Engineering
+                            </h2>
+
+                            <article class="experience-card">
+                                <div class="card-body">
+
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+
+                                            <div class="experience-meta">
+
+                                                <div class="meta-icon">
+                                                    <i class="bi bi-building" aria-hidden="true"></i>
+                                                </div>
+
+                                                <div class="meta-title">
+                                                    TCS - Tata Consultancy Services
+                                                </div>
+
+                                                <div class="meta-period">
+                                                    2017 – Present
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Business Analyst
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Corporate Actions
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Java Developer
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-7">
+
+                                            <p class="experience-description">
+                                                Techno-Functional Business Analyst with
+                                                <strong>9+ years in Capital Markets and Securities Services.</strong>
+                                                Specialist in Corporate Actions, SWIFT messaging
+                                                and Reference Data on TCS BaNCS, supporting global
+                                                banks across APAC, EMEA, NAM and LATAM.
+                                            </p>
+
+                                            <a class="experience-link" href="Engineering.html">
+                                                Explore my engineering background
+                                                <i class="bi bi-arrow-right"></i>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </section>
+
+                        <!-- 2. PowerPoint & Automation -->
+                        <section class="experience-section powerpoint">
+
+                            <h2 class="section-heading">
+                                <span class="section-heading-icon">
+                                    <i class="bi bi-file-earmark-slides" aria-hidden="true"></i>
+                                </span>
+                                PowerPoint &amp; Automation
+                            </h2>
+
+                            <article class="experience-card">
+                                <div class="card-body">
+
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+
+                                            <div class="experience-meta">
+
+                                                <div class="meta-icon">
+                                                    <i class="bi bi-play-btn" aria-hidden="true"></i>
+                                                </div>
+
+                                                <div class="meta-title">
+                                                    YouTube - PowerPoint
+                                                </div>
+
+                                                <div class="meta-period">
+                                                    2016 – Present
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Presentations
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Macros
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>High-Speed Typography
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-7">
+
+                                            <p class="experience-description">
+                                                Explore practical Microsoft PowerPoint tutorials,
+                                                tips, tricks, VBA automation, macros, and productivity
+                                                techniques on my YouTube channel. Created to help users
+                                                design better presentations, automate repetitive tasks,
+                                                and get more from PowerPoint.
+                                            </p>
+
+                                            <div class="channel-stats">
+
+                                                <span class="stat-pill">
+                                                    <i class="bi bi-people-fill" aria-hidden="true"></i>
+                                                    35K+ subscribers
+                                                </span>
+
+                                                <span class="stat-pill">
+                                                    <i class="bi bi-play-circle-fill" aria-hidden="true"></i>
+                                                    300+ videos
+                                                </span>
+
+                                            </div>
+
+                                            <a class="experience-link" href="Powerpoint.html">
+                                                Explore my PowerPoint channel
+                                                <i class="bi bi-arrow-right"></i>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </section>
+
+                        <!-- 3. Equity & Commodity Trading -->
+                        <section class="experience-section trading">
+
+                            <h2 class="section-heading">
+                                <span class="section-heading-icon">
+                                    <i class="bi bi-graph-up-arrow" aria-hidden="true"></i>
+                                </span>
+                                Equity &amp; Commodity Trading
+                            </h2>
+
+                            <article class="experience-card">
+                                <div class="card-body">
+
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+
+                                            <div class="experience-meta">
+
+                                                <div class="meta-icon">
+                                                    <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
+                                                </div>
+
+                                                <div class="meta-title">
+                                                    Equity &amp; Commodity Markets
+                                                </div>
+
+                                                <div class="meta-period">
+                                                    2020 – Present
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Equity Trading
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Commodity Trading
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Market Analysis
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-7">
+
+                                            <p class="experience-description">
+                                                I follow equity and commodity markets, study price
+                                                movements and turn research into trading decisions.
+                                                My work in capital markets gives me a close view of
+                                                how securities and market events work behind the scenes.
+                                            </p>
+
+                                            <a class="experience-link" href="Trading.html">
+                                                Explore my trading journey
+                                                <i class="bi bi-arrow-right"></i>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </section>
+
+                        <!-- 4. Cinematography & Photography -->
+                        <section class="experience-section photography">
+
+                            <h2 class="section-heading">
+                                <span class="section-heading-icon">
+                                    <i class="bi bi-camera-reels" aria-hidden="true"></i>
+                                </span>
+                                Cinematography &amp; Photography
+                            </h2>
+
+                            <article class="experience-card">
+                                <div class="card-body">
+
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+
+                                            <div class="experience-meta">
+
+                                                <div class="meta-icon">
+                                                    <i class="bi bi-camera" aria-hidden="true"></i>
+                                                </div>
+
+                                                <div class="meta-title">
+                                                    Photo &amp; Film
+                                                </div>
+
+                                                <div class="meta-period">
+                                                    2015 – Present
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Photography
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Cinematography
+                                                </div>
+
+                                                <div class="meta-role">
+                                                    <i class="bi bi-dot"></i>Reels &amp; Editing
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-7">
+
+                                            <p class="experience-description">
+                                                I capture lifestyle, travel and portrait moments
+                                                through photos and video, using composition, light,
+                                                color grading and storytelling to bring each frame
+                                                to life.
+                                            </p>
+
+                                            <a class="experience-link" href="Photography.html">
+                                                Explore my photography
+                                                <i class="bi bi-arrow-right"></i>
+                                            </a>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </article>
+
+                        </section>
+
                     </div>
                 </div>
-            </nav>
-            <!-- Page Content-->
-            <div class="container px-5 my-5">
-                <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Professional</span></h1>
-                </div>
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-11 col-xl-9 col-xxl-8">
 
-                        <!-- 1. Computer Science & Engineering-->
-                        <section>
-                            <h2 class="text-primary fw-bolder mb-4 text-center">Computer Science &amp; Engineering</h2>
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-primary fw-bolder mb-2">TCS - Tata Consultancy Services</div>
-                                                <div class="small fw-bolder">2017 - Present</div>
-                                                <div class="small text-muted">Business Analyst</div>
-                                                <div class="small text-muted">Corporate Actions</div>
-                                                <div class="small text-muted">Java Developer</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="mb-3">Techno-Functional Business Analyst with 9+ years in Capital Markets and Securities Services. Specialist in Corporate Actions, SWIFT messaging and Reference Data on TCS BaNCS, supporting global banks across APAC, EMEA, NAM and LATAM.</p>
-                                            <a class="text-primary fw-bolder text-decoration-none" href="Engineering.html">Explore my engineering background <i class="bi bi-arrow-right ms-1"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+            </div>
+        </div>
 
-                        <!-- 2. PowerPoint & Automation-->
-                        <section>
-                            <h2 class="text-secondary fw-bolder mb-4 text-center">PowerPoint &amp; Automation</h2>
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-secondary fw-bolder mb-2">YouTube - PowerPoint</div>
-                                                <div class="small fw-bolder">2016 - Present</div>
-                                                <div class="small text-muted">Presentation</div>
-                                                <div class="small text-muted">Macros</div>
-                                                <div class="small text-muted">High Speed Typography</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="mb-3">Explore practical Microsoft PowerPoint tutorials, tips, tricks, VBA automation, macros, and productivity techniques on my YouTube channel. Created to help users design better presentations, automate repetitive tasks, and get more from PowerPoint.</p>
-                                            <p class="mb-3"><strong>35K+ subscribers</strong> | <strong>300+ videos</strong></p>
-                                            <a class="text-secondary fw-bolder text-decoration-none" href="Powerpoint.html">Explore my PowerPoint channel <i class="bi bi-arrow-right ms-1"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
+    </main>
 
-                        <!-- 3. Equity & Commodity Trading-->
-                        <section>
-                            <h2 class="text-primary fw-bolder mb-4 text-center">Equity &amp; Commodity Trading</h2>
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-primary fw-bolder mb-2">Equity &amp; Commodity Markets</div>
-                                                <div class="small fw-bolder">2020 - Present</div>
-                                                <div class="small text-muted">Equity Trading</div>
-                                                <div class="small text-muted">Commodity Trading</div>
-                                                <div class="small text-muted">Market Analysis</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="mb-3">I follow equity and commodity markets, study price movements and turn research into trading decisions. My work in capital markets gives me a close view of how securities and market events work behind the scenes.</p>
-                                            <a class="text-primary fw-bolder text-decoration-none" href="Trading.html">Explore my trading journey <i class="bi bi-arrow-right ms-1"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- 4. Cinematography & Photography-->
-                        <section>
-                            <h2 class="text-secondary fw-bolder mb-4 text-center">Cinematography &amp; Photography</h2>
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-secondary fw-bolder mb-2">Photo &amp; Film</div>
-                                                <div class="small fw-bolder">2015 - Present</div>
-                                                <div class="small text-muted">Photography</div>
-                                                <div class="small text-muted">Cinematography</div>
-                                                <div class="small text-muted">Reels &amp; Editing</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8">
-                                            <p class="mb-3">I capture lifestyle, travel and portrait moments through photos and video, using composition, light, color grading and storytelling to bring each frame to life.</p>
-                                            <a class="text-secondary fw-bolder text-decoration-none" href="Photography.html">Explore my photography <i class="bi bi-arrow-right ms-1"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-
-                        <!-- Divider-->
-                        <div class="pb-5"></div>
+    <!-- Footer -->
+    <footer class="site-footer mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto text-center">
+                    <div class="small m-0">
+                        &copy; Pravind Thakur. All rights reserved.
                     </div>
                 </div>
             </div>
-        </main>
-        <!-- Footer-->
-        <footer class="bg-white py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto text-center">
-                        <div class="small m-0">&copy; Pravind Thakur. All rights reserved.</div>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Existing Site JavaScript -->
+    <script src="js/scripts.js"></script>
+
+    <!-- Scroll Progress -->
+    <script>
+        (function () {
+            const progressBar = document.getElementById('cScroll');
+
+            function updateProgress() {
+                const scrollTop =
+                    window.scrollY || document.documentElement.scrollTop;
+
+                const scrollableHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                const progress = scrollableHeight > 0
+                    ? (scrollTop / scrollableHeight) * 100
+                    : 0;
+
+                progressBar.style.width =
+                    Math.min(progress, 100) + '%';
+            }
+
+            window.addEventListener('scroll', updateProgress, {
+                passive: true
+            });
+
+            window.addEventListener('resize', updateProgress);
+
+            updateProgress();
+        })();
+    </script>
+
+</body>
 </html>
