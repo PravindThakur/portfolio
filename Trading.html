@@ -1,205 +1,942 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Pravind Thakur - Equity and commodity trading, market analysis and risk management" />
-        <meta name="author" content="Pravind Thakur" />
-        <title>Pravind Thakur | Trading</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pravind Thakur - Equity and commodity trading, market analysis and risk management" />
+    <meta name="author" content="Pravind Thakur" />
+    <meta name="theme-color" content="#07070b" />
 
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>Pravind Thakur | Trading</title>
 
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-        <!-- Core theme CSS-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
 
-    <body class="d-flex flex-column h-100 bg-light">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #07070b;
+            --surface: #101016;
+            --surface-hover: #16161e;
+            --border: #252530;
+            --text: #f2f2f7;
+            --muted: #a1a1aa;
+            --gold: #f5b942;
+            --blue: #6c7bff;
+            --pink: #e21e80;
+            --orange: #ff8a5c;
+        }
 
-        <main class="flex-shrink-0">
+        * {
+            box-sizing: border-box;
+        }
 
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
-                        <span class="fw-bolder text-primary">Pravind Thakur</span>
-                    </a>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+            background: var(--bg);
+        }
 
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--bg) !important;
+            color: var(--text);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            overflow-x: hidden;
+        }
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Professional.html">Professional</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Personal.html">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
+        a {
+            transition: color .25s ease, border-color .25s ease,
+                        background .25s ease, transform .25s ease;
+        }
+
+        .navbar {
+            background: rgba(7, 7, 11, .94) !important;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .navbar-brand {
+            color: var(--text) !important;
+            letter-spacing: -.5px;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(100deg, var(--blue), var(--pink), var(--orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar .nav-link {
+            color: var(--muted) !important;
+            font-weight: 600;
+            padding: 10px 13px !important;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--gold) !important;
+        }
+
+        .navbar-toggler {
+            border-color: var(--border) !important;
+            box-shadow: none !important;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .page-shell {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 15% 0%, rgba(108, 123, 255, .10), transparent 35%),
+                radial-gradient(ellipse at 90% 15%, rgba(226, 30, 128, .07), transparent 32%),
+                var(--bg);
+        }
+
+        .hero {
+            position: relative;
+            padding: 76px 0 42px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: 2.6px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+            width: 23px;
+            height: 1px;
+            background: var(--gold);
+            opacity: .75;
+        }
+
+        .hero h1 {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(2.6rem, 7vw, 5rem);
+            font-weight: 800;
+            letter-spacing: -2.8px;
+            line-height: 1.12;
+        }
+
+        .gradient-text {
+            background: linear-gradient(100deg, var(--blue) 0%, var(--pink) 55%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 710px;
+            margin: 22px auto 0;
+            color: var(--muted);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .hero-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 27px;
+        }
+
+        .hero-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 15px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: var(--text);
+            font-size: .82rem;
+            font-weight: 600;
+        }
+
+        .hero-pill i {
+            color: var(--gold);
+        }
+
+        .market-visual {
+            max-width: 760px;
+            margin: 38px auto 0;
+            padding: 20px 22px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.012));
+            text-align: left;
+        }
+
+        .market-visual-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 18px;
+        }
+
+        .market-visual-title {
+            color: var(--text);
+            font-size: .9rem;
+            font-weight: 700;
+        }
+
+        .market-visual-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--muted);
+            font-size: .75rem;
+        }
+
+        .market-visual-label i {
+            color: var(--gold);
+        }
+
+        .chart-art {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 190px;
+        }
+
+        .market-visual-note {
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: .76rem;
+            line-height: 1.7;
+        }
+
+        .content-section {
+            padding: 20px 0 24px;
+        }
+
+        .content-container {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 23px;
+        }
+
+        .section-icon {
+            display: flex;
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(108, 123, 255, .35);
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(108, 123, 255, .18), rgba(226, 30, 128, .12));
+            color: var(--gold);
+            font-size: 1.35rem;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: -.7px;
+        }
+
+        .section-subtitle {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.7;
+        }
+
+        .dark-card {
+            height: 100%;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+            box-shadow: 0 15px 45px rgba(0, 0, 0, .14);
+            transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+
+        .dark-card:hover {
+            border-color: rgba(245, 185, 66, .35);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .22);
+        }
+
+        .approach-card {
+            padding: 30px;
+        }
+
+        .approach-copy {
+            color: #d0d0d9;
+            font-size: .95rem;
+            line-height: 1.95;
+        }
+
+        .approach-copy p {
+            margin-bottom: 18px;
+        }
+
+        .approach-copy p:last-child {
+            margin-bottom: 0;
+        }
+
+        .approach-highlights {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 13px;
+            margin-top: 25px;
+        }
+
+        .highlight-item {
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, .025);
+        }
+
+        .highlight-item i {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--gold);
+            font-size: 1.25rem;
+        }
+
+        .highlight-item strong {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text);
+            font-size: .88rem;
+        }
+
+        .highlight-item span {
+            display: block;
+            color: var(--muted);
+            font-size: .78rem;
+            line-height: 1.65;
+        }
+
+        .disclaimer {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-top: 25px;
+            padding: 17px 19px;
+            border: 1px solid rgba(245, 185, 66, .25);
+            border-radius: 15px;
+            background: rgba(245, 185, 66, .045);
+            color: var(--muted);
+            font-size: .84rem;
+            line-height: 1.8;
+        }
+
+        .disclaimer i {
+            flex: 0 0 auto;
+            margin-top: 2px;
+            color: var(--gold);
+            font-size: 1.05rem;
+        }
+
+        .skills-card {
+            padding: 30px;
+        }
+
+        .skills-intro {
+            margin: -4px 0 23px;
+            color: var(--muted);
+            font-size: .93rem;
+            line-height: 1.85;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: #d4d4dc;
+            font-size: .84rem;
+            font-weight: 500;
+            line-height: 1.4;
+            transition: border-color .25s ease, background .25s ease, color .25s ease;
+        }
+
+        .skill-tag i {
+            color: var(--gold);
+            font-size: .85rem;
+        }
+
+        .skill-tag:hover {
+            border-color: rgba(245, 185, 66, .45);
+            background: rgba(245, 185, 66, .07);
+            color: #fff;
+        }
+
+        .skill-groups {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 28px;
+        }
+
+        .skill-group {
+            padding: 21px;
+            border: 1px solid var(--border);
+            border-radius: 17px;
+            background: rgba(255, 255, 255, .02);
+        }
+
+        .skill-group h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 0 0 10px;
+            color: var(--text);
+            font-size: .95rem;
+            font-weight: 800;
+        }
+
+        .skill-group h3 i {
+            color: var(--gold);
+        }
+
+        .skill-group p {
+            margin: 0;
+            color: var(--muted);
+            font-size: .84rem;
+            line-height: 1.8;
+        }
+
+        .closing-note {
+            margin-top: 25px;
+            padding: 19px 21px;
+            border: 1px solid rgba(108, 123, 255, .25);
+            border-radius: 16px;
+            background: linear-gradient(110deg, rgba(108, 123, 255, .08), rgba(226, 30, 128, .05));
+            color: var(--muted);
+            font-size: .88rem;
+            line-height: 1.85;
+        }
+
+        .closing-note i {
+            margin-right: 8px;
+            color: var(--gold);
+        }
+
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            background: #07070b !important;
+            color: var(--muted);
+        }
+
+        footer .small {
+            color: var(--muted);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--pink), var(--orange));
+        }
+
+        @media (max-width: 767.98px) {
+            .hero {
+                padding: 54px 0 30px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.7px;
+            }
+
+            .hero-description {
+                font-size: .94rem;
+            }
+
+            .market-visual {
+                margin-top: 28px;
+                padding: 17px;
+            }
+
+            .content-section {
+                padding: 15px 0 20px;
+            }
+
+            .approach-card,
+            .skills-card {
+                padding: 22px;
+            }
+
+            .approach-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .highlight-item {
+                display: grid;
+                grid-template-columns: 28px 1fr;
+                column-gap: 10px;
+                align-items: start;
+            }
+
+            .highlight-item i {
+                grid-row: span 2;
+                margin-bottom: 0;
+            }
+
+            .skill-groups {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+
+            .skill-tag {
+                padding: 9px 12px;
+                font-size: .79rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .hero-pill {
+                font-size: .76rem;
+                padding: 9px 11px;
+            }
+
+            .section-heading {
+                gap: 11px;
+            }
+
+            .section-icon {
+                flex-basis: 42px;
+                width: 42px;
+                height: 42px;
+            }
+
+            .market-visual-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column">
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <main class="flex-shrink-0 page-shell">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand fw-bolder" href="index.html">
+                    <span class="brand-gradient">Pravind Thakur</span>
+                </a>
+
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container px-4 px-lg-5">
+
+                <div class="eyebrow">Markets · Analysis · Discipline</div>
+
+                <h1>
+                    Equity &amp; Commodity<br />
+                    <span class="gradient-text">Trading.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Exploring market behaviour through price action, technical analysis
+                    and risk management. My focus is on understanding the context behind
+                    market movements, protecting capital and making disciplined decisions.
+                </p>
+
+                <div class="hero-pills">
+                    <div class="hero-pill">
+                        <i class="bi bi-graph-up-arrow"></i>
+                        Equity Markets
+                    </div>
+                    <div class="hero-pill">
+                        <i class="bi bi-bar-chart-line"></i>
+                        Commodity Markets
+                    </div>
+                    <div class="hero-pill">
+                        <i class="bi bi-shield-check"></i>
+                        Risk Management
                     </div>
                 </div>
-            </nav>
 
-
-            <!-- Trading Header + Introduction -->
-            <section class="pt-5 pb-2">
-                <div class="container px-5">
-
-                    <div class="text-center mb-4">
-                        <h1 class="display-5 fw-bolder mb-0">
-                            <span class="text-gradient d-inline">Equity &amp; Commodity Trading</span>
-                        </h1>
+                <!-- Decorative chart illustration; not live market data -->
+                <div class="market-visual">
+                    <div class="market-visual-header">
+                        <div class="market-visual-title">
+                            <i class="bi bi-activity me-2" style="color: var(--gold);"></i>
+                            Understanding Market Movements
+                        </div>
+                        <div class="market-visual-label">
+                            <i class="bi bi-info-circle"></i>
+                            Illustrative chart · Not live data
+                        </div>
                     </div>
 
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+                    <svg class="chart-art" viewBox="0 0 700 175"
+                        role="img" aria-label="Decorative candlestick chart illustration">
 
-                            <!-- Introduction Card -->
-                            <div class="card shadow border-0 rounded-4 mb-3">
-                                <div class="card-body p-4 p-md-5">
+                        <defs>
+                            <linearGradient id="chartLine" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#6c7bff" />
+                                <stop offset="55%" stop-color="#e21e80" />
+                                <stop offset="100%" stop-color="#ff8a5c" />
+                            </linearGradient>
+                            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#6c7bff" stop-opacity=".22" />
+                                <stop offset="100%" stop-color="#6c7bff" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
 
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-graph-up-arrow"></i>
-                                        </div>
+                        <g stroke="#343440" stroke-width="1" stroke-dasharray="4 6">
+                            <line x1="0" y1="25" x2="700" y2="25" />
+                            <line x1="0" y1="65" x2="700" y2="65" />
+                            <line x1="0" y1="105" x2="700" y2="105" />
+                            <line x1="0" y1="145" x2="700" y2="145" />
+                        </g>
 
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">My Approach</span>
-                                        </h3>
-                                    </div>
+                        <path d="M 0 135 L 55 118 L 100 126 L 145 92 L 190 103 L 235 72 L 280 86 L 325 48 L 370 66 L 415 42 L 460 57 L 505 30 L 550 44 L 595 20 L 640 35 L 700 12 L 700 175 L 0 175 Z"
+                            fill="url(#chartFill)" />
 
-                                    <p>
-                                        I follow equity and commodity markets, study price movements and turn research into
-                                        trading decisions. I focus on understanding the market first, managing risk carefully
-                                        and staying disciplined.
-                                    </p>
+                        <path d="M 0 135 L 55 118 L 100 126 L 145 92 L 190 103 L 235 72 L 280 86 L 325 48 L 370 66 L 415 42 L 460 57 L 505 30 L 550 44 L 595 20 L 640 35 L 700 12"
+                            fill="none" stroke="url(#chartLine)" stroke-width="3"
+                            stroke-linecap="round" stroke-linejoin="round" />
 
-                                    <p class="mb-3">
-                                        My day-to-day work in capital markets and corporate actions gives me a close view of how
-                                        events such as dividends, stock splits and bonus issues are processed and how they can
-                                        affect securities.
-                                    </p>
+                        <g stroke-width="2" stroke-linecap="round">
+                            <g stroke="#57c7a5" fill="#57c7a5">
+                                <line x1="55" y1="95" x2="55" y2="139" />
+                                <rect x="48" y="108" width="14" height="20" rx="2" />
+                                <line x1="145" y1="72" x2="145" y2="115" />
+                                <rect x="138" y="84" width="14" height="20" rx="2" />
+                                <line x1="235" y1="53" x2="235" y2="94" />
+                                <rect x="228" y="62" width="14" height="22" rx="2" />
+                                <line x1="325" y1="31" x2="325" y2="73" />
+                                <rect x="318" y="39" width="14" height="22" rx="2" />
+                                <line x1="415" y1="23" x2="415" y2="65" />
+                                <rect x="408" y="31" width="14" height="22" rx="2" />
+                                <line x1="505" y1="13" x2="505" y2="48" />
+                                <rect x="498" y="20" width="14" height="20" rx="2" />
+                                <line x1="595" y1="5" x2="595" y2="40" />
+                                <rect x="588" y="12" width="14" height="20" rx="2" />
+                            </g>
 
-                                    <p class="small text-muted mb-0">
-                                        This page shares my personal interest in the markets. It is not financial advice.
-                                    </p>
+                            <g stroke="#ed6a78" fill="#ed6a78">
+                                <line x1="100" y1="107" x2="100" y2="147" />
+                                <rect x="93" y="117" width="14" height="18" rx="2" />
+                                <line x1="190" y1="85" x2="190" y2="122" />
+                                <rect x="183" y="95" width="14" height="17" rx="2" />
+                                <line x1="280" y1="65" x2="280" y2="105" />
+                                <rect x="273" y="75" width="14" height="19" rx="2" />
+                                <line x1="370" y1="45" x2="370" y2="82" />
+                                <rect x="363" y="54" width="14" height="18" rx="2" />
+                                <line x1="460" y1="39" x2="460" y2="74" />
+                                <rect x="453" y="47" width="14" height="17" rx="2" />
+                                <line x1="550" y1="25" x2="550" y2="59" />
+                                <rect x="543" y="33" width="14" height="17" rx="2" />
+                                <line x1="640" y1="15" x2="640" y2="48" />
+                                <rect x="633" y="24" width="14" height="16" rx="2" />
+                            </g>
+                        </g>
+                    </svg>
 
-                                </div>
-                            </div>
+                    <p class="market-visual-note">
+                        Markets involve uncertainty. A chart illustrates price behaviour,
+                        not a guaranteed direction or trading outcome.
+                    </p>
+                </div>
 
+            </div>
+        </section>
+
+
+        <!-- My Approach -->
+        <section class="content-section">
+            <div class="container px-4 px-lg-5 content-container">
+
+                <div class="dark-card approach-card">
+
+                    <div class="section-heading">
+                        <div class="section-icon">
+                            <i class="bi bi-compass"></i>
+                        </div>
+                        <div>
+                            <h2>My Approach</h2>
+                            <p class="section-subtitle">
+                                Research first. Risk awareness always. Discipline throughout.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="approach-copy">
+                        <p>
+                            I follow equity and commodity markets, study price movements
+                            and turn research into trading decisions. I focus on understanding
+                            the market first, managing risk carefully and staying disciplined.
+                        </p>
+
+                        <p>
+                            My day-to-day work in capital markets and corporate actions gives
+                            me a close view of how events such as dividends, stock splits and
+                            bonus issues are processed and how they can affect securities.
+                        </p>
+                    </div>
+
+                    <div class="approach-highlights">
+
+                        <div class="highlight-item">
+                            <i class="bi bi-search"></i>
+                            <strong>Market Research</strong>
+                            <span>Study trends, price behaviour, market structure and relevant context.</span>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="bi bi-shield-check"></i>
+                            <strong>Risk Management</strong>
+                            <span>Consider exposure, position sizing and potential downside before a trade.</span>
+                        </div>
+
+                        <div class="highlight-item">
+                            <i class="bi bi-journal-check"></i>
+                            <strong>Discipline</strong>
+                            <span>Use a consistent process, review decisions and learn from outcomes.</span>
+                        </div>
+
+                    </div>
+
+                    <div class="disclaimer">
+                        <i class="bi bi-exclamation-triangle"></i>
+                        <div>
+                            <strong style="color: var(--text);">Important disclaimer</strong><br />
+                            This page shares my personal interest in the markets and is
+                            for informational purposes only. It is not financial advice
+                            or a recommendation to buy or sell any security or commodity.
+                            Trading involves risk, including possible loss of capital.
                         </div>
                     </div>
 
                 </div>
-            </section>
+
+            </div>
+        </section>
 
 
-            <!-- Trading & Market Skills -->
-            <section class="pt-2 pb-5">
-                <div class="container px-5">
+        <!-- Trading & Market Skills -->
+        <section class="content-section pb-5">
+            <div class="container px-4 px-lg-5 content-container">
 
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+                <div class="dark-card skills-card">
 
-                            <div class="card shadow border-0 rounded-4">
-
-                                <div class="card-body p-4 p-md-5">
-
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-bar-chart-line"></i>
-                                        </div>
-
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">
-                                                Trading &amp; Market Skills
-                                            </span>
-                                        </h3>
-
-                                    </div>
-
-                                    <div class="d-flex flex-wrap gap-2">
-
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Equity Trading</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Commodity Trading</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Technical Analysis</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Fundamental Analysis</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Candlestick Patterns</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Chart Patterns</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Support &amp; Resistance</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Trend Analysis</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Moving Averages</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">RSI &amp; MACD</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Volume Analysis</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Market Structure</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Risk Management</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Position Sizing</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Stop-Loss &amp; Targets</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Trading Psychology</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Trading Journal</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Swing Trading</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Intraday Trading</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Market Sentiment</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Sector Analysis</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Portfolio Diversification</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Gold, Silver &amp; Crude Oil</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Corporate Actions Impact</span>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
+                    <div class="section-heading">
+                        <div class="section-icon">
+                            <i class="bi bi-bar-chart-line"></i>
                         </div>
+                        <div>
+                            <h2>Trading &amp; Market Skills</h2>
+                            <p class="section-subtitle">
+                                Concepts and areas of interest across equity and commodity markets.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="skills-intro">
+                        Trading combines market analysis, a repeatable decision-making
+                        process and risk controls. The topics below represent the
+                        techniques and concepts I study across different market conditions.
+                    </p>
+
+                    <div class="skills-list">
+
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Equity Trading</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Commodity Trading</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Technical Analysis</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Fundamental Analysis</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Candlestick Patterns</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Chart Patterns</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Support &amp; Resistance</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Trend Analysis</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Moving Averages</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>RSI &amp; MACD</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Volume Analysis</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Market Structure</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Risk Management</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Position Sizing</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Stop-Loss &amp; Targets</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Trading Psychology</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Trading Journal</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Swing Trading</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Intraday Trading</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Market Sentiment</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Sector Analysis</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Portfolio Diversification</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Gold, Silver &amp; Crude Oil</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Corporate Actions Impact</span>
+
+                    </div>
+
+                    <div class="skill-groups">
+
+                        <div class="skill-group">
+                            <h3>
+                                <i class="bi bi-graph-up-arrow"></i>
+                                Market Analysis
+                            </h3>
+                            <p>
+                                Technical and fundamental analysis, chart patterns,
+                                candlesticks, indicators, price trends, volume and market structure.
+                            </p>
+                        </div>
+
+                        <div class="skill-group">
+                            <h3>
+                                <i class="bi bi-shield-lock"></i>
+                                Risk &amp; Decision-Making
+                            </h3>
+                            <p>
+                                Position sizing, stop-loss planning, risk awareness,
+                                trading psychology, journaling and portfolio diversification.
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="closing-note">
+                        <i class="bi bi-lightbulb"></i>
+                        <strong style="color: var(--text);">My guiding principle:</strong>
+                        Focus on the quality of the decision and the risk being taken,
+                        rather than assuming any single trade or strategy will guarantee a profit.
                     </div>
 
                 </div>
-            </section>
 
-        </main>
+            </div>
+        </section>
+
+    </main>
 
 
-        <!-- Footer -->
-        <footer class="bg-white py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto text-center">
-                        <div class="small m-0">
-                            &copy; Pravind Thakur. All rights reserved.
-                        </div>
-                    </div>
+    <!-- Footer -->
+    <footer class="py-4 mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="text-center">
+                <div class="small">
+                    &copy; Pravind Thakur. All rights reserved.
                 </div>
             </div>
-        </footer>
+        </div>
+    </footer>
 
 
-        <!-- Bootstrap core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        <!-- Core theme JS -->
-        <script src="js/scripts.js"></script>
+    <!-- Existing site JavaScript -->
+    <script src="js/scripts.js"></script>
 
-    </body>
+    <!-- Reading progress indicator -->
+    <script>
+        (function () {
+            var progress = document.getElementById('scrollProgress');
+
+            function updateProgress() {
+                var scrollableHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                var percentage = scrollableHeight > 0
+                    ? (window.scrollY / scrollableHeight) * 100
+                    : 0;
+
+                progress.style.width = Math.min(100, percentage) + '%';
+            }
+
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', updateProgress);
+            updateProgress();
+        })();
+    </script>
+
+</body>
 </html>
