@@ -2,330 +2,412 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Explore Pravind Thakur's personal interests, photography and creative projects.">
-    <meta name="author" content="Pravind Thakur">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Explore Pravind Thakur's personal interests, creative work, photography and online communities." />
+    <meta name="author" content="Pravind Thakur" />
     <title>Pravind Thakur | Personal</title>
 
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
 
     <style>
         :root {
-            --bg: #07070b;
-            --surface: #101016;
-            --surface-hover: #15151d;
-            --border: #252530;
-            --text: #f4f4f5;
-            --muted: #a1a1aa;
-            --gold: #f5b942;
+            color-scheme: dark;
         }
 
         html {
-            background: var(--bg);
             scroll-behavior: smooth;
         }
 
         body {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            background: var(--bg) !important;
-            color: var(--text);
-            font-family: "Plus Jakarta Sans", sans-serif;
+            background: #07070b !important;
+            color: #f2f2f2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
         }
 
-        main {
-            flex: 1;
+        /* NAVIGATION — MATCHES index.html */
+
+        .navbar {
+            background-color: #07070b !important;
+            border-bottom: 1px solid #1c1c24;
         }
 
-        /* Navigation */
-        .personal-navbar {
-            background: var(--bg) !important;
-            border-bottom: 1px solid var(--border);
-            padding: 18px 0;
+        .navbar .navbar-brand {
+            color: #f2f2f2 !important;
         }
 
-        .personal-navbar .navbar-brand {
-            color: var(--text) !important;
-            font-size: 1.05rem;
-            font-weight: 800;
+        .navbar .navbar-brand .text-primary {
+            background: linear-gradient(100deg, #6c7bff 0%, #e21e80 70%, #ff8a5c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .brand-accent {
-            color: var(--gold);
+        .navbar .nav-link {
+            color: #a1a1aa !important;
+            transition: color 0.25s ease;
         }
 
-        .personal-navbar .nav-link {
-            color: var(--muted) !important;
-            font-weight: 600;
-            padding: 10px 14px !important;
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus,
+        .navbar .nav-link.active {
+            color: #f5b942 !important;
         }
 
-        .personal-navbar .nav-link:hover,
-        .personal-navbar .nav-link.active {
-            color: var(--gold) !important;
+        .navbar .navbar-toggler {
+            border: 1px solid rgba(255,255,255,.25);
+            box-shadow: none;
         }
 
-        .personal-navbar .navbar-toggler {
-            border-color: var(--border);
+        .navbar .navbar-toggler:focus {
+            box-shadow: 0 0 0 .15rem rgba(245,185,66,.2);
         }
 
-        .personal-navbar .navbar-toggler-icon {
+        .navbar .navbar-toggler-icon {
             filter: invert(1);
         }
 
-        /* Page heading */
-        .personal-hero {
-            padding: 75px 0 45px;
-            text-align: center;
+        /* SHARED CINEMATIC DESIGN */
+
+        .cine {
+            background: #07070b;
+            color: #f2f2f2;
+            position: relative;
+            overflow: hidden;
         }
 
-        .eyebrow {
-            color: var(--gold);
-            font-size: 0.72rem;
-            font-weight: 800;
-            letter-spacing: 2.5px;
+        .cine a {
+            text-decoration: none;
+        }
+
+        .c-grad {
+            background: linear-gradient(100deg, #6c7bff 0%, #e21e80 70%, #ff8a5c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .c-gold {
+            color: #f5b942;
+        }
+
+        .c-muted {
+            color: #a1a1aa;
+        }
+
+        #cScroll {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #1e30f3, #e21e80);
+            z-index: 2000;
+        }
+
+        .c-eyebrow {
+            letter-spacing: .3em;
+            font-size: .75rem;
             text-transform: uppercase;
-            margin-bottom: 18px;
+            color: #f5b942;
         }
 
-        .personal-title {
-            color: var(--text);
-            font-size: clamp(2.5rem, 6vw, 4.4rem);
+        .c-sec {
+            padding: 7rem 0;
+            position: relative;
+        }
+
+        .c-h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
             font-weight: 800;
-            letter-spacing: -2px;
-            line-height: 1.1;
-            margin-bottom: 20px;
+            letter-spacing: -.02em;
         }
 
-        .personal-title span {
-            color: var(--gold);
+        /* HERO */
+
+        .c-hero {
+            position: relative;
+            min-height: 65vh;
+            display: flex;
+            align-items: center;
+            padding: 8vh 0;
+            overflow: hidden;
         }
 
-        .personal-intro {
-            max-width: 600px;
-            margin: 0 auto;
-            color: var(--muted);
-            font-size: 0.98rem;
+        .c-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                520px circle at var(--mx, 70%) var(--my, 40%),
+                rgba(226,30,128,.25),
+                transparent 65%
+            );
+            pointer-events: none;
+        }
+
+        .c-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .055;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
+
+        .c-title {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 800;
+            line-height: .98;
+            letter-spacing: -.04em;
+            margin: .8rem 0 1.2rem;
+        }
+
+        .c-intro {
+            max-width: 650px;
+            font-size: 1.05rem;
             line-height: 1.9;
         }
 
-        .section-line {
-            width: 54px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 5px;
-            margin: 26px auto 0;
+        .c-btn {
+            display: inline-block;
+            padding: .9rem 2rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: transform .25s, box-shadow .25s, background .25s;
         }
 
-        /* Social profile cards */
-        .personal-content {
-            padding: 15px 0 75px;
+        .c-btn:hover {
+            transform: translateY(-3px);
         }
 
-        .social-card {
+        .c-btn.fill {
+            background: linear-gradient(90deg, #1e30f3, #e21e80);
+            color: #fff;
+        }
+
+        .c-btn.fill:hover {
+            box-shadow: 0 10px 30px rgba(226,30,128,.4);
+            color: #fff;
+        }
+
+        .c-btn.line {
+            border: 1px solid rgba(255,255,255,.35);
+            color: #fff;
+        }
+
+        .c-btn.line:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        /* PERSONAL INTEREST CARDS */
+
+        .c-card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255,255,255,.04);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 20px;
+            padding: 1.5rem;
             height: 100%;
             overflow: hidden;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            transition: transform 0.25s ease,
-                        border-color 0.25s ease,
-                        background 0.25s ease;
+            transition: transform .3s, border-color .3s, background .3s;
         }
 
-        .social-card:hover {
-            transform: translateY(-4px);
-            background: var(--surface-hover);
-            border-color: rgba(245, 185, 66, 0.5);
+        .c-card:hover {
+            border-color: rgba(226,30,128,.7);
+            background: rgba(255,255,255,.07);
+            transform: translateY(-7px);
         }
 
-        .social-card-inner {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .social-card-content {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            flex: 1;
-            padding: 30px;
-        }
-
-        .social-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 22px;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            background: #191921;
-            font-size: 1.45rem;
-        }
-
-        .instagram-icon { color: #e6a4bd; }
-        .youtube-icon { color: #ff6868; }
-        .quora-icon { color: #ef7771; }
-
-        .social-card h2 {
-            margin: 0 0 12px;
-            font-size: 1.2rem;
-            font-weight: 800;
-            overflow-wrap: anywhere;
-        }
-
-        .social-card h2 a {
-            color: var(--text);
-            text-decoration: none;
-            transition: color 0.2s ease;
-        }
-
-        .social-card h2 a:hover {
-            color: var(--gold);
-        }
-
-        .social-card p {
-            margin-bottom: 25px;
-            color: var(--muted);
-            font-size: 0.91rem;
-            line-height: 1.85;
-        }
-
-        .social-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 9px;
-            margin-top: auto;
-            padding: 11px 17px;
-            border: 1px solid var(--gold);
-            border-radius: 9px;
-            background: var(--gold);
-            color: #17130b;
-            font-size: 0.84rem;
-            font-weight: 800;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .social-button:hover {
-            background: transparent;
-            color: var(--gold);
-        }
-
-        .social-image-wrap {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 220px;
-            padding: 24px;
-            background: radial-gradient(circle, #17151b, #0b0b10 70%);
-            border-top: 1px solid var(--border);
-        }
-
-        .social-image {
-            display: block;
+        .c-card-image {
             width: 100%;
-            max-width: 240px;
-            height: 190px;
-            object-fit: contain;
-            border-radius: 12px;
-        }
-
-        .instagram-photo {
+            height: 220px;
             object-fit: cover;
+            border-radius: 13px;
+            margin-bottom: 1.5rem;
+            background: #15151c;
+            border: 1px solid rgba(255,255,255,.08);
+            transition: transform .45s, filter .45s;
         }
 
-        /* Footer */
-        #siteFooter {
+        .c-card:hover .c-card-image {
+            transform: scale(1.025);
+        }
+
+        .c-ico {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #1e30f3, #e21e80);
+            color: #fff;
+            margin-bottom: 1.1rem;
+        }
+
+        .c-card h3 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #f4f4f5;
+        }
+
+        .c-card p {
+            font-size: .92rem;
+            line-height: 1.8;
+        }
+
+        .c-card-link {
             margin-top: auto;
-            padding: 25px 0;
-            background: var(--bg) !important;
-            border-top: 1px solid var(--border);
-            color: var(--muted);
+            padding-top: 1.3rem;
+            color: #f5b942;
+            font-size: .9rem;
+            font-weight: 800;
         }
 
-        #siteFooter .small {
-            color: var(--muted) !important;
-            font-size: 0.8rem;
+        /* CREATIVE QUOTE */
+
+        .c-quote-section {
+            background: #0b0b11;
+            border-top: 1px solid #1c1c24;
+            border-bottom: 1px solid #1c1c24;
         }
 
-        #siteFooter .footer-accent {
-            color: var(--gold);
+        .c-quote {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            font-size: clamp(1.8rem, 4.6vw, 3.4rem);
+            line-height: 1.3;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        @media (min-width: 768px) {
-            .personal-hero {
-                padding-top: 90px;
-                padding-bottom: 50px;
-            }
+        /* CTA */
 
-            .social-card-inner {
-                flex-direction: row;
-                align-items: stretch;
-            }
-
-            .social-card-content {
-                flex: 1.25;
-                padding: 34px;
-            }
-
-            .social-image-wrap {
-                flex: 0.85;
-                min-width: 220px;
-                border-top: 0;
-                border-left: 1px solid var(--border);
-            }
-
-            .social-image {
-                max-width: 100%;
-            }
+        .c-cta {
+            background: #0b0b11;
+            border-top: 1px solid #1c1c24;
+            padding: 7rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (max-width: 767.98px) {
-            .personal-hero {
-                padding: 55px 0 30px;
+        .c-cta::before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 640px;
+            height: 640px;
+            max-width: 120%;
+            transform: translate(-50%,-50%);
+            border-radius: 50%;
+            background: radial-gradient(
+                circle,
+                rgba(226,30,128,.25),
+                rgba(30,48,243,.14) 45%,
+                transparent 70%
+            );
+            pointer-events: none;
+        }
+
+        .c-cta .container {
+            position: relative;
+        }
+
+        /* FOOTER — MATCHES index.html */
+
+        footer#siteFooter {
+            background: #07070b !important;
+            color: #a1a1aa;
+            border-top: 1px solid #1c1c24;
+        }
+
+        footer#siteFooter .small {
+            color: #a1a1aa;
+        }
+
+        /* SCROLL REVEAL */
+
+        .js .rv {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity .9s ease, transform .9s ease;
+        }
+
+        .js .rv.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        .js .rv.d1 {
+            transition-delay: .12s;
+        }
+
+        .js .rv.d2 {
+            transition-delay: .24s;
+        }
+
+        .js .rv.d3 {
+            transition-delay: .36s;
+        }
+
+        @media (max-width: 767px) {
+            .c-hero {
+                min-height: 55vh;
+                padding: 5rem 0;
             }
 
-            .personal-title {
-                letter-spacing: -1.5px;
+            .c-sec {
+                padding: 4.5rem 0;
             }
 
-            .personal-content {
-                padding-bottom: 48px;
+            .c-card-image {
+                height: 200px;
             }
 
-            .social-card-content {
-                padding: 25px;
+            .c-cta {
+                padding: 5rem 0;
             }
 
-            .social-image-wrap {
-                min-height: 190px;
-            }
-
-            .social-image {
-                height: 155px;
+            .c-title {
+                font-size: clamp(3rem, 14vw, 5rem);
             }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            html { scroll-behavior: auto; }
+            html {
+                scroll-behavior: auto;
+            }
 
-            *,
-            *::before,
-            *::after {
-                transition-duration: 0.01ms !important;
-                animation-duration: 0.01ms !important;
+            .js .rv {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .c-card,
+            .c-btn,
+            .c-card-image {
+                transition: none;
             }
         }
     </style>
@@ -333,220 +415,408 @@
 
 <body class="d-flex flex-column h-100">
 
-<main class="flex-shrink-0">
+    <main class="flex-shrink-0">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-dark personal-navbar">
-        <div class="container px-4 px-lg-5">
+        <!-- NAVIGATION: SAME AS index.html -->
 
-            <a class="navbar-brand" href="index.html">
-                Pravind <span class="brand-accent">Thakur</span>
-            </a>
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
+            <div class="container px-5">
 
-            <button class="navbar-toggler" type="button"
+                <a class="navbar-brand" href="index.html">
+                    <span class="fw-bolder text-primary">Pravind Thakur</span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent"
                     aria-expanded="false"
                     aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Professional.html">Professional</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="Personal.html">Personal</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
-                    </li>
-                </ul>
-            </div>
-
-        </div>
-    </nav>
-
-    <!-- Page heading -->
-    <section class="personal-hero">
-        <div class="container px-4 px-lg-5">
-            <div class="eyebrow">Beyond the professional</div>
-
-            <h1 class="personal-title">
-                My <span>Personal</span> Side
-            </h1>
-
-            <p class="personal-intro">
-                A little more about what I enjoy beyond work — creativity,
-                photography, ideas, learning and sharing perspectives
-                across different interests.
-            </p>
-
-            <div class="section-line"></div>
-        </div>
-    </section>
-
-    <!-- Social profiles -->
-    <section class="personal-content">
-        <div class="container px-4 px-lg-5">
-            <div class="row g-4">
-
-                <!-- Instagram -->
-                <div class="col-12">
-                    <article class="social-card">
-                        <div class="social-card-inner">
-
-                            <div class="social-card-content">
-                                <div class="social-icon instagram-icon">
-                                    <i class="bi bi-instagram" aria-hidden="true"></i>
-                                </div>
-
-                                <h2>
-                                    <a href="https://www.instagram.com/pravindthakur"
-                                       target="_blank" rel="noopener noreferrer">
-                                        Instagram
-                                    </a>
-                                </h2>
-
-                                <p>
-                                    Follow me on Instagram for a more personal
-                                    look at life beyond work — lifestyle,
-                                    photography, personal reels, old songs,
-                                    travel and everyday moments.
-                                </p>
-
-                                <a class="social-button"
-                                   href="https://www.instagram.com/pravindthakur"
-                                   target="_blank" rel="noopener noreferrer">
-                                    <i class="bi bi-instagram" aria-hidden="true"></i>
-                                    Follow @pravindthakur
-                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-
-                            <div class="social-image-wrap">
-                                <img class="social-image instagram-photo"
-                                     src="assets/instagramphoto1.jpg"
-                                     alt="Pravind Thakur's Instagram photography"
-                                     loading="lazy">
-                            </div>
-
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Fancy Idea YouTube -->
-                <div class="col-12">
-                    <article class="social-card">
-                        <div class="social-card-inner">
-
-                            <div class="social-card-content">
-                                <div class="social-icon youtube-icon">
-                                    <i class="bi bi-youtube" aria-hidden="true"></i>
-                                </div>
-
-                                <h2>
-                                    <a href="https://www.youtube.com/fancyidea"
-                                       target="_blank" rel="noopener noreferrer">
-                                        Fancy Idea
-                                    </a>
-                                </h2>
-
-                                <p>
-                                    Welcome to Fancy Idea — a channel exploring
-                                    research, analysis, how-to guides,
-                                    imagination, interesting facts and creative
-                                    ideas. Discover something new and join
-                                    the journey of learning.
-                                </p>
-
-                                <a class="social-button"
-                                   href="https://www.youtube.com/fancyidea"
-                                   target="_blank" rel="noopener noreferrer">
-                                    <i class="bi bi-youtube" aria-hidden="true"></i>
-                                    Subscribe on YouTube
-                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-
-                            <div class="social-image-wrap">
-                                <img class="social-image"
-                                     src="assets/fancyIdealogo.png"
-                                     alt="Fancy Idea YouTube channel logo"
-                                     loading="lazy">
-                            </div>
-
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Quora -->
-                <div class="col-12">
-                    <article class="social-card">
-                        <div class="social-card-inner">
-
-                            <div class="social-card-content">
-                                <div class="social-icon quora-icon">
-                                    <i class="bi bi-chat-square-text" aria-hidden="true"></i>
-                                </div>
-
-                                <h2>
-                                    <a href="https://www.quora.com/profile/Pravind-Thakur"
-                                       target="_blank" rel="noopener noreferrer">
-                                        Quora
-                                    </a>
-                                </h2>
-
-                                <p>
-                                    I share answers and insights on Quora about
-                                    technology, careers, finance and PowerPoint.
-                                    Follow along to explore ideas, read answers
-                                    and join conversations.
-                                </p>
-
-                                <a class="social-button"
-                                   href="https://www.quora.com/profile/Pravind-Thakur"
-                                   target="_blank" rel="noopener noreferrer">
-                                    <i class="bi bi-chat-square-text" aria-hidden="true"></i>
-                                    Follow on Quora
-                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
-                                </a>
-                            </div>
-
-                            <div class="social-image-wrap">
-                                <img class="social-image"
-                                     src="assets/quora.jpg"
-                                     alt="Pravind Thakur on Quora"
-                                     loading="lazy">
-                            </div>
-
-                        </div>
-                    </article>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
 
             </div>
+        </nav>
+
+        <div class="cine">
+
+            <div id="cScroll"></div>
+
+            <!-- HERO -->
+
+            <section class="c-hero" id="cHero">
+                <div class="container px-5" style="position:relative;z-index:1">
+                    <div class="row">
+                        <div class="col-lg-10 rv">
+
+                            <div class="c-eyebrow">
+                                Beyond work &middot; Creativity &middot; Life
+                            </div>
+
+                            <h1 class="c-title">
+                                My personal<br>
+                                <span class="c-grad">side of life.</span>
+                            </h1>
+
+                            <p class="c-muted c-intro mb-4">
+                                Beyond capital markets and technology, I enjoy creating,
+                                capturing moments, sharing ideas and learning new things.
+                                This is where my creative interests and online communities come together.
+                            </p>
+
+                            <div class="d-flex flex-wrap gap-3">
+                                <a class="c-btn fill" href="#interests">
+                                    Explore my interests
+                                </a>
+
+                                <a class="c-btn line" href="Photography.html">
+                                    <i class="bi bi-camera me-2"></i>
+                                    View photography
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERESTS -->
+
+            <section class="c-sec" id="interests" style="padding-top:2rem">
+
+                <div class="container px-5">
+
+                    <div class="text-center mb-5 rv">
+                        <div class="c-eyebrow">What I enjoy</div>
+
+                        <h2 class="c-h2 mt-2">
+                            My world of <span class="c-grad">interests</span>
+                        </h2>
+
+                        <p class="c-muted mt-3 mx-auto" style="max-width:650px">
+                            A few places where I share my creativity, photographs,
+                            ideas and things I've learned along the way.
+                        </p>
+                    </div>
+
+                    <div class="row g-4">
+
+                        <!-- INSTAGRAM -->
+
+                        <div class="col-md-6 col-xl-4 rv">
+                            <a
+                                class="c-card text-white"
+                                href="https://www.instagram.com/pravindthakur"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                <img
+                                    class="c-card-image"
+                                    src="assets/instagramphoto1.jpg"
+                                    alt="Pravind Thakur on Instagram"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'">
+
+                                <div class="c-ico">
+                                    <i class="bi bi-instagram"></i>
+                                </div>
+
+                                <h3>Photography &amp; moments</h3>
+
+                                <p class="c-muted">
+                                    Follow my Instagram for personal moments, photography,
+                                    travel, visual stories and snapshots from everyday life.
+                                </p>
+
+                                <div class="c-card-link">
+                                    Visit Instagram
+                                    <i class="bi bi-arrow-up-right ms-1"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- FANCY IDEA -->
+
+                        <div class="col-md-6 col-xl-4 rv d1">
+                            <a
+                                class="c-card text-white"
+                                href="https://www.youtube.com/fancyidea"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                <img
+                                    class="c-card-image"
+                                    src="assets/fancyIdealogo.png"
+                                    alt="Fancy Idea YouTube channel"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'">
+
+                                <div class="c-ico">
+                                    <i class="bi bi-youtube"></i>
+                                </div>
+
+                                <h3>Fancy Idea</h3>
+
+                                <p class="c-muted">
+                                    Explore my PowerPoint tutorials, presentation design,
+                                    animation techniques and automation content.
+                                    I enjoy turning useful ideas into practical learning.
+                                </p>
+
+                                <div class="c-card-link">
+                                    Explore the channel
+                                    <i class="bi bi-arrow-up-right ms-1"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- QUORA -->
+
+                        <div class="col-md-6 col-xl-4 rv d2">
+                            <a
+                                class="c-card text-white"
+                                href="https://www.quora.com/profile/Pravind-Thakur"
+                                target="_blank"
+                                rel="noopener noreferrer">
+
+                                <img
+                                    class="c-card-image"
+                                    src="assets/quora.jpg"
+                                    alt="Pravind Thakur on Quora"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'">
+
+                                <div class="c-ico">
+                                    <i class="bi bi-chat-square-text"></i>
+                                </div>
+
+                                <h3>Ideas &amp; knowledge</h3>
+
+                                <p class="c-muted">
+                                    Visit my Quora profile to explore shared knowledge,
+                                    questions, answers and topics that spark curiosity.
+                                </p>
+
+                                <div class="c-card-link">
+                                    Visit Quora
+                                    <i class="bi bi-arrow-up-right ms-1"></i>
+                                </div>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- QUOTE -->
+
+            <section class="c-sec c-quote-section">
+                <div class="container px-5 rv">
+
+                    <p class="c-quote">
+                        "Creativity is intelligence having
+                        <span class="c-grad">fun.</span>"
+                    </p>
+
+                    <p class="c-muted text-center mt-4 mb-0">
+                        Create with curiosity. Capture with purpose. Share with kindness.
+                    </p>
+
+                </div>
+            </section>
+
+            <!-- PHOTOGRAPHY CTA -->
+
+            <section class="c-sec">
+                <div class="container px-5">
+
+                    <div class="row align-items-center g-5">
+
+                        <div class="col-lg-7 rv">
+                            <div class="c-eyebrow">Through the lens</div>
+
+                            <h2 class="c-h2 mt-3 mb-4">
+                                Every moment has<br>
+                                <span class="c-grad">a story to tell.</span>
+                            </h2>
+
+                            <p class="c-muted" style="line-height:1.9;max-width:580px">
+                                Photography is a way to notice the details that often go
+                                unseen. From people and places to everyday scenes, I enjoy
+                                capturing moments and presenting them through my own perspective.
+                            </p>
+
+                            <a class="c-btn fill mt-3" href="Photography.html">
+                                <i class="bi bi-camera me-2"></i>
+                                Explore photography
+                            </a>
+                        </div>
+
+                        <div class="col-lg-5 rv d2">
+                            <div class="c-card">
+                                <div class="c-ico">
+                                    <i class="bi bi-camera-reels"></i>
+                                </div>
+
+                                <h3>Observe. Create. Share.</h3>
+
+                                <p class="c-muted mb-0">
+                                    From photography and video to presentations and digital
+                                    content, I enjoy experimenting with different ways to
+                                    communicate an idea or tell a story.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <!-- CTA -->
+
+            <section class="c-cta">
+                <div class="container px-5 rv">
+
+                    <div class="c-eyebrow mb-2">Let's connect</div>
+
+                    <h2 class="c-h2 mb-4">
+                        Good ideas start with<br>
+                        <span class="c-grad">good conversations.</span>
+                    </h2>
+
+                    <p class="c-muted mb-4">
+                        Have a creative idea, a question or something interesting to share?
+                        I'd be happy to connect.
+                    </p>
+
+                    <a class="c-btn fill" href="contact.html">
+                        <i class="bi bi-envelope me-2"></i>
+                        Get in touch
+                    </a>
+
+                </div>
+            </section>
+
         </div>
-    </section>
 
-</main>
+        <!-- INTERACTIONS: MATCHES index.html -->
 
-<!-- Footer -->
-<footer id="siteFooter">
-    <div class="container px-4 px-lg-5">
-        <div class="text-center small">
-            &copy; <span class="footer-accent">Pravind Thakur</span>.
-            All rights reserved.
+        <script>
+        (function () {
+            'use strict';
+
+            var reduce = window.matchMedia(
+                '(prefers-reduced-motion: reduce)'
+            ).matches;
+
+            var fine = window.matchMedia('(hover: hover)').matches;
+
+            /* Scroll progress */
+
+            var bar = document.getElementById('cScroll');
+
+            function updateScrollProgress() {
+                var h = document.documentElement;
+                var max = h.scrollHeight - h.clientHeight;
+
+                if (bar) {
+                    bar.style.width =
+                        (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+                }
+            }
+
+            window.addEventListener('scroll', updateScrollProgress, {
+                passive: true
+            });
+
+            updateScrollProgress();
+
+            /* Mouse-follow hero glow */
+
+            var hero = document.getElementById('cHero');
+
+            if (hero && fine && !reduce) {
+                hero.addEventListener('mousemove', function (e) {
+                    var r = hero.getBoundingClientRect();
+
+                    hero.style.setProperty(
+                        '--mx',
+                        (e.clientX - r.left) + 'px'
+                    );
+
+                    hero.style.setProperty(
+                        '--my',
+                        (e.clientY - r.top) + 'px'
+                    );
+                });
+            }
+
+            /* Scroll reveal */
+
+            var revealElements = document.querySelectorAll('.rv');
+
+            if ('IntersectionObserver' in window) {
+                var io = new IntersectionObserver(function (entries, observer) {
+                    entries.forEach(function (en) {
+                        if (!en.isIntersecting) {
+                            return;
+                        }
+
+                        en.target.classList.add('in');
+                        observer.unobserve(en.target);
+                    });
+                }, {
+                    threshold: 0.12
+                });
+
+                revealElements.forEach(function (el) {
+                    io.observe(el);
+                });
+            } else {
+                revealElements.forEach(function (el) {
+                    el.classList.add('in');
+                });
+            }
+        })();
+        </script>
+
+    </main>
+
+    <!-- FOOTER: MATCHES index.html -->
+
+    <footer id="siteFooter" class="py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto text-center">
+                    <div class="small m-0">
+                        &copy; Pravind Thakur. All rights reserved.
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
 
 </body>
 </html>
