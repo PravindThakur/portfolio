@@ -1,357 +1,1185 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Pravind Thakur - Photography, Cinematography and Creative Interests" />
-        <meta name="author" content="Pravind Thakur" />
-        <title>Pravind Thakur | Photography</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Pravind Thakur — Photography, cinematography and creative interests." />
+    <meta name="author" content="Pravind Thakur" />
+    <title>Pravind Thakur | Photography</title>
 
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
 
-        <!-- Core theme CSS-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+    <script>
+        document.documentElement.classList.add('js');
+    </script>
 
-    <body class="d-flex flex-column h-100 bg-light">
+    <style>
+        /* =========================================
+           GLOBAL DARK THEME — MATCHES index.html
+        ========================================= */
 
-        <main class="flex-shrink-0">
+        :root {
+            color-scheme: dark;
+        }
 
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
-                        <span class="fw-bolder text-primary">Pravind Thakur</span>
-                    </a>
+        html {
+            scroll-behavior: smooth;
+        }
 
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        body {
+            background: #07070b !important;
+            color: #f2f2f2;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Professional.html">Professional</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Personal.html">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        /* NAVIGATION */
 
+        .navbar {
+            background-color: #07070b !important;
+            border-bottom: 1px solid #1c1c24;
+        }
 
-            <!-- Photography Header + Instagram -->
-            <section class="pt-5 pb-2">
-                <div class="container px-5">
+        .navbar .navbar-brand {
+            color: #f2f2f2 !important;
+        }
 
-                    <div class="text-center mb-4">
-                        <h1 class="display-5 fw-bolder mb-0">
-                            <span class="text-gradient d-inline">Photography</span>
-                        </h1>
-                    </div>
+        .navbar .navbar-brand .text-primary {
+            background: linear-gradient(100deg, #6c7bff 0%, #e21e80 70%, #ff8a5c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+        .navbar .nav-link {
+            color: #a1a1aa !important;
+            transition: color .25s ease;
+        }
 
-                            <!-- Instagram Card -->
-                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-3">
-                                <div class="card-body p-0">
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus {
+            color: #f5b942 !important;
+        }
 
-                                    <div class="d-flex flex-column flex-md-row align-items-center">
+        .navbar .navbar-toggler {
+            border: 1px solid rgba(255,255,255,.25);
+            box-shadow: none;
+        }
 
-                                        <div class="p-4 p-md-5">
+        .navbar .navbar-toggler:focus {
+            box-shadow: 0 0 0 .15rem rgba(245,185,66,.2);
+        }
 
-                                            <h2 class="fw-bolder fs-3 text-break">
-                                                <a class="text-dark text-decoration-none"
-                                                   href="https://www.instagram.com/pravindthakur"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    instagram.com/pravindthakur
-                                                </a>
-                                            </h2>
+        .navbar .navbar-toggler-icon {
+            filter: invert(1);
+        }
 
-                                            <p>
-                                                Follow me on Instagram for a more personal look at what I'm up to beyond work:
-                                                lifestyle, photography, personal reels, old songs, travel and more.
-                                            </p>
+        /* CINEMATIC FOUNDATION */
 
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark"
-                                                   href="https://www.instagram.com/pravindthakur"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    <i class="bi bi-instagram me-2"></i>
-                                                    Follow @pravindthakur
-                                                </a>
-                                            </div>
+        .cine {
+            background: #07070b;
+            color: #f2f2f2;
+            position: relative;
+            overflow: hidden;
+        }
 
-                                        </div>
+        .cine a {
+            text-decoration: none;
+        }
 
-                                        <img class="img-fluid insta-photo"
-                                             src="assets/instagramphoto2.jpg"
-                                             alt="Instagram" />
+        .c-grad {
+            background: linear-gradient(100deg, #6c7bff 0%, #e21e80 70%, #ff8a5c 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
 
-                                    </div>
-                                </div>
-                            </div>
+        .c-gold {
+            color: #f5b942;
+        }
 
-                        </div>
-                    </div>
+        .c-muted {
+            color: #a1a1aa;
+        }
 
-                </div>
-            </section>
+        #cScroll {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #1e30f3, #e21e80);
+            z-index: 2000;
+        }
 
+        .c-eyebrow {
+            letter-spacing: .3em;
+            font-size: .75rem;
+            text-transform: uppercase;
+            color: #f5b942;
+        }
 
-            <!-- Sample Photos -->
-            <section class="pt-2 pb-2">
-                <div class="container px-5">
+        .c-sec {
+            padding: 6rem 0;
+            position: relative;
+        }
 
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+        .c-h2 {
+            font-size: clamp(2rem, 4.5vw, 3.2rem);
+            font-weight: 800;
+            letter-spacing: -.02em;
+        }
 
-                            <div class="card shadow border-0 rounded-4 mb-3">
+        /* HERO */
 
-                                <div class="card-body p-4 p-md-5">
+        .c-hero {
+            position: relative;
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            padding: 8vh 0;
+            overflow: hidden;
+        }
 
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-images"></i>
-                                        </div>
+        .c-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(
+                520px circle at var(--mx, 70%) var(--my, 40%),
+                rgba(226,30,128,.27),
+                transparent 65%
+            );
+            pointer-events: none;
+        }
 
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">Sample Photos</span>
-                                        </h3>
-                                    </div>
+        .c-hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: .055;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+        }
 
-                                    <div class="row g-3">
+        .c-title {
+            font-size: clamp(3rem, 8vw, 6.5rem);
+            font-weight: 800;
+            line-height: .98;
+            letter-spacing: -.04em;
+            margin: .8rem 0 1.2rem;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo1.JPG"
-                                                 alt="Sample photo 1"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-intro {
+            max-width: 680px;
+            font-size: 1.05rem;
+            line-height: 1.9;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo2.JPG"
-                                                 alt="Sample photo 2"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        /* BUTTONS */
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo3.JPG"
-                                                 alt="Sample photo 3"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn {
+            display: inline-block;
+            padding: .9rem 2rem;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: .95rem;
+            transition: transform .25s, box-shadow .25s, background .25s;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo4.JPG"
-                                                 alt="Sample photo 4"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn:hover {
+            transform: translateY(-3px);
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo5.JPG"
-                                                 alt="Sample photo 5"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn.fill {
+            background: linear-gradient(90deg, #1e30f3, #e21e80);
+            color: #fff;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo6.JPG"
-                                                 alt="Sample photo 6"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn.fill:hover {
+            box-shadow: 0 10px 30px rgba(226,30,128,.4);
+            color: #fff;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo7.jpeg"
-                                                 alt="Sample photo 7"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn.line {
+            border: 1px solid rgba(255,255,255,.35);
+            color: #fff;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo8.jpeg"
-                                                 alt="Sample photo 8"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        .c-btn.line:hover {
+            background: #fff;
+            color: #000;
+        }
 
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/photo9.jpg"
-                                                 alt="Sample photo 9"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
+        /* INSTAGRAM FEATURE */
 
-                                    </div>
+        .c-feature {
+            display: grid;
+            grid-template-columns: 1fr  .85fr;
+            align-items: stretch;
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: border-color .3s, background .3s;
+        }
 
-                                </div>
-                            </div>
+        .c-feature:hover {
+            border-color: rgba(226,30,128,.55);
+            background: rgba(255,255,255,.05);
+        }
 
-                        </div>
-                    </div>
+        .c-feature-content {
+            padding: clamp(1.5rem, 4vw, 3rem);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
 
-                </div>
-            </section>
+        .c-feature-content h2 {
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
 
+        .c-feature-content p {
+            color: #a1a1aa;
+            line-height: 1.9;
+        }
 
-            <!-- Photography & Cinematography Skills -->
-            <section class="pt-2 pb-5">
-                <div class="container px-5">
+        .c-feature-image-wrap {
+            min-height: 320px;
+            overflow: hidden;
+            background: #101016;
+        }
 
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
+        .c-feature-image {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            object-fit: cover;
+            display: block;
+            transition: transform .6s;
+        }
 
-                            <div class="card shadow border-0 rounded-4">
+        .c-feature:hover .c-feature-image {
+            transform: scale(1.04);
+        }
 
-                                <div class="card-body p-4 p-md-5">
+        .c-ico {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, #1e30f3, #e21e80);
+            color: #fff;
+            margin-bottom: 1.1rem;
+        }
 
-                                    <div class="d-flex align-items-center mb-3">
+        /* PHOTO GALLERY */
 
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-camera"></i>
-                                        </div>
+        .c-gallery-frame {
+            position: relative;
+            overflow: hidden;
+            background: #101016;
+            border: 1px solid #252530;
+            border-radius: 14px;
+            cursor: zoom-in;
+            aspect-ratio: 4 / 3;
+        }
 
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">
-                                                Photography &amp; Cinematography Skills
-                                            </span>
-                                        </h3>
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            filter: saturate(.8);
+            transition: transform .5s ease, filter .5s ease;
+        }
 
-                                    </div>
+        .c-gallery-frame:hover .gallery-img {
+            transform: scale(1.07);
+            filter: saturate(1.1);
+        }
 
-                                    <div class="d-flex flex-wrap gap-2">
+        .c-gallery-frame::after {
+            content: "\F52A";
+            font-family: "bootstrap-icons";
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: #fff;
+            background: rgba(7,7,11,.72);
+            border: 1px solid rgba(255,255,255,.25);
+            opacity: 0;
+            transition: opacity .25s;
+            pointer-events: none;
+        }
 
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">180-Degree Rule</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Rule of Thirds</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Rule of Odds &amp; Golden Ratio</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Patterns &amp; Symmetry</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Layering</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Leading Lines</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Frame Within a Frame</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Negative Space</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Silhouettes &amp; Reflections</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Depth of Field &amp; Bokeh</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Golden Hour &amp; Natural Light</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Exposure Triangle</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Long Exposure &amp; Motion Blur</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Color Theory &amp; Mood</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Color Grading</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Slow Motion</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Time-Lapse &amp; Hyperlapse</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Camera Movement &amp; Transitions</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Shot Types</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Aspect Ratio &amp; Cinematic Crop</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Match Cut &amp; Jump Cut</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">B-Roll</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Emotion &amp; Storytelling</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Candid &amp; Portrait Moments</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Photo Editing &amp; Retouching</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Video Editing &amp; Reels</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Sound &amp; Music Selection</span>
+        .c-gallery-frame:hover::after {
+            opacity: 1;
+        }
 
-                                    </div>
+        /* PHOTOGRAPHY SKILLS */
 
-                                </div>
-                            </div>
+        .c-panel {
+            background: rgba(255,255,255,.035);
+            border: 1px solid rgba(255,255,255,.1);
+            border-radius: 20px;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+        }
 
-                        </div>
-                    </div>
+        .c-tag {
+            display: inline-block;
+            padding: .55rem 1rem;
+            margin: .3rem;
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 999px;
+            color: #d4d4d8;
+            font-size: .9rem;
+            line-height: 1.4;
+            transition: color .25s, background .25s, border-color .25s, transform .25s;
+        }
 
-                </div>
-            </section>
+        .c-tag:hover {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+            transform: translateY(-3px);
+        }
 
-        </main>
+        /* QUOTE */
 
+        .c-quote-section {
+            background: #0b0b11;
+            border-top: 1px solid #1c1c24;
+            border-bottom: 1px solid #1c1c24;
+        }
 
-        <!-- Footer -->
-        <footer class="bg-white py-4 mt-auto">
+        .c-quote {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-style: italic;
+            font-size: clamp(1.8rem, 4.6vw, 3.4rem);
+            line-height: 1.3;
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* FOOTER */
+
+        footer#siteFooter {
+            background: #07070b !important;
+            color: #a1a1aa;
+            border-top: 1px solid #1c1c24;
+        }
+
+        footer#siteFooter .small {
+            color: #a1a1aa;
+        }
+
+        /* REVEAL ANIMATIONS */
+
+        .js .rv {
+            opacity: 0;
+            transform: translateY(34px);
+            transition: opacity .9s ease, transform .9s ease;
+        }
+
+        .js .rv.in {
+            opacity: 1;
+            transform: none;
+        }
+
+        .js .rv.d1 {
+            transition-delay: .12s;
+        }
+
+        .js .rv.d2 {
+            transition-delay: .24s;
+        }
+
+        .js .rv.d3 {
+            transition-delay: .36s;
+        }
+
+        /* DARK PHOTO MODAL */
+
+        #photoModal .modal-dialog {
+            max-width: min(1100px, 94vw);
+        }
+
+        #photoModal .modal-content {
+            background: #07070b;
+        }
+
+        #photoModal .modal-header {
+            border-bottom: 1px solid #252530;
+        }
+
+        #photoModal .modal-title {
+            color: #f4f4f5;
+        }
+
+        #photoModal .btn-close {
+            filter: invert(1);
+        }
+
+        #photoModalImg {
+            display: block;
+            max-height: 82vh;
+            width: auto;
+            max-width: 100%;
+            object-fit: contain;
+            margin: 0 auto;
+        }
+
+        .c-modal-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .c-modal-nav button {
+            border: 1px solid rgba(255,255,255,.25);
+            background: rgba(255,255,255,.06);
+            color: #fff;
+            padding: .55rem 1rem;
+            border-radius: 999px;
+        }
+
+        .c-modal-nav button:hover {
+            background: #fff;
+            color: #000;
+        }
+
+        #photoCounter {
+            color: #a1a1aa;
+            font-size: .9rem;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 767px) {
+            .c-hero {
+                min-height: 55vh;
+                padding: 5rem 0;
+            }
+
+            .c-sec {
+                padding: 4.5rem 0;
+            }
+
+            .c-title {
+                font-size: clamp(3rem, 14vw, 5rem);
+            }
+
+            .c-feature {
+                grid-template-columns: 1fr;
+            }
+
+            .c-feature-image-wrap {
+                min-height: 240px;
+                order: -1;
+            }
+
+            .c-feature-image {
+                min-height: 240px;
+                max-height: 350px;
+            }
+
+            .c-tag {
+                margin: .2rem;
+                font-size: .82rem;
+                padding: .5rem .8rem;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .js .rv {
+                opacity: 1;
+                transform: none;
+                transition: none;
+            }
+
+            .c-btn,
+            .c-feature,
+            .c-feature-image,
+            .gallery-img,
+            .c-tag {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <main class="flex-shrink-0">
+
+        <!-- NAVIGATION: MATCHES index.html -->
+
+        <nav class="navbar navbar-expand-lg navbar-light py-3">
             <div class="container px-5">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto text-center">
-                        <div class="small m-0">
-                            &copy; Pravind Thakur. All rights reserved.
+
+                <a class="navbar-brand" href="index.html">
+                    <span class="fw-bolder text-primary">Pravind Thakur</span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="cine">
+
+            <div id="cScroll"></div>
+
+            <!-- HERO -->
+
+            <section class="c-hero" id="cHero">
+                <div class="container px-5" style="position:relative;z-index:1">
+                    <div class="row">
+                        <div class="col-lg-10 rv">
+
+                            <div class="c-eyebrow">
+                                Photography &middot; Cinematography &middot; Storytelling
+                            </div>
+
+                            <h1 class="c-title">
+                                Life through<br>
+                                <span class="c-grad">my lens.</span>
+                            </h1>
+
+                            <p class="c-muted c-intro mb-4">
+                                I enjoy capturing people, places and everyday moments through
+                                photography and video. For me, a good image is more than a
+                                picture — it is a feeling, a perspective and a story.
+                            </p>
+
+                            <div class="d-flex flex-wrap gap-3">
+                                <a class="c-btn fill" href="#gallery">
+                                    <i class="bi bi-images me-2"></i>
+                                    Explore the gallery
+                                </a>
+
+                                <a class="c-btn line"
+                                   href="https://www.instagram.com/pravindthakur"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="bi bi-instagram me-2"></i>
+                                    Follow on Instagram
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </section>
 
+            <!-- INSTAGRAM FEATURE -->
 
-        <!-- Photo popup -->
-        <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content bg-transparent border-0">
-                    <img id="photoModalImg"
-                         class="img-fluid rounded-4"
-                         src=""
-                         alt="" />
+            <section class="c-sec" style="padding-top:1rem">
+
+                <div class="container px-5">
+
+                    <div class="c-feature rv">
+
+                        <div class="c-feature-content">
+
+                            <div class="c-eyebrow mb-3">
+                                Follow the journey
+                            </div>
+
+                            <div class="c-ico">
+                                <i class="bi bi-instagram"></i>
+                            </div>
+
+                            <h2>
+                                Moments beyond<br>
+                                <span class="c-grad">the everyday.</span>
+                            </h2>
+
+                            <p class="mt-3">
+                                Follow me on Instagram for a more personal look at what
+                                I'm up to beyond work: lifestyle, photography, personal
+                                reels, old songs, travel and more.
+                            </p>
+
+                            <div class="mt-3">
+                                <a class="c-btn fill"
+                                   href="https://www.instagram.com/pravindthakur"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    <i class="bi bi-instagram me-2"></i>
+                                    Follow @pravindthakur
+                                </a>
+                            </div>
+
+                        </div>
+
+                        <div class="c-feature-image-wrap">
+                            <img
+                                class="c-feature-image"
+                                src="assets/instagramphoto2.jpg"
+                                alt="Pravind Thakur's Instagram photography"
+                                loading="lazy"
+                                onerror="this.style.display='none'">
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- PHOTO GALLERY -->
+
+            <section class="c-sec" id="gallery" style="padding-top:3rem">
+
+                <div class="container px-5">
+
+                    <div class="text-center mb-5 rv">
+
+                        <div class="c-eyebrow">Selected moments</div>
+
+                        <h2 class="c-h2 mt-2">
+                            The photo <span class="c-grad">gallery</span>
+                        </h2>
+
+                        <p class="c-muted mt-3 mx-auto" style="max-width:650px">
+                            A collection of moments captured through my lens.
+                            Select any photograph to view it in a larger format.
+                        </p>
+
+                    </div>
+
+                    <div class="row g-3">
+
+                        <div class="col-6 col-md-4 rv">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="0"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 1">
+                                <img class="gallery-img"
+                                     src="photos/photo1.JPG"
+                                     alt="Sample photograph 1"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d1">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="1"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 2">
+                                <img class="gallery-img"
+                                     src="photos/photo2.JPG"
+                                     alt="Sample photograph 2"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d2">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="2"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 3">
+                                <img class="gallery-img"
+                                     src="photos/photo3.JPG"
+                                     alt="Sample photograph 3"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="3"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 4">
+                                <img class="gallery-img"
+                                     src="photos/photo4.JPG"
+                                     alt="Sample photograph 4"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d1">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="4"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 5">
+                                <img class="gallery-img"
+                                     src="photos/photo5.JPG"
+                                     alt="Sample photograph 5"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d2">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="5"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 6">
+                                <img class="gallery-img"
+                                     src="photos/photo6.JPG"
+                                     alt="Sample photograph 6"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="6"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 7">
+                                <img class="gallery-img"
+                                     src="photos/photo7.jpeg"
+                                     alt="Sample photograph 7"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d1">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="7"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 8">
+                                <img class="gallery-img"
+                                     src="photos/photo8.jpeg"
+                                     alt="Sample photograph 8"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-md-4 rv d2">
+                            <div class="c-gallery-frame"
+                                 data-photo-index="8"
+                                 role="button"
+                                 tabindex="0"
+                                 aria-label="View sample photo 9">
+                                <img class="gallery-img"
+                                     src="photos/photo9.jpg"
+                                     alt="Sample photograph 9"
+                                     loading="lazy"
+                                     onerror="this.closest('.col-6').style.display='none'">
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- QUOTE -->
+
+            <section class="c-sec c-quote-section">
+
+                <div class="container px-5 rv">
+
+                    <p class="c-quote">
+                        "Photography is the story I fail to put into
+                        <span class="c-grad">words.</span>"
+                    </p>
+
+                    <p class="c-muted text-center mt-4 mb-0">
+                        Notice the light. Find the perspective. Tell the story.
+                    </p>
+
+                </div>
+
+            </section>
+
+            <!-- PHOTOGRAPHY AND CINEMATOGRAPHY SKILLS -->
+
+            <section class="c-sec">
+
+                <div class="container px-5">
+
+                    <div class="text-center mb-5 rv">
+
+                        <div class="c-eyebrow">The creative toolkit</div>
+
+                        <h2 class="c-h2 mt-2">
+                            Photography &amp; <span class="c-grad">cinematography</span>
+                        </h2>
+
+                        <p class="c-muted mt-3 mx-auto" style="max-width:700px">
+                            Composition, light, camera movement, editing and storytelling
+                            all contribute to creating a compelling visual experience.
+                        </p>
+
+                    </div>
+
+                    <div class="c-panel rv d1">
+
+                        <div class="d-flex align-items-center mb-4">
+
+                            <div class="c-ico me-3 mb-0 flex-shrink-0">
+                                <i class="bi bi-camera"></i>
+                            </div>
+
+                            <div>
+                                <h3 class="fw-bolder mb-1">
+                                    Creative techniques
+                                </h3>
+                                <p class="c-muted mb-0 small">
+                                    Principles and techniques I explore in photography and video.
+                                </p>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-1">
+
+                            <span class="c-tag">180-Degree Rule</span>
+                            <span class="c-tag">Rule of Thirds</span>
+                            <span class="c-tag">Rule of Odds &amp; Golden Ratio</span>
+                            <span class="c-tag">Patterns &amp; Symmetry</span>
+                            <span class="c-tag">Layering</span>
+                            <span class="c-tag">Leading Lines</span>
+                            <span class="c-tag">Frame Within a Frame</span>
+                            <span class="c-tag">Negative Space</span>
+                            <span class="c-tag">Silhouettes &amp; Reflections</span>
+                            <span class="c-tag">Depth of Field &amp; Bokeh</span>
+                            <span class="c-tag">Golden Hour &amp; Natural Light</span>
+                            <span class="c-tag">Exposure Triangle</span>
+                            <span class="c-tag">Long Exposure &amp; Motion Blur</span>
+                            <span class="c-tag">Color Theory &amp; Mood</span>
+                            <span class="c-tag">Color Grading</span>
+                            <span class="c-tag">Slow Motion</span>
+                            <span class="c-tag">Time-Lapse &amp; Hyperlapse</span>
+                            <span class="c-tag">Camera Movement &amp; Transitions</span>
+                            <span class="c-tag">Shot Types</span>
+                            <span class="c-tag">Aspect Ratio &amp; Cinematic Crop</span>
+                            <span class="c-tag">Match Cut &amp; Jump Cut</span>
+                            <span class="c-tag">B-Roll</span>
+                            <span class="c-tag">Emotion &amp; Storytelling</span>
+                            <span class="c-tag">Candid &amp; Portrait Moments</span>
+                            <span class="c-tag">Photo Editing &amp; Retouching</span>
+                            <span class="c-tag">Video Editing &amp; Reels</span>
+                            <span class="c-tag">Sound &amp; Music Selection</span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- CTA -->
+
+            <section class="c-sec" style="padding-top:0">
+
+                <div class="container px-5">
+
+                    <div class="c-panel text-center rv">
+
+                        <div class="c-eyebrow mb-2">More moments</div>
+
+                        <h2 class="c-h2 mb-3">
+                            Follow the <span class="c-grad">journey.</span>
+                        </h2>
+
+                        <p class="c-muted mb-4">
+                            Discover more photographs, personal reels and creative moments on Instagram.
+                        </p>
+
+                        <a class="c-btn fill"
+                           href="https://www.instagram.com/pravindthakur"
+                           target="_blank"
+                           rel="noopener noreferrer">
+                            <i class="bi bi-instagram me-2"></i>
+                            Follow @pravindthakur
+                        </a>
+
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer id="siteFooter" class="py-4 mt-auto">
+        <div class="container px-5">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto text-center">
+                    <div class="small m-0">
+                        &copy; Pravind Thakur. All rights reserved.
+                    </div>
                 </div>
             </div>
         </div>
+    </footer>
 
+    <!-- PHOTO MODAL -->
 
-        <!-- Bootstrap core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="modal fade" id="photoModal" tabindex="-1"
+         aria-labelledby="photoModalTitle" aria-hidden="true">
 
-        <!-- Core theme JS -->
-        <script src="js/scripts.js"></script>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0">
 
-        <!-- Photo popup script -->
-        <script>
-            document.querySelectorAll('.gallery-img').forEach(function (img) {
-                img.addEventListener('click', function () {
-                    var big = document.getElementById('photoModalImg');
-                    big.src = img.src;
-                    big.alt = img.alt;
-                });
+                <div class="modal-header">
+                    <h5 class="modal-title" id="photoModalTitle">
+                        <span class="c-grad">Photography gallery</span>
+                    </h5>
+
+                    <button type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-3">
+
+                    <img id="photoModalImg"
+                         class="img-fluid rounded-3"
+                         src=""
+                         alt="Selected photograph">
+
+                    <div class="c-modal-nav">
+                        <button type="button" id="photoPrev">
+                            <i class="bi bi-arrow-left me-1"></i> Previous
+                        </button>
+
+                        <span id="photoCounter">1 / 9</span>
+
+                        <button type="button" id="photoNext">
+                            Next <i class="bi bi-arrow-right ms-1"></i>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+    <script>
+    (function () {
+        'use strict';
+
+        var reduce = window.matchMedia(
+            '(prefers-reduced-motion: reduce)'
+        ).matches;
+
+        var fine = window.matchMedia('(hover: hover)').matches;
+
+        /* Scroll progress */
+
+        var bar = document.getElementById('cScroll');
+
+        function updateScrollProgress() {
+            var h = document.documentElement;
+            var max = h.scrollHeight - h.clientHeight;
+
+            if (bar) {
+                bar.style.width =
+                    (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+            }
+        }
+
+        window.addEventListener('scroll', updateScrollProgress, {
+            passive: true
+        });
+
+        updateScrollProgress();
+
+        /* Mouse-follow hero glow */
+
+        var hero = document.getElementById('cHero');
+
+        if (hero && fine && !reduce) {
+            hero.addEventListener('mousemove', function (e) {
+                var r = hero.getBoundingClientRect();
+
+                hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
             });
-        </script>
+        }
 
-    </body>
+        /* Scroll reveal */
+
+        var revealElements = document.querySelectorAll('.rv');
+
+        if ('IntersectionObserver' in window) {
+            var io = new IntersectionObserver(function (entries, observer) {
+                entries.forEach(function (en) {
+                    if (!en.isIntersecting) {
+                        return;
+                    }
+
+                    en.target.classList.add('in');
+                    observer.unobserve(en.target);
+                });
+            }, {
+                threshold: 0.12
+            });
+
+            revealElements.forEach(function (el) {
+                io.observe(el);
+            });
+        } else {
+            revealElements.forEach(function (el) {
+                el.classList.add('in');
+            });
+        }
+
+        /* Photo gallery modal */
+
+        var frames = Array.from(
+            document.querySelectorAll('.c-gallery-frame')
+        );
+
+        var currentIndex = 0;
+        var modalElement = document.getElementById('photoModal');
+        var modalImage = document.getElementById('photoModalImg');
+        var counter = document.getElementById('photoCounter');
+        var prevButton = document.getElementById('photoPrev');
+        var nextButton = document.getElementById('photoNext');
+        var photoModal = bootstrap.Modal.getOrCreateInstance(modalElement);
+
+        function getAvailablePhotos() {
+            return frames.filter(function (frame) {
+                var img = frame.querySelector('img');
+                return img && img.complete && img.naturalWidth > 0;
+            });
+        }
+
+        function showPhoto(index) {
+            var available = getAvailablePhotos();
+
+            if (!available.length) {
+                return;
+            }
+
+            index = (index + available.length) % available.length;
+            currentIndex = index;
+
+            var img = available[currentIndex].querySelector('img');
+
+            modalImage.src = img.src;
+            modalImage.alt = img.alt;
+            counter.textContent = (currentIndex + 1) + ' / ' + available.length;
+        }
+
+        function openPhoto(frame) {
+            var available = getAvailablePhotos();
+            var index = available.indexOf(frame);
+
+            if (index < 0) {
+                return;
+            }
+
+            showPhoto(index);
+            photoModal.show();
+        }
+
+        frames.forEach(function (frame) {
+            frame.addEventListener('click', function () {
+                openPhoto(frame);
+            });
+
+            frame.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openPhoto(frame);
+                }
+            });
+        });
+
+        prevButton.addEventListener('click', function () {
+            showPhoto(currentIndex - 1);
+        });
+
+        nextButton.addEventListener('click', function () {
+            showPhoto(currentIndex + 1);
+        });
+
+        /* Keyboard navigation while modal is open */
+
+        modalElement.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowLeft') {
+                showPhoto(currentIndex - 1);
+            } else if (e.key === 'ArrowRight') {
+                showPhoto(currentIndex + 1);
+            }
+        });
+
+    })();
+    </script>
+
+</body>
 </html>
