@@ -1,196 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pravind Thakur | Professional</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Pravind Thakur</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Professional.html">Professional</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Personal.html">Personal</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Engineering experience, education and technical skills of Pravind Thakur, specializing in TCS BaNCS, Corporate Actions, Reference Data and Capital Markets." />
+    <meta name="author" content="Pravind Thakur" />
+    <title>Pravind Thakur | Engineering</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Existing Site CSS -->
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --c-bg: #07070b;
+            --c-surface: rgba(255, 255, 255, 0.035);
+            --c-surface-hover: rgba(255, 255, 255, 0.055);
+            --c-border: #1c1c24;
+            --c-text: #f2f2f2;
+            --c-muted: #a1a1aa;
+            --c-gold: #f5b942;
+            --c-blue: #6c7bff;
+            --c-pink: #e21e80;
+            --c-orange: #ff8a5c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+            background: var(--c-bg);
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--c-text);
+            background: var(--c-bg) !important;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            background: rgba(7, 7, 11, 0.96) !important;
+            border-bottom: 1px solid var(--c-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .navbar-brand {
+            color: var(--c-text) !important;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-gradient,
+        .gradient-text {
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar .nav-link {
+            color: var(--c-muted) !important;
+            font-weight: 700;
+            transition: color 0.25s ease;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--c-gold) !important;
+        }
+
+        .navbar-toggler {
+            border: 1px solid #343440;
+            padding: 7px 10px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Main page */
+
+        .engineering-page {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            padding: 68px 0 60px;
+            background:
+                radial-gradient(
+                    ellipse at 8% 3%,
+                    rgba(108, 123, 255, 0.12),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    ellipse at 94% 22%,
+                    rgba(226, 30, 128, 0.08),
+                    transparent 32%
+                ),
+                var(--c-bg);
+        }
+
+        .engineering-page::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 50%;
+            width: min(760px, 100%);
+            height: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.65),
+                rgba(226, 30, 128, 0.65),
+                transparent
+            );
+        }
+
+        /* Page heading */
+
+        .page-header {
+            margin-bottom: 52px;
+            text-align: center;
+        }
+
+        .page-eyebrow {
+            margin-bottom: 14px;
+            color: var(--c-gold);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .page-title {
+            margin: 0;
+            color: var(--c-text);
+            font-size: clamp(2.5rem, 6vw, 4.4rem);
+            font-weight: 800;
+            letter-spacing: -2.5px;
+            line-height: 1.1;
+        }
+
+        .page-description {
+            max-width: 680px;
+            margin: 20px auto 0;
+            color: var(--c-muted);
+            font-size: 0.96rem;
+            line-height: 1.9;
+        }
+
+        .heading-divider {
+            width: 72px;
+            height: 3px;
+            margin: 27px auto 0;
+            border-radius: 10px;
+            background: linear-gradient(
+                90deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+        }
+
+        /* Section headings */
+
+        .content-section {
+            margin-bottom: 48px;
+            scroll-margin-top: 100px;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            color: var(--c-text);
+            font-size: clamp(1.25rem, 3vw, 1.7rem);
+            font-weight: 800;
+            letter-spacing: -0.6px;
+            text-align: center;
+        }
+
+        .section-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(108, 123, 255, 0.3);
+            border-radius: 13px;
+            background: rgba(108, 123, 255, 0.1);
+            color: var(--c-gold);
+            font-size: 1.15rem;
+        }
+
+        /* Main cards */
+
+        .content-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 20px;
+            background: var(--c-surface);
+            box-shadow: 0 18px 55px rgba(0, 0, 0, 0.16);
+            transition:
+                border-color 0.3s ease,
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .content-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 8%;
+            right: 8%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.5),
+                rgba(226, 30, 128, 0.5),
+                transparent
+            );
+        }
+
+        .content-card:hover {
+            border-color: rgba(226, 30, 128, 0.25);
+            background: var(--c-surface-hover);
+        }
+
+        .card-content {
+            padding: clamp(22px, 4vw, 36px);
+        }
+
+        /* Experience and education panels */
+
+        .info-panel {
+            height: 100%;
+            padding: 24px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.035);
+        }
+
+        .info-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            margin-bottom: 17px;
+            border: 1px solid rgba(245, 185, 66, 0.22);
+            border-radius: 13px;
+            background: rgba(245, 185, 66, 0.07);
+            color: var(--c-gold);
+            font-size: 1.2rem;
+        }
+
+        .info-title {
+            margin-bottom: 12px;
+            color: var(--c-text);
+            font-size: 0.98rem;
+            font-weight: 800;
+            line-height: 1.7;
+        }
+
+        .info-period {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 6px 10px;
+            border: 1px solid rgba(245, 185, 66, 0.22);
+            border-radius: 8px;
+            background: rgba(245, 185, 66, 0.06);
+            color: var(--c-gold);
+            font-size: 0.77rem;
+            font-weight: 800;
+        }
+
+        .info-detail {
+            margin-bottom: 8px;
+            color: var(--c-muted);
+            font-size: 0.83rem;
+            line-height: 1.7;
+        }
+
+        .info-detail:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-detail i {
+            margin-right: 7px;
+            color: #858cff;
+        }
+
+        .content-description {
+            margin: 0 0 22px;
+            color: #c3c3cc;
+            font-size: 0.92rem;
+            line-height: 1.95;
+            overflow-wrap: anywhere;
+        }
+
+        .content-description strong {
+            color: var(--c-text);
+        }
+
+        /* Action links */
+
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            color: var(--c-gold);
+            font-size: 0.9rem;
+            font-weight: 800;
+            line-height: 1.7;
+            transition:
+                color 0.25s ease,
+                gap 0.25s ease;
+        }
+
+        .action-link:hover {
+            gap: 14px;
+            color: var(--c-orange);
+        }
+
+        .action-link i {
+            transition: transform 0.25s ease;
+        }
+
+        .action-link:hover i {
+            transform: translateX(2px);
+        }
+
+        /* Resume button */
+
+        .resume-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 4px;
+            padding: 13px 19px;
+            border: 1px solid rgba(108, 123, 255, 0.5);
+            border-radius: 11px;
+            background: linear-gradient(
+                110deg,
+                rgba(108, 123, 255, 0.17),
+                rgba(226, 30, 128, 0.12)
+            );
+            color: var(--c-text);
+            font-size: 0.87rem;
+            font-weight: 800;
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .resume-button:hover {
+            transform: translateY(-2px);
+            border-color: var(--c-pink);
+            background: linear-gradient(
+                110deg,
+                rgba(108, 123, 255, 0.25),
+                rgba(226, 30, 128, 0.22)
+            );
+            color: #fff;
+        }
+
+        /* Skills card */
+
+        .skills-group {
+            margin-bottom: 35px;
+        }
+
+        .skills-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .skills-group-heading {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-bottom: 21px;
+            color: var(--c-text);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .skills-group-heading .group-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 43px;
+            height: 43px;
+            border: 1px solid rgba(226, 30, 128, 0.3);
+            border-radius: 13px;
+            background: rgba(226, 30, 128, 0.09);
+            color: var(--c-orange);
+            font-size: 1.2rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            min-height: 54px;
+            padding: 13px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.09);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.025);
+            color: #d6d6de;
+            font-size: 0.83rem;
+            font-weight: 600;
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease,
+                transform 0.25s ease;
+        }
+
+        .skill-item::before {
+            content: "";
+            flex-shrink: 0;
+            width: 6px;
+            height: 6px;
+            margin-right: 10px;
+            border-radius: 50%;
+            background: linear-gradient(
+                135deg,
+                var(--c-blue),
+                var(--c-pink)
+            );
+        }
+
+        .skill-item:hover {
+            transform: translateY(-2px);
+            border-color: rgba(226, 30, 128, 0.35);
+            background: rgba(255, 255, 255, 0.055);
+            color: #fff;
+        }
+
+        /* Footer */
+
+        .site-footer {
+            padding: 24px 0;
+            border-top: 1px solid var(--c-border);
+            background: var(--c-bg);
+            color: var(--c-muted);
+            font-size: 0.82rem;
+        }
+
+        /* Scroll progress */
+
+        #cScroll {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+        }
+
+        /* Responsive layout */
+
+        @media (max-width: 767px) {
+            .engineering-page {
+                padding: 46px 0 35px;
+            }
+
+            .page-header {
+                margin-bottom: 38px;
+            }
+
+            .page-title {
+                letter-spacing: -1.5px;
+            }
+
+            .page-description {
+                font-size: 0.9rem;
+            }
+
+            .content-section {
+                margin-bottom: 38px;
+            }
+
+            .section-heading {
+                gap: 9px;
+                font-size: 1.18rem;
+            }
+
+            .section-icon {
+                width: 38px;
+                height: 38px;
+                border-radius: 11px;
+            }
+
+            .card-content {
+                padding: 19px;
+            }
+
+            .info-panel {
+                padding: 20px;
+            }
+
+            .content-description {
+                margin-top: 22px;
+                font-size: 0.89rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 9px;
+            }
+
+            .skill-item {
+                min-height: 48px;
+                padding: 11px;
+                font-size: 0.77rem;
+            }
+
+            .skills-group-heading {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Scroll Progress -->
+    <div id="cScroll" aria-hidden="true"></div>
+
+    <main class="flex-shrink-0">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="index.html">
+                    <span class="brand-gradient">Pravind Thakur</span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
-            <!-- Page Content-->
-            <div class="container px-5 my-5">
-                <div class="text-center mb-5">
-                    <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Engineering</span></h1>
-                </div>
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-11 col-xl-9 col-xxl-8">
-                        <!-- Experience Section-->
-                                                <!-- Computer Science & Engineering-->
-                        <section>
-                            <div class="d-flex align-items-center justify-content-center mb-4">
-                                <h2 class="text-primary fw-bolder mb-0">Computer Science & Engineering</h2>
-                            </div>
-                            <!-- Computer Science & Engineering Card 1-->
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-primary fw-bolder mb-2">TCS - Tata Consultancy Services</div> 
-                                                <div class="small fw-bolder">2017 - Present</div>
-                                                <div class="small text-muted">Business Analyst</div>
-                                                <div class="small text-muted">Corporate Actions</div>
-                                                <div class="small text-muted">Java Developer</div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8"><div>Over 9 years of experience in TCS BaNCS Financial Services, specializing in Corporate Actions, Securities Processing, SWIFT Messaging and Reference Data Setup. Experienced in Requirements Analysis, Interface Design, Development,
-Performance Optimization, UAT and Production Support. Currently engaged in a client-facing role from past 6 years supporting global financial institutions across APAC, EMEA, NAM and LATAM region.
-                                       <a class="text-primary fw-bolder text-decoration-none" href="assets/PravindThakur.pdf" download="PravindThakur.pdf">Download My Resume<i class="bi bi-arrow-right ms-1"></i></a></div></div> 
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <!-- Education Section-->
-                        <section>
-                             <div class="d-flex align-items-center justify-content-center mb-4">
-                            <h2 class="text-secondary fw-bolder mb-4">Education</h2>
-                            </div>
-                            <!-- Education Card 1-->
-                            <div class="card shadow border-0 rounded-4 mb-5">
-                                <div class="card-body p-5">
-                                    <div class="row align-items-center gx-5">
-                                        <div class="col text-center text-lg-start mb-4 mb-lg-0">
-                                            <div class="bg-light p-4 rounded-4">
-                                                <div class="text-secondary fw-bolder mb-2">Computer Science & Engineering 77.14%</div>
-                                                <div class="mb-2">
-                                                    <div class="small text-muted">2012 - 2016</div>
+
+            </div>
+        </nav>
+
+        <!-- Engineering Page -->
+        <div class="engineering-page">
+            <div class="container px-4 px-lg-5">
+
+                <!-- Page Header -->
+                <header class="page-header">
+                    <div class="page-eyebrow">Experience · Education · Expertise</div>
+
+                    <h1 class="page-title">
+                        <span class="gradient-text">Engineering</span>
+                    </h1>
+
+                    <p class="page-description">
+                        My professional journey in financial technology, capital markets,
+                        enterprise applications, and data-driven solutions.
+                    </p>
+
+                    <div class="heading-divider"></div>
+                </header>
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-11 col-xl-10 col-xxl-9">
+
+                        <!-- Experience -->
+                        <section class="content-section" id="experience">
+
+                            <h2 class="section-heading">
+                                <span class="section-icon">
+                                    <i class="bi bi-briefcase" aria-hidden="true"></i>
+                                </span>
+                                Computer Science &amp; Engineering
+                            </h2>
+
+                            <article class="content-card">
+                                <div class="card-content">
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+                                            <div class="info-panel">
+
+                                                <div class="info-icon">
+                                                    <i class="bi bi-building" aria-hidden="true"></i>
                                                 </div>
+
+                                                <div class="info-title">
+                                                    TCS - Tata Consultancy Services
+                                                </div>
+
+                                                <div class="info-period">
+                                                    2017 – Present
+                                                </div>
+
+                                                <div class="info-detail">
+                                                    <i class="bi bi-dot"></i>Business Analyst
+                                                </div>
+
+                                                <div class="info-detail">
+                                                    <i class="bi bi-dot"></i>Corporate Actions
+                                                </div>
+
+                                                <div class="info-detail">
+                                                    <i class="bi bi-dot"></i>Java Developer
+                                                </div>
+
                                             </div>
                                         </div>
-                                        <div class="col-lg-8"><div>Bachelor of Technology (B.Tech.) in Computer Science & Engineering from New Horizon College of Engineering, Bengaluru, affiliated to Visvesvaraya Technological University (VTU). Graduated in 2016 with 77.14%. <a class="text-secondary fw-bolder text-decoration-none" href="https://newhorizoncollegeofengineering.in/" target="_blank" rel="noopener">Visit New Horizon College of Engineering<i class="bi bi-arrow-right ms-1"></i></a></div></div>
+
+                                        <div class="col-lg-8 col-md-7">
+                                            <p class="content-description">
+                                                Over 9 years of experience in TCS BaNCS Financial
+                                                Services, specializing in Corporate Actions,
+                                                Securities Processing, SWIFT Messaging and Reference
+                                                Data Setup. Experienced in Requirements Analysis,
+                                                Interface Design, Development, Performance
+                                                Optimization, UAT and Production Support. Currently
+                                                engaged in a client-facing role with over 6 years
+                                                of client engagement experience supporting global
+                                                financial institutions across APAC, EMEA, NAM and
+                                                LATAM regions.
+                                            </p>
+
+                                            <a
+                                                class="resume-button"
+                                                href="assets/PravindThakur.pdf"
+                                                download="PravindThakur.pdf">
+
+                                                <i class="bi bi-file-earmark-pdf" aria-hidden="true"></i>
+                                                Download My Resume
+                                                <i class="bi bi-arrow-down-circle" aria-hidden="true"></i>
+
+                                            </a>
+                                        </div>
+
                                     </div>
                                 </div>
-                            </div>
+                            </article>
+
                         </section>
-                        <!-- Divider-->
-                        <div class="pb-5"></div>
-                        <!-- Skills Section-->
-                       <section>
-                            <div class="d-flex align-items-center justify-content-center mb-4">
-                                <h2 class="text-primary fw-bolder mb-0">Skills</h2>
+
+                        <!-- Education -->
+                        <section class="content-section" id="education">
+
+                            <h2 class="section-heading">
+                                <span class="section-icon">
+                                    <i class="bi bi-mortarboard" aria-hidden="true"></i>
+                                </span>
+                                Education
+                            </h2>
+
+                            <article class="content-card">
+                                <div class="card-content">
+                                    <div class="row align-items-center gx-lg-5">
+
+                                        <div class="col-lg-4 col-md-5">
+                                            <div class="info-panel">
+
+                                                <div class="info-icon">
+                                                    <i class="bi bi-award" aria-hidden="true"></i>
+                                                </div>
+
+                                                <div class="info-title">
+                                                    Computer Science &amp; Engineering
+                                                </div>
+
+                                                <div class="info-period">
+                                                    2012 – 2016
+                                                </div>
+
+                                                <div class="info-detail">
+                                                    <i class="bi bi-graph-up"></i>77.14%
+                                                </div>
+
+                                                <div class="info-detail">
+                                                    <i class="bi bi-mortarboard"></i>B.Tech.
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-8 col-md-7">
+                                            <p class="content-description">
+                                                Bachelor of Technology (B.Tech.) in Computer Science
+                                                &amp; Engineering from New Horizon College of
+                                                Engineering, Bengaluru, affiliated to Visvesvaraya
+                                                Technological University (VTU). Graduated in 2016
+                                                with 77.14%.
+                                            </p>
+
+                                            <a
+                                                class="action-link"
+                                                href="https://newhorizoncollegeofengineering.in/"
+                                                target="_blank"
+                                                rel="noopener noreferrer">
+
+                                                Visit New Horizon College of Engineering
+                                                <i class="bi bi-arrow-up-right"></i>
+
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </article>
+
+                        </section>
+
+                        <!-- Skills -->
+                        <section class="content-section" id="skills">
+
+                            <h2 class="section-heading">
+                                <span class="section-icon">
+                                    <i class="bi bi-stars" aria-hidden="true"></i>
+                                </span>
+                                Skills &amp; Expertise
+                            </h2>
+
+                            <div class="content-card">
+                                <div class="card-content">
+
+                                    <!-- Professional Skills -->
+                                    <div class="skills-group">
+
+                                        <h3 class="skills-group-heading">
+                                            <span class="group-icon">
+                                                <i class="bi bi-tools" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="gradient-text">Professional Skills</span>
+                                        </h3>
+
+                                        <div class="skills-grid">
+                                            <div class="skill-item">Corporate Actions</div>
+                                            <div class="skill-item">Asset Servicing</div>
+                                            <div class="skill-item">Securities Processing</div>
+
+                                            <div class="skill-item">Business Analysis (BRD, FSD, ISD)</div>
+                                            <div class="skill-item">Reference Data Management</div>
+                                            <div class="skill-item">Instrument &amp; Security Master Data</div>
+
+                                            <div class="skill-item">SWIFT Messaging (MT564/565/566)</div>
+                                            <div class="skill-item">GDPR &amp; Archival Solutions</div>
+                                            <div class="skill-item">Performance Tuning</div>
+
+                                            <div class="skill-item">Interface Design</div>
+                                            <div class="skill-item">ETL / Data Integration</div>
+                                            <div class="skill-item">Team Management &amp; Mentoring</div>
+
+                                            <div class="skill-item">UAT &amp; Testing</div>
+                                            <div class="skill-item">L2/L3 Production Support</div>
+                                            <div class="skill-item">Stakeholder Management</div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Technical Skills -->
+                                    <div class="skills-group">
+
+                                        <h3 class="skills-group-heading">
+                                            <span class="group-icon">
+                                                <i class="bi bi-code-slash" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="gradient-text">Technical Skills</span>
+                                        </h3>
+
+                                        <div class="skills-grid">
+                                            <div class="skill-item">Java</div>
+                                            <div class="skill-item">Oracle SQL</div>
+                                            <div class="skill-item">PL/SQL</div>
+
+                                            <div class="skill-item">JavaScript</div>
+                                            <div class="skill-item">HTML &amp; JSP</div>
+                                            <div class="skill-item">Shell Scripting</div>
+
+                                            <div class="skill-item">VBScript</div>
+                                            <div class="skill-item">Kafka</div>
+                                            <div class="skill-item">Linux / UNIX</div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- Tools and Reporting -->
+                                    <div class="skills-group">
+
+                                        <h3 class="skills-group-heading">
+                                            <span class="group-icon">
+                                                <i class="bi bi-bar-chart-line" aria-hidden="true"></i>
+                                            </span>
+                                            <span class="gradient-text">Tools &amp; Reporting</span>
+                                        </h3>
+
+                                        <div class="skills-grid">
+                                            <div class="skill-item">Advanced PowerPoint</div>
+                                            <div class="skill-item">Advanced Excel &amp; VBA Macros</div>
+                                            <div class="skill-item">Dashboards &amp; Reporting</div>
+
+                                            <div class="skill-item">JIRA, Confluence, ServiceNow</div>
+                                            <div class="skill-item">Oracle AWR &amp; JProfiler</div>
+                                            <div class="skill-item">Git, SVN, SQL Developer</div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
                             </div>
-    <!-- Skillset Card-->
-    <div class="card shadow border-0 rounded-4 mb-5">
-        <div class="card-body p-5">
-            <!-- Professional skills list-->
-            <div class="mb-5">
-                <div class="d-flex align-items-center mb-4">
-                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-tools"></i></div>
-                    <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Professional Skills</span></h3>
+
+                        </section>
+
+                    </div>
                 </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Corporate Actions</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Asset Servicing</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Securities Processing</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Business Analysis (BRD, FSD, ISD)</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Reference Data Management</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Instrument &amp; Security Master Data</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">SWIFT Messaging (MT564/565/566)</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">GDPR &amp; Archival Solutions</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Performance Tuning</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Interface Design</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">ETL / Data Integration</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Team Management &amp; Mentoring</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">UAT &amp; Testing</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">L2/L3 Production Support</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Stakeholder Management</div></div>
-                </div>
-            </div>
-            <!-- Technical skills list-->
-            <div class="mb-5">
-                <div class="d-flex align-items-center mb-4">
-                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-code-slash"></i></div>
-                    <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Technical Skills</span></h3>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Java</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Oracle SQL</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">PL/SQL</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JavaScript</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">HTML &amp; JSP</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Shell Scripting</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">VBScript</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Kafka</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Linux / UNIX</div></div>
-                </div>
-            </div>
-            <!-- Tools and reporting list-->
-            <div class="mb-0">
-                <div class="d-flex align-items-center mb-4">
-                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3"><i class="bi bi-bar-chart-line"></i></div>
-                    <h3 class="fw-bolder mb-0"><span class="text-gradient d-inline">Tools &amp; Reporting</span></h3>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3 mb-4">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Advanced PowerPoint</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Advanced Excel &amp; VBA Macros</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Dashboards &amp; Reporting</div></div>
-                </div>
-                <div class="row row-cols-1 row-cols-md-3">
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">JIRA, Confluence, ServiceNow</div></div>
-                    <div class="col mb-4 mb-md-0"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Oracle AWR &amp; JProfiler</div></div>
-                    <div class="col"><div class="d-flex align-items-center bg-light rounded-4 p-3 h-100">Git, SVN, SQL Developer</div></div>
-                </div>
+
             </div>
         </div>
-    </div>
-</section>
-                        
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-auto text-center">
+                    <div class="small m-0">
+                        &copy; Pravind Thakur. All rights reserved.
                     </div>
                 </div>
             </div>
-        </main>
-        <!-- Footer-->
-<footer class="bg-white py-4 mt-auto">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-auto text-center">
-                <div class="small m-0">&copy; Pravind Thakur. All rights reserved.</div>
-            </div>
         </div>
-    </div>
-</footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Existing Site JavaScript -->
+    <script src="js/scripts.js"></script>
+
+    <!-- Scroll Progress -->
+    <script>
+        (function () {
+            const progressBar = document.getElementById('cScroll');
+
+            function updateProgress() {
+                const scrollTop =
+                    window.scrollY || document.documentElement.scrollTop;
+
+                const scrollableHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                const progress = scrollableHeight > 0
+                    ? (scrollTop / scrollableHeight) * 100
+                    : 0;
+
+                progressBar.style.width =
+                    Math.min(progress, 100) + '%';
+            }
+
+            window.addEventListener('scroll', updateProgress, {
+                passive: true
+            });
+
+            window.addEventListener('resize', updateProgress);
+
+            updateProgress();
+        })();
+    </script>
+
+</body>
 </html>
