@@ -1,122 +1,552 @@
+
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pravind Thakur | Personal</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Pravind Thakur</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Professional.html">Professional</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Personal.html">Personal</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            <!-- Projects Section-->
-            <section class="py-5">
-                <div class="container px-5 mb-5">
-                    <div class="text-center mb-5">
-                        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Personal</span></h1>
-                    </div>
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
-                            <!-- Project Card 1-->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-    <div class="card-body p-0">
-        <div class="d-flex flex-column flex-md-row align-items-center">
-            <div class="p-4 p-md-5">
-                <h2 class="fw-bolder fs-3 text-break"><a class="text-dark text-decoration-none" href="https://www.instagram.com/pravindthakur" target="_blank" rel="noopener">instagram.com/pravindthakur</a></h2>
-                <p>Follow me on Instagram for a more personal look at what I'm up to beyond work: lifestyle, photography, personal reels, old songs, travel and more.</p>
-               <div class="text-center"> <a class="btn btn-outline-dark" href="https://www.instagram.com/pravindthakur" target="_blank" rel="noopener"><i class="bi bi-instagram me-2"></i>Follow @pravindthakur</a></div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Explore Pravind Thakur's personal interests, photography and creative projects.">
+    <meta name="author" content="Pravind Thakur">
+    <title>Pravind Thakur | Personal</title>
+
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #07070b;
+            --surface: #101016;
+            --surface-hover: #15151d;
+            --border: #252530;
+            --text: #f4f4f5;
+            --muted: #a1a1aa;
+            --gold: #f5b942;
+        }
+
+        html {
+            background: var(--bg);
+            scroll-behavior: smooth;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg) !important;
+            color: var(--text);
+            font-family: "Plus Jakarta Sans", sans-serif;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Navigation */
+        .personal-navbar {
+            background: var(--bg) !important;
+            border-bottom: 1px solid var(--border);
+            padding: 18px 0;
+        }
+
+        .personal-navbar .navbar-brand {
+            color: var(--text) !important;
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+
+        .brand-accent {
+            color: var(--gold);
+        }
+
+        .personal-navbar .nav-link {
+            color: var(--muted) !important;
+            font-weight: 600;
+            padding: 10px 14px !important;
+        }
+
+        .personal-navbar .nav-link:hover,
+        .personal-navbar .nav-link.active {
+            color: var(--gold) !important;
+        }
+
+        .personal-navbar .navbar-toggler {
+            border-color: var(--border);
+        }
+
+        .personal-navbar .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Page heading */
+        .personal-hero {
+            padding: 75px 0 45px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            color: var(--gold);
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            margin-bottom: 18px;
+        }
+
+        .personal-title {
+            color: var(--text);
+            font-size: clamp(2.5rem, 6vw, 4.4rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .personal-title span {
+            color: var(--gold);
+        }
+
+        .personal-intro {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 0.98rem;
+            line-height: 1.9;
+        }
+
+        .section-line {
+            width: 54px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 5px;
+            margin: 26px auto 0;
+        }
+
+        /* Social profile cards */
+        .personal-content {
+            padding: 15px 0 75px;
+        }
+
+        .social-card {
+            height: 100%;
+            overflow: hidden;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            transition: transform 0.25s ease,
+                        border-color 0.25s ease,
+                        background 0.25s ease;
+        }
+
+        .social-card:hover {
+            transform: translateY(-4px);
+            background: var(--surface-hover);
+            border-color: rgba(245, 185, 66, 0.5);
+        }
+
+        .social-card-inner {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .social-card-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+            padding: 30px;
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #191921;
+            font-size: 1.45rem;
+        }
+
+        .instagram-icon { color: #e6a4bd; }
+        .youtube-icon { color: #ff6868; }
+        .quora-icon { color: #ef7771; }
+
+        .social-card h2 {
+            margin: 0 0 12px;
+            font-size: 1.2rem;
+            font-weight: 800;
+            overflow-wrap: anywhere;
+        }
+
+        .social-card h2 a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .social-card h2 a:hover {
+            color: var(--gold);
+        }
+
+        .social-card p {
+            margin-bottom: 25px;
+            color: var(--muted);
+            font-size: 0.91rem;
+            line-height: 1.85;
+        }
+
+        .social-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            margin-top: auto;
+            padding: 11px 17px;
+            border: 1px solid var(--gold);
+            border-radius: 9px;
+            background: var(--gold);
+            color: #17130b;
+            font-size: 0.84rem;
+            font-weight: 800;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .social-button:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        .social-image-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 220px;
+            padding: 24px;
+            background: radial-gradient(circle, #17151b, #0b0b10 70%);
+            border-top: 1px solid var(--border);
+        }
+
+        .social-image {
+            display: block;
+            width: 100%;
+            max-width: 240px;
+            height: 190px;
+            object-fit: contain;
+            border-radius: 12px;
+        }
+
+        .instagram-photo {
+            object-fit: cover;
+        }
+
+        /* Footer */
+        #siteFooter {
+            margin-top: auto;
+            padding: 25px 0;
+            background: var(--bg) !important;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+        }
+
+        #siteFooter .small {
+            color: var(--muted) !important;
+            font-size: 0.8rem;
+        }
+
+        #siteFooter .footer-accent {
+            color: var(--gold);
+        }
+
+        @media (min-width: 768px) {
+            .personal-hero {
+                padding-top: 90px;
+                padding-bottom: 50px;
+            }
+
+            .social-card-inner {
+                flex-direction: row;
+                align-items: stretch;
+            }
+
+            .social-card-content {
+                flex: 1.25;
+                padding: 34px;
+            }
+
+            .social-image-wrap {
+                flex: 0.85;
+                min-width: 220px;
+                border-top: 0;
+                border-left: 1px solid var(--border);
+            }
+
+            .social-image {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .personal-hero {
+                padding: 55px 0 30px;
+            }
+
+            .personal-title {
+                letter-spacing: -1.5px;
+            }
+
+            .personal-content {
+                padding-bottom: 48px;
+            }
+
+            .social-card-content {
+                padding: 25px;
+            }
+
+            .social-image-wrap {
+                min-height: 190px;
+            }
+
+            .social-image {
+                height: 155px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+
+            *,
+            *::before,
+            *::after {
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column h-100">
+
+<main class="flex-shrink-0">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark personal-navbar">
+        <div class="container px-4 px-lg-5">
+
+            <a class="navbar-brand" href="index.html">
+                Pravind <span class="brand-accent">Thakur</span>
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Professional.html">Professional</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="Personal.html">Personal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
             </div>
-           <img class="img-fluid insta-photo" src="assets/instagramphoto1.jpg" alt="Instagram" />
+
         </div>
-    </div>
-</div>
+    </nav>
 
-<!-- Project Card 2-->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-    <div class="card-body p-0">
-        <div class="d-flex flex-column flex-md-row align-items-center">
-            <div class="p-4 p-md-5">
-                <h2 class="fw-bolder fs-3 text-break"><a class="text-dark text-decoration-none" href="https://www.youtube.com/fancyidea" target="_blank" rel="noopener">youtube.com/fancyidea</a></h2>
-                <p>Welcome to Fancy Idea. This channel aims to let you experience about Research, Analysis, Idea, How to, Imagination, Interesting Facts and so on. There will be plenty of mind bending information here, so be sure to subscribe so you can see it all!</p>
-              <div class="text-center">  <a class="btn btn-danger" href="https://www.youtube.com/fancyidea" target="_blank" rel="noopener"><i class="bi bi-youtube me-2"></i>Subscribe on YouTube</a></div>
-            </div>
-            <img class="img-fluid insta-photo" src="assets/fancyIdealogo.png" alt="FancyIdea YouTube channel logo" />
+    <!-- Page heading -->
+    <section class="personal-hero">
+        <div class="container px-4 px-lg-5">
+            <div class="eyebrow">Beyond the professional</div>
+
+            <h1 class="personal-title">
+                My <span>Personal</span> Side
+            </h1>
+
+            <p class="personal-intro">
+                A little more about what I enjoy beyond work — creativity,
+                photography, ideas, learning and sharing perspectives
+                across different interests.
+            </p>
+
+            <div class="section-line"></div>
         </div>
-    </div>
-</div>
+    </section>
 
+    <!-- Social profiles -->
+    <section class="personal-content">
+        <div class="container px-4 px-lg-5">
+            <div class="row g-4">
 
-<!-- Project Card 3-->
-<div class="card overflow-hidden shadow rounded-4 border-0 mb-5">
-    <div class="card-body p-0">
-        <div class="d-flex flex-column flex-md-row align-items-center">
-            <div class="p-4 p-md-5">
-                <h2 class="fw-bolder fs-3 text-break"><a class="text-dark text-decoration-none" href="https://www.quora.com/profile/Pravind-Thakur" target="_blank" rel="noopener">quora.com/Pravind-Thakur</a></h2>
-                <p>I share answers and insights on Quora about technology, careers, finance and PowerPoint. Follow me to read my answers, ask a question, or join the conversation.</p>
-                <div class="text-center">
-                    <a class="btn text-white" style="background-color: #b92b27;" href="https://www.quora.com/profile/Pravind-Thakur" target="_blank" rel="noopener"><i class="bi bi-chat-square-text me-2"></i>Follow on Quora</a>
-                </div>
-            </div>
-            <img class="img-fluid insta-photo" src="assets/quora.jpg" alt="Pravind Thakur on Quora" />
-        </div>
-    </div>
-</div>
+                <!-- Instagram -->
+                <div class="col-12">
+                    <article class="social-card">
+                        <div class="social-card-inner">
 
+                            <div class="social-card-content">
+                                <div class="social-icon instagram-icon">
+                                    <i class="bi bi-instagram" aria-hidden="true"></i>
+                                </div>
 
+                                <h2>
+                                    <a href="https://www.instagram.com/pravindthakur"
+                                       target="_blank" rel="noopener noreferrer">
+                                        Instagram
+                                    </a>
+                                </h2>
 
+                                <p>
+                                    Follow me on Instagram for a more personal
+                                    look at life beyond work — lifestyle,
+                                    photography, personal reels, old songs,
+                                    travel and everyday moments.
+                                </p>
 
+                                <a class="social-button"
+                                   href="https://www.instagram.com/pravindthakur"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="bi bi-instagram" aria-hidden="true"></i>
+                                    Follow @pravindthakur
+                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
 
+                            <div class="social-image-wrap">
+                                <img class="social-image instagram-photo"
+                                     src="assets/instagramphoto1.jpg"
+                                     alt="Pravind Thakur's Instagram photography"
+                                     loading="lazy">
+                            </div>
 
-
-
-
-
-                            
-
-                            
                         </div>
-                    </div>
+                    </article>
                 </div>
-            </section>
-        </main>
-        <!-- Footer-->
-<footer class="bg-white py-4 mt-auto">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-auto text-center">
-                <div class="small m-0">&copy; Pravind Thakur. All rights reserved.</div>
+
+                <!-- Fancy Idea YouTube -->
+                <div class="col-12">
+                    <article class="social-card">
+                        <div class="social-card-inner">
+
+                            <div class="social-card-content">
+                                <div class="social-icon youtube-icon">
+                                    <i class="bi bi-youtube" aria-hidden="true"></i>
+                                </div>
+
+                                <h2>
+                                    <a href="https://www.youtube.com/fancyidea"
+                                       target="_blank" rel="noopener noreferrer">
+                                        Fancy Idea
+                                    </a>
+                                </h2>
+
+                                <p>
+                                    Welcome to Fancy Idea — a channel exploring
+                                    research, analysis, how-to guides,
+                                    imagination, interesting facts and creative
+                                    ideas. Discover something new and join
+                                    the journey of learning.
+                                </p>
+
+                                <a class="social-button"
+                                   href="https://www.youtube.com/fancyidea"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="bi bi-youtube" aria-hidden="true"></i>
+                                    Subscribe on YouTube
+                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                            <div class="social-image-wrap">
+                                <img class="social-image"
+                                     src="assets/fancyIdealogo.png"
+                                     alt="Fancy Idea YouTube channel logo"
+                                     loading="lazy">
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Quora -->
+                <div class="col-12">
+                    <article class="social-card">
+                        <div class="social-card-inner">
+
+                            <div class="social-card-content">
+                                <div class="social-icon quora-icon">
+                                    <i class="bi bi-chat-square-text" aria-hidden="true"></i>
+                                </div>
+
+                                <h2>
+                                    <a href="https://www.quora.com/profile/Pravind-Thakur"
+                                       target="_blank" rel="noopener noreferrer">
+                                        Quora
+                                    </a>
+                                </h2>
+
+                                <p>
+                                    I share answers and insights on Quora about
+                                    technology, careers, finance and PowerPoint.
+                                    Follow along to explore ideas, read answers
+                                    and join conversations.
+                                </p>
+
+                                <a class="social-button"
+                                   href="https://www.quora.com/profile/Pravind-Thakur"
+                                   target="_blank" rel="noopener noreferrer">
+                                    <i class="bi bi-chat-square-text" aria-hidden="true"></i>
+                                    Follow on Quora
+                                    <i class="bi bi-arrow-up-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+
+                            <div class="social-image-wrap">
+                                <img class="social-image"
+                                     src="assets/quora.jpg"
+                                     alt="Pravind Thakur on Quora"
+                                     loading="lazy">
+                            </div>
+
+                        </div>
+                    </article>
+                </div>
+
             </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer id="siteFooter">
+    <div class="container px-4 px-lg-5">
+        <div class="text-center small">
+            &copy; <span class="footer-accent">Pravind Thakur</span>.
+            All rights reserved.
         </div>
     </div>
 </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/scripts.js"></script>
+
+</body>
 </html>
