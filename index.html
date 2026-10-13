@@ -100,7 +100,9 @@
                 .c-tag{display:inline-block;padding:.55rem 1.1rem;margin:.3rem;border:1px solid rgba(255,255,255,.18);border-radius:999px;font-size:.95rem;transition:all .25s;cursor:default}
                 .c-tag:hover{background:#fff;color:#000;transform:translateY(-4px) rotate(-2deg);box-shadow:0 10px 24px rgba(226,30,128,.35)}
 
-                .c-cta{background:linear-gradient(120deg,#1e30f3,#e21e80);padding:7rem 0;text-align:center}
+                .c-cta{background:#0b0b11;border-top:1px solid #1c1c24;padding:7rem 0;text-align:center;position:relative;overflow:hidden}
+                .c-cta::before{content:"";position:absolute;left:50%;top:50%;width:640px;height:640px;max-width:120%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(226,30,128,.28),rgba(30,48,243,.14) 45%,transparent 70%);pointer-events:none}
+                .c-cta .container{position:relative}
 
                 .js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
                 .js .rv.in{opacity:1;transform:none}
@@ -269,9 +271,10 @@
                 <!-- 8. Call to action-->
                 <section class="c-cta">
                     <div class="container px-5 rv">
-                        <h2 class="display-4 fw-bolder mb-4 text-white">Let's build something together</h2>
-                        <a class="c-btn line me-sm-3 mb-3 mb-sm-0" href="contact.html">Contact me</a>
-                        <a class="c-btn" style="background:#fff;color:#111" href="assets/PravindThakur.pdf" download="PravindThakur.pdf"><i class="bi bi-download me-2"></i>Download resume</a>
+                        <div class="c-eyebrow mb-2">Your move</div>
+                        <h2 class="c-h2 mb-4">Let's build <span class="c-grad">something together</span></h2>
+                        <a class="c-btn fill me-sm-3 mb-3 mb-sm-0" href="contact.html">Contact me</a>
+                        <a class="c-btn line" href="assets/PravindThakur.pdf" download="PravindThakur.pdf"><i class="bi bi-download me-2"></i>Download resume</a>
                     </div>
                 </section>
             </div>
