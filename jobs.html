@@ -687,127 +687,36 @@
                ===================================================== */
 
             function formatPostedTime(job) {
+                const postedTime = new Date(job.postedAt || 0).getTime();
 
-                if (
-                    job.postedText
-                ) {
-
-                    return job.postedText;
-
+                // Recalculate from the actual timestamp instead of stale LinkedIn text.
+                if (!Number.isFinite(postedTime) || postedTime <= 0) {
+                    return job.postedText || job.posted || "Date unavailable";
                 }
 
+                const elapsedMs = Math.max(0, Date.now() - postedTime);
+                const minutes = Math.floor(elapsedMs / 60000);
 
-                if (
-                    job.posted
-                ) {
+                if (minutes < 1) return "Just now";
 
-                    return job.posted;
-
+                if (minutes < 60) {
+                    return `${minutes} ${minutes === 1 ? "minute" : "minutes"} ago`;
                 }
 
+                const hours = Math.floor(minutes / 60);
 
-                if (
-                    job.postedAt
-                ) {
-
-                    const postedTime =
-                        new Date(
-                            job.postedAt
-                        ).getTime();
-
-
-                    if (
-                        Number.isFinite(
-                            postedTime
-                        )
-                    ) {
-
-                        const diff =
-                            Math.max(
-                                0,
-                                Date.now() -
-                                postedTime
-                            );
-
-
-                        const minutes =
-                            Math.floor(
-                                diff /
-                                60000
-                            );
-
-
-                        if (
-                            minutes < 1
-                        ) {
-
-                            return "Just now";
-
-                        }
-
-
-                        if (
-                            minutes < 60
-                        ) {
-
-                            return (
-                                minutes +
-                                (
-                                    minutes === 1
-                                        ? " minute ago"
-                                        : " minutes ago"
-                                )
-                            );
-
-                        }
-
-
-                        const hours =
-                            Math.floor(
-                                minutes /
-                                60
-                            );
-
-
-                        if (
-                            hours < 24
-                        ) {
-
-                            return (
-                                hours +
-                                (
-                                    hours === 1
-                                        ? " hour ago"
-                                        : " hours ago"
-                                )
-                            );
-
-                        }
-
-
-                        const days =
-                            Math.floor(
-                                hours /
-                                24
-                            );
-
-
-                        return (
-                            days +
-                            (
-                                days === 1
-                                    ? " day ago"
-                                    : " days ago"
-                            )
-                        );
-
-                    }
-
+                if (hours < 24) {
+                    return `${hours} ${hours === 1 ? "hour" : "hours"} ago`;
                 }
 
+                const days = Math.floor(hours / 24);
 
-                return "";
+                if (days < 30) {
+                    return `${days} ${days === 1 ? "day" : "days"} ago`;
+                }
 
+                const months = Math.floor(days / 30);
+                return `${months} ${months === 1 ? "month" : "months"} ago`;
             }
 
 
@@ -1046,7 +955,7 @@
                                     </div>
 
 
-                                    <div class="job-posted ${recentClass}">
+                                    <div class="job-posted ${recentClass}" data-posted-at="${escapeAttribute(job.postedAt || "")}">
 
                                         ${posted}
 
@@ -1401,6 +1310,28 @@
 
 
             updateCountdown();
+
+            /* =====================================================
+               Update displayed job ages every minute
+               ===================================================== */
+
+            function updateJobAges() {
+                document.querySelectorAll(".job-posted").forEach(element => {
+                    const postedAt = element.dataset.postedAt;
+                    if (!postedAt) return;
+
+                    element.textContent = formatPostedTime({ postedAt });
+
+                    const postedTime = new Date(postedAt).getTime();
+                    const isWithinLastHour =
+                        Number.isFinite(postedTime) &&
+                        Date.now() - postedTime < 60 * 60 * 1000;
+
+                    element.classList.toggle("recent", isWithinLastHour);
+                });
+            }
+
+            setInterval(updateJobAges, 60 * 1000);
 
         </script>
 
