@@ -35,175 +35,323 @@
                 </div>
             </nav>
 
-            <!-- 1. Hero-->
-            <header class="py-5">
-                <div class="container px-5 pb-5">
-                    <div class="row gx-5 align-items-center">
-                        <div class="col-xxl-5">
-                            <div class="text-center text-xxl-start">
-                                <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">WORK &middot; CREATIVITY &middot; LIFE</div></div>
-                                <div class="fs-3 fw-light text-muted">Hello, I'm Pravind Thakur</div>
-                                <h1 class="display-3 fw-bolder mb-3"><span class="text-gradient d-inline">Building, creating and staying kind</span></h1>
-                                <p class="lead fw-light text-muted mb-5">Business Analyst in capital markets, PowerPoint creator and photographer.</p>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="Professional.html">Professional</a>
-                                    <a class="btn btn-outline-dark btn-lg px-5 py-3 fs-6 fw-bolder" href="Personal.html">Personal</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-7">
-                            <!-- Header profile picture-->
-                            <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                                <div class="profile bg-gradient-primary-to-secondary">
-                                    <img class="profile-img" src="assets/Profile.png" alt="Pravind Thakur" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </header>
+            <!-- ===== Cinematic home body: styles ===== -->
+            <script>document.documentElement.classList.add('js');</script>
+            <style>
+                .cine{background:#07070b;color:#f2f2f2;position:relative;overflow:hidden}
+                .cine a{text-decoration:none}
+                .c-grad{background:linear-gradient(100deg,#6c7bff 0%,#e21e80 70%,#ff8a5c 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+                .c-gold{color:#f5b942}
+                .c-muted{color:#a1a1aa}
+                #cScroll{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1e30f3,#e21e80);z-index:2000}
 
-            <!-- 2. Stats strip-->
-            <section class="bg-white py-5">
-                <div class="container px-5">
-                    <div class="row gx-5 text-center">
-                        <div class="col-6 col-md-3 mb-4 mb-md-0">
-                            <div class="display-6 fw-bolder"><span class="text-gradient d-inline">9+</span></div>
-                            <div class="small text-muted">Years in capital markets</div>
-                        </div>
-                        <div class="col-6 col-md-3 mb-4 mb-md-0">
-                            <div class="display-6 fw-bolder"><span class="text-gradient d-inline">16M+</span></div>
-                            <div class="small text-muted">Records processed faster</div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="display-6 fw-bolder"><span class="text-gradient d-inline">35K+</span></div>
-                            <div class="small text-muted">YouTube subscribers</div>
-                        </div>
-                        <div class="col-6 col-md-3">
-                            <div class="display-6 fw-bolder"><span class="text-gradient d-inline">300+</span></div>
-                            <div class="small text-muted">Videos published</div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                .c-hero{position:relative;min-height:88vh;display:flex;align-items:center;padding:9vh 0}
+                .c-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(226,30,128,.28),transparent 65%);pointer-events:none}
+                .c-hero::after{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+                .c-lb{position:absolute;left:0;right:0;height:7vh;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#71717a;z-index:2}
+                .c-lb.top{top:0}.c-lb.bot{bottom:0}
+                .c-eyebrow{letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;color:#f5b942}
+                .c-title{font-size:clamp(3rem,9vw,7rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin:.6rem 0 1.2rem}
+                .c-role{font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:300;min-height:2.2em}
+                .c-role b{font-weight:600;color:#fff;transition:opacity .35s,transform .35s;display:inline-block;border-bottom:2px solid #e21e80}
+                .c-role b.out{opacity:0;transform:translateY(8px)}
+                .c-btn{display:inline-block;padding:.9rem 2rem;border-radius:999px;font-weight:700;font-size:.95rem;transition:transform .25s,box-shadow .25s,background .25s}
+                .c-btn:hover{transform:translateY(-3px)}
+                .c-btn.fill{background:linear-gradient(90deg,#1e30f3,#e21e80);color:#fff}
+                .c-btn.fill:hover{box-shadow:0 10px 30px rgba(226,30,128,.4);color:#fff}
+                .c-btn.line{border:1px solid rgba(255,255,255,.35);color:#fff}
+                .c-btn.line:hover{background:#fff;color:#000}
+                .c-portrait{position:relative;display:flex;justify-content:center;z-index:1}
+                .c-portrait::before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;top:8%;background:conic-gradient(from 90deg,#1e30f3,#e21e80,#ff8a5c,#1e30f3);filter:blur(70px);opacity:.55;animation:cSpin 14s linear infinite}
+                @keyframes cSpin{to{transform:rotate(360deg)}}
+                .c-portrait img{position:relative;max-height:62vh;max-width:100%;animation:cFloat 6s ease-in-out infinite;filter:drop-shadow(0 25px 40px rgba(0,0,0,.6))}
+                @keyframes cFloat{50%{transform:translateY(-12px)}}
+                .c-scroll{position:absolute;bottom:9vh;left:50%;width:1px;height:46px;background:linear-gradient(#f5b942,transparent);z-index:2;animation:cDrop 2s ease-in-out infinite}
+                @keyframes cDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 
-            <!-- 3. Two sides: Work and Create-->
-            <section class="py-5">
-                <div class="container px-5 my-5">
-                    <div class="text-center mb-5">
-                        <h2 class="display-6 fw-bolder mb-0"><span class="text-gradient d-inline">Two sides, one story</span></h2>
+                .c-sec{padding:7rem 0;position:relative}
+                .c-h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
+
+                .c-reel{overflow:hidden;padding:1.5rem 0;border-top:1px solid #1c1c24;border-bottom:1px solid #1c1c24;background:#0b0b11;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+                .c-track{display:flex;gap:14px;width:max-content;animation:cMarq 60s linear infinite}
+                .c-reel:hover .c-track{animation-play-state:paused}
+                @keyframes cMarq{to{transform:translateX(-50%)}}
+                .c-frame{flex:0 0 auto;border:6px solid #15151c;border-radius:4px;overflow:hidden;position:relative}
+                .c-frame img{height:230px;width:auto;display:block;filter:grayscale(1) contrast(1.1);transition:filter .4s,transform .4s}
+                .c-frame:hover img{filter:none;transform:scale(1.06)}
+
+                .c-stat{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1}
+
+                .c-worlds{display:flex;gap:14px;min-height:380px}
+                .c-world{flex:1;border-radius:22px;padding:2.4rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:flex .6s cubic-bezier(.2,.8,.2,1)}
+                .c-world:hover{flex:1.7}
+                .c-world.work{background:radial-gradient(circle at 20% 10%,#2b3fff,#0b1240 70%)}
+                .c-world.create{background:radial-gradient(circle at 80% 10%,#ff6a3d,#7a0f4a 75%)}
+                .c-world .more{max-height:0;opacity:0;overflow:hidden;transition:max-height .6s,opacity .6s}
+                .c-world:hover .more{max-height:200px;opacity:1}
+                .c-world h3{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800}
+                @media (max-width:767px){.c-worlds{flex-direction:column}.c-world .more{max-height:200px;opacity:1}}
+
+                .c-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.8rem;height:100%;transition:transform .15s,border-color .3s,background .3s;transform-style:preserve-3d}
+                .c-card:hover{border-color:rgba(226,30,128,.7);background:rgba(255,255,255,.07)}
+                .c-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,#1e30f3,#e21e80);color:#fff;margin-bottom:1.1rem}
+
+                .c-quote{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(1.8rem,4.6vw,3.4rem);line-height:1.25;text-align:center;max-width:900px;margin:0 auto}
+                .c-tag{display:inline-block;padding:.55rem 1.1rem;margin:.3rem;border:1px solid rgba(255,255,255,.18);border-radius:999px;font-size:.95rem;transition:all .25s;cursor:default}
+                .c-tag:hover{background:#fff;color:#000;transform:translateY(-4px) rotate(-2deg);box-shadow:0 10px 24px rgba(226,30,128,.35)}
+
+                .c-cta{background:linear-gradient(120deg,#1e30f3,#e21e80);padding:7rem 0;text-align:center}
+
+                .js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
+                .js .rv.in{opacity:1;transform:none}
+                .js .rv.d1{transition-delay:.12s}.js .rv.d2{transition-delay:.24s}.js .rv.d3{transition-delay:.36s}
+                @media (prefers-reduced-motion:reduce){
+                    .c-track,.c-portrait::before,.c-portrait img,.c-scroll{animation:none}
+                    .js .rv{opacity:1;transform:none;transition:none}
+                    .c-world,.c-card,.c-tag,.c-btn{transition:none}
+                }
+            </style>
+
+            <div class="cine">
+                <div id="cScroll"></div>
+
+                <!-- 1. Hero scene-->
+                <section class="c-hero" id="cHero">
+                    <div class="c-lb top"><span>Scene 01</span><span>Pravind Thakur</span></div>
+                    <div class="container px-5" style="position:relative;z-index:1">
+                        <div class="row align-items-center gx-5">
+                            <div class="col-lg-7 text-center text-lg-start rv">
+                                <div class="c-eyebrow">Work &middot; Creativity &middot; Life</div>
+                                <h1 class="c-title"><span class="c-grad">Pravind<br>Thakur</span></h1>
+                                <div class="c-role">I am a <b id="cRole">business analyst</b></div>
+                                <p class="c-muted mb-4" style="max-width:520px">Nearly a decade in capital markets, 35K+ learners on YouTube, and a camera never far away. Building, creating and staying kind.</p>
+                                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                                    <a class="c-btn fill" href="Professional.html">Professional</a>
+                                    <a class="c-btn line" href="Personal.html">Personal</a>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 mt-5 mt-lg-0 rv d2">
+                                <div class="c-portrait"><img src="assets/Profile.png" alt="Pravind Thakur" /></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-6 mb-4 mb-lg-0">
-                            <div class="card h-100 border-0 shadow rounded-4 bg-primary text-white">
-                                <div class="card-body p-5">
-                                    <div class="small fw-bolder text-uppercase mb-2 opacity-75">Work</div>
-                                    <h3 class="fw-bolder mb-3">Capital markets and corporate actions</h3>
-                                    <p class="mb-4">Business Analyst with 9+ years in Securities Services, working on corporate actions, SWIFT messaging and reference data for global banks across APAC, EMEA, NAM and LATAM.</p>
-                                    <a class="btn btn-light fw-bolder px-4" href="Professional.html">See my work <i class="bi bi-arrow-right ms-1"></i></a>
+                    <div class="c-scroll"></div>
+                    <div class="c-lb bot"><span>Scroll to explore</span><span>Capital markets &middot; PowerPoint &middot; Photography</span></div>
+                </section>
+
+                <!-- 2. Photo reel-->
+                <section class="c-reel" aria-label="Photo reel">
+                    <div class="c-track">
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo1.JPG" alt="Photo 1" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo2.JPG" alt="Photo 2" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo3.JPG" alt="Photo 3" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo4.JPG" alt="Photo 4" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo5.JPG" alt="Photo 5" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo7.jpeg" alt="Photo 7" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo8.jpeg" alt="Photo 8" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo9.jpg" alt="Photo 9" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo1.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo2.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo3.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo4.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo5.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo7.jpeg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo8.jpeg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                        <a class="c-frame" href="Photography.html"><img src="photos/photo9.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
+                    </div>
+                </section>
+
+                <!-- 3. Numbers-->
+                <section class="c-sec" style="padding:5rem 0">
+                    <div class="container px-5">
+                        <div class="row text-center gy-4">
+                            <div class="col-6 col-md-3 rv"><div class="c-stat c-grad" data-count="9" data-suffix="+">0</div><div class="c-muted small mt-2">Years in capital markets</div></div>
+                            <div class="col-6 col-md-3 rv d1"><div class="c-stat c-grad" data-count="16" data-suffix="M+">0</div><div class="c-muted small mt-2">Records processed faster</div></div>
+                            <div class="col-6 col-md-3 rv d2"><div class="c-stat c-grad" data-count="35" data-suffix="K+">0</div><div class="c-muted small mt-2">YouTube subscribers</div></div>
+                            <div class="col-6 col-md-3 rv d3"><div class="c-stat c-grad" data-count="300" data-suffix="+">0</div><div class="c-muted small mt-2">Videos published</div></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 4. Two worlds-->
+                <section class="c-sec" style="padding-top:2rem">
+                    <div class="container px-5">
+                        <div class="text-center mb-5 rv">
+                            <div class="c-eyebrow">Two sides</div>
+                            <h2 class="c-h2">One story, <span class="c-grad">two worlds</span></h2>
+                            <p class="c-muted">Hover to step inside.</p>
+                        </div>
+                        <div class="c-worlds rv d1">
+                            <div class="c-world work">
+                                <div class="c-eyebrow" style="color:#9db4ff">Work</div>
+                                <h3>Capital markets and corporate actions</h3>
+                                <div class="more">
+                                    <p class="mt-2">Business Analyst on TCS BaNCS, working with global banks across APAC, EMEA, NAM and LATAM on corporate actions, SWIFT messaging and reference data.</p>
+                                    <a class="c-btn fill" href="Professional.html">See my work</a>
+                                </div>
+                            </div>
+                            <div class="c-world create">
+                                <div class="c-eyebrow" style="color:#ffe3d1">Create</div>
+                                <h3>PowerPoint, photography and trading</h3>
+                                <div class="more">
+                                    <p class="mt-2">I teach PowerPoint and automation on YouTube, shoot photos and video, and follow equity and commodity markets.</p>
+                                    <a class="c-btn line" href="Personal.html">Meet the creator</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            <div class="card h-100 border-0 shadow rounded-4 bg-secondary text-white">
-                                <div class="card-body p-5">
-                                    <div class="small fw-bolder text-uppercase mb-2 opacity-75">Create</div>
-                                    <h3 class="fw-bolder mb-3">PowerPoint, photography and trading</h3>
-                                    <p class="mb-4">Outside work I teach PowerPoint and automation on YouTube, shoot photos and video, and follow equity and commodity markets.</p>
-                                    <a class="btn btn-light fw-bolder px-4" href="Personal.html">Meet the creator <i class="bi bi-arrow-right ms-1"></i></a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- 4. Explore-->
-            <section class="bg-white py-5">
-                <div class="container px-5 my-5">
-                    <div class="text-center mb-5">
-                        <h2 class="display-6 fw-bolder mb-0"><span class="text-gradient d-inline">Explore</span></h2>
-                    </div>
-                    <div class="row gx-4 row-cols-1 row-cols-md-2 row-cols-xl-4">
-                        <div class="col mb-4">
-                            <div class="card h-100 border-0 shadow-sm rounded-4 bg-light">
-                                <div class="card-body p-4">
-                                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-bank"></i></div>
+                <!-- 5. Explore cards-->
+                <section class="c-sec" style="padding-top:2rem">
+                    <div class="container px-5">
+                        <div class="text-center mb-5 rv">
+                            <div class="c-eyebrow">Explore</div>
+                            <h2 class="c-h2">Pick a <span class="c-grad">scene</span></h2>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-md-6 col-xl-3 rv">
+                                <a class="c-card d-block text-white" data-tilt href="Professional.html">
+                                    <div class="c-ico"><i class="bi bi-bank"></i></div>
                                     <h3 class="h5 fw-bolder">Capital markets</h3>
-                                    <p class="small text-muted">Corporate actions, asset servicing and reference data on TCS BaNCS.</p>
-                                    <a class="text-primary fw-bolder text-decoration-none" href="Professional.html">Read more <i class="bi bi-arrow-right ms-1"></i></a>
-                                </div>
+                                    <p class="c-muted small">Corporate actions, asset servicing and reference data on TCS BaNCS.</p>
+                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100 border-0 shadow-sm rounded-4 bg-light">
-                                <div class="card-body p-4">
-                                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-file-earmark-slides"></i></div>
+                            <div class="col-md-6 col-xl-3 rv d1">
+                                <a class="c-card d-block text-white" data-tilt href="Powerpoint.html">
+                                    <div class="c-ico"><i class="bi bi-file-earmark-slides"></i></div>
                                     <h3 class="h5 fw-bolder">PowerPoint</h3>
-                                    <p class="small text-muted">Design, animation and VBA automation tutorials for 35K+ learners.</p>
-                                    <a class="text-secondary fw-bolder text-decoration-none" href="Powerpoint.html">Read more <i class="bi bi-arrow-right ms-1"></i></a>
-                                </div>
+                                    <p class="c-muted small">Design, animation and VBA automation tutorials for 35K+ learners.</p>
+                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100 border-0 shadow-sm rounded-4 bg-light">
-                                <div class="card-body p-4">
-                                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-camera"></i></div>
+                            <div class="col-md-6 col-xl-3 rv d2">
+                                <a class="c-card d-block text-white" data-tilt href="Photography.html">
+                                    <div class="c-ico"><i class="bi bi-camera"></i></div>
                                     <h3 class="h5 fw-bolder">Photography</h3>
-                                    <p class="small text-muted">Lifestyle, travel and portrait moments, with cinematography and reels.</p>
-                                    <a class="text-primary fw-bolder text-decoration-none" href="Photography.html">Read more <i class="bi bi-arrow-right ms-1"></i></a>
-                                </div>
+                                    <p class="c-muted small">Lifestyle, travel and portrait moments, with cinematography and reels.</p>
+                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
+                                </a>
                             </div>
-                        </div>
-                        <div class="col mb-4">
-                            <div class="card h-100 border-0 shadow-sm rounded-4 bg-light">
-                                <div class="card-body p-4">
-                                    <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 mb-3"><i class="bi bi-graph-up-arrow"></i></div>
+                            <div class="col-md-6 col-xl-3 rv d3">
+                                <a class="c-card d-block text-white" data-tilt href="Trading.html">
+                                    <div class="c-ico"><i class="bi bi-graph-up-arrow"></i></div>
                                     <h3 class="h5 fw-bolder">Trading</h3>
-                                    <p class="small text-muted">Equity and commodity markets, analysis and risk management.</p>
-                                    <a class="text-secondary fw-bolder text-decoration-none" href="Trading.html">Read more <i class="bi bi-arrow-right ms-1"></i></a>
-                                </div>
+                                    <p class="c-muted small">Equity and commodity markets, analysis and risk management.</p>
+                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- 5. Skills at a glance-->
-            <section class="py-5">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-10 col-xl-8">
-                            <div class="text-center mb-4">
-                                <h2 class="display-6 fw-bolder mb-0"><span class="text-gradient d-inline">What I bring</span></h2>
-                            </div>
-                            <div class="d-flex flex-wrap justify-content-center gap-2">
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Corporate Actions</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Asset Servicing</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">SWIFT Messaging</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Reference Data</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Business Analysis</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Oracle SQL &amp; PL/SQL</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Performance Tuning</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">GDPR Archival</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">UAT &amp; Production Support</span>
-                                <span class="badge bg-white text-dark border fw-normal fs-6 rounded-pill px-3 py-2">PowerPoint &amp; VBA</span>
-                            </div>
+                <!-- 6. Title card quote-->
+                <section class="c-sec" style="background:#0b0b11">
+                    <div class="container px-5 rv">
+                        <p class="c-quote">&ldquo;In a world where you can be anything, <span class="c-grad">be kind.</span>&rdquo;</p>
+                    </div>
+                </section>
+
+                <!-- 7. Skills-->
+                <section class="c-sec">
+                    <div class="container px-5">
+                        <div class="text-center mb-4 rv">
+                            <div class="c-eyebrow">The toolkit</div>
+                            <h2 class="c-h2">What I <span class="c-grad">bring</span></h2>
+                        </div>
+                        <div class="text-center rv d1" style="max-width:860px;margin:0 auto">
+                            <span class="c-tag">Corporate Actions</span><span class="c-tag">Asset Servicing</span><span class="c-tag">SWIFT Messaging</span><span class="c-tag">Reference Data</span><span class="c-tag">Business Analysis</span><span class="c-tag">Oracle SQL &amp; PL/SQL</span><span class="c-tag">Performance Tuning</span><span class="c-tag">GDPR Archival</span><span class="c-tag">UAT &amp; Production Support</span><span class="c-tag">PowerPoint &amp; VBA</span><span class="c-tag">Cinematography</span><span class="c-tag">Color Grading</span><span class="c-tag">Storytelling</span>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
 
-            <!-- 6. Call to action-->
-            <section class="py-5 bg-gradient-primary-to-secondary text-white">
-                <div class="container px-5 my-5">
-                    <div class="text-center">
-                        <h2 class="display-5 fw-bolder mb-4">Let's build something together</h2>
-                        <a class="btn btn-outline-light btn-lg px-5 py-3 fs-6 fw-bolder me-sm-3 mb-3 mb-sm-0" href="contact.html">Contact me</a>
-                        <a class="btn btn-light btn-lg px-5 py-3 fs-6 fw-bolder" href="assets/PravindThakur.pdf" download="PravindThakur.pdf"><i class="bi bi-download me-2"></i>Download resume</a>
+                <!-- 8. Call to action-->
+                <section class="c-cta">
+                    <div class="container px-5 rv">
+                        <h2 class="display-4 fw-bolder mb-4 text-white">Let's build something together</h2>
+                        <a class="c-btn line me-sm-3 mb-3 mb-sm-0" href="contact.html">Contact me</a>
+                        <a class="c-btn" style="background:#fff;color:#111" href="assets/PravindThakur.pdf" download="PravindThakur.pdf"><i class="bi bi-download me-2"></i>Download resume</a>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+
+            <!-- ===== Cinematic home body: behaviour ===== -->
+            <script>
+            (function () {
+                var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var fine = window.matchMedia('(hover: hover)').matches;
+
+                var bar = document.getElementById('cScroll');
+                window.addEventListener('scroll', function () {
+                    var h = document.documentElement;
+                    var max = h.scrollHeight - h.clientHeight;
+                    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+                }, { passive: true });
+
+                var hero = document.getElementById('cHero');
+                if (hero && fine && !reduce) {
+                    hero.addEventListener('mousemove', function (e) {
+                        var r = hero.getBoundingClientRect();
+                        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+                        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
+                    });
+                }
+
+                var roles = ['business analyst', 'PowerPoint creator', 'photographer', 'market watcher', 'storyteller'];
+                var roleEl = document.getElementById('cRole');
+                var ri = 0;
+                if (roleEl && !reduce) {
+                    setInterval(function () {
+                        roleEl.classList.add('out');
+                        setTimeout(function () {
+                            ri = (ri + 1) % roles.length;
+                            roleEl.textContent = roles[ri];
+                            roleEl.classList.remove('out');
+                        }, 350);
+                    }, 2400);
+                }
+
+                function countUp(el) {
+                    var end = parseInt(el.getAttribute('data-count'), 10);
+                    var suffix = el.getAttribute('data-suffix') || '';
+                    if (reduce) { el.textContent = end + suffix; return; }
+                    var start = null;
+                    function step(ts) {
+                        if (!start) start = ts;
+                        var p = Math.min((ts - start) / 1500, 1);
+                        var eased = 1 - Math.pow(1 - p, 3);
+                        el.textContent = Math.round(end * eased) + (p === 1 ? suffix : '');
+                        if (p < 1) requestAnimationFrame(step);
+                    }
+                    requestAnimationFrame(step);
+                }
+
+                var io = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (en) {
+                        if (!en.isIntersecting) return;
+                        en.target.classList.add('in');
+                        en.target.querySelectorAll('[data-count]').forEach(countUp);
+                        io.unobserve(en.target);
+                    });
+                }, { threshold: 0.15 });
+                document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+
+                if (fine && !reduce) {
+                    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+                        card.addEventListener('mousemove', function (e) {
+                            var r = card.getBoundingClientRect();
+                            var x = (e.clientX - r.left) / r.width - 0.5;
+                            var y = (e.clientY - r.top) / r.height - 0.5;
+                            card.style.transform = 'perspective(700px) rotateX(' + (-y * 12) + 'deg) rotateY(' + (x * 12) + 'deg) translateY(-4px)';
+                        });
+                        card.addEventListener('mouseleave', function () {
+                            card.style.transform = '';
+                        });
+                    });
+                }
+            })();
+            </script>
         </main>
         <!-- Footer-->
 <footer class="bg-white py-4 mt-auto">
