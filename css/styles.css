@@ -11765,3 +11765,28 @@ html {
   transform: scale(1.03);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
+
+
+/* Force the footer to match the cinematic dark theme */
+html body footer#siteFooter,
+html body footer#siteFooter.bg-white {
+    background: #07070b !important;
+    background-color: #07070b !important;
+    color: #a1a1aa !important;
+    border-top: 1px solid #1c1c24 !important;
+    box-shadow: none !important;
+}
+
+html body footer#siteFooter .small,
+html body footer#siteFooter p,
+html body footer#siteFooter a {
+    color: #a1a1aa !important;
+}
+
+html body footer#siteFooter a:hover {
+    color: #f5b942 !important;
+}
+
+
+
+
