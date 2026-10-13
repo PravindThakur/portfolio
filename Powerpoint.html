@@ -1,396 +1,1011 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="Pravind Thakur - PowerPoint design, animation, VBA automation and tutorials" />
-        <meta name="author" content="Pravind Thakur" />
-        <title>Pravind Thakur | PowerPoint</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pravind Thakur - PowerPoint design, animation, VBA automation and tutorials" />
+    <meta name="author" content="Pravind Thakur" />
+    <meta name="theme-color" content="#07070b" />
 
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <title>Pravind Thakur | PowerPoint</title>
 
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
 
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-        <!-- Core theme CSS-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
 
-    <body class="d-flex flex-column h-100 bg-light">
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #07070b;
+            --surface: #101016;
+            --surface-hover: #16161e;
+            --border: #252530;
+            --text: #f2f2f7;
+            --muted: #a1a1aa;
+            --gold: #f5b942;
+            --blue: #6c7bff;
+            --pink: #e21e80;
+            --orange: #ff8a5c;
+        }
 
-        <main class="flex-shrink-0">
+        * {
+            box-sizing: border-box;
+        }
 
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-white py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html">
-                        <span class="fw-bolder text-primary">Pravind Thakur</span>
-                    </a>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 90px;
+            background: var(--bg);
+        }
 
-                    <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent"
-                        aria-controls="navbarSupportedContent"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--bg) !important;
+            color: var(--text);
+            font-family: "Plus Jakarta Sans", sans-serif;
+            overflow-x: hidden;
+        }
 
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Professional.html">Professional</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="Personal.html">Personal</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
-                            </li>
-                        </ul>
-                    </div>
+        a {
+            transition: color .25s ease, border-color .25s ease,
+                        background .25s ease, transform .25s ease;
+        }
+
+        .navbar {
+            background: rgba(7, 7, 11, .94) !important;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+        }
+
+        .navbar-brand {
+            color: var(--text) !important;
+            letter-spacing: -.5px;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(100deg, var(--blue), var(--pink), var(--orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar .nav-link {
+            color: var(--muted) !important;
+            font-weight: 600;
+            padding: 10px 13px !important;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--gold) !important;
+        }
+
+        .navbar-toggler {
+            border-color: var(--border) !important;
+            box-shadow: none !important;
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        .page-shell {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at 50% 0%, rgba(108, 123, 255, .11), transparent 42%),
+                var(--bg);
+        }
+
+        .hero {
+            padding: 76px 0 38px;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-bottom: 18px;
+            color: var(--gold);
+            font-size: .76rem;
+            font-weight: 800;
+            letter-spacing: 2.6px;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before,
+        .eyebrow::after {
+            content: "";
+            width: 23px;
+            height: 1px;
+            background: var(--gold);
+            opacity: .75;
+        }
+
+        .hero h1 {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(2.8rem, 7vw, 5.3rem);
+            font-weight: 800;
+            letter-spacing: -3px;
+            line-height: 1.08;
+        }
+
+        .gradient-text {
+            background: linear-gradient(100deg, var(--blue) 0%, var(--pink) 55%, var(--orange) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-description {
+            max-width: 650px;
+            margin: 22px auto 0;
+            color: var(--muted);
+            font-size: 1.03rem;
+            line-height: 1.9;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .stat-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            padding: 10px 16px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: var(--text);
+            font-size: .83rem;
+            font-weight: 600;
+        }
+
+        .stat-pill i {
+            color: var(--gold);
+        }
+
+        .content-section {
+            padding: 18px 0 24px;
+        }
+
+        .content-container {
+            max-width: 1040px;
+            margin: 0 auto;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 24px;
+        }
+
+        .section-icon {
+            display: flex;
+            flex: 0 0 48px;
+            width: 48px;
+            height: 48px;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(108, 123, 255, .35);
+            border-radius: 15px;
+            background: linear-gradient(135deg, rgba(108, 123, 255, .18), rgba(226, 30, 128, .12));
+            color: var(--gold);
+            font-size: 1.35rem;
+        }
+
+        .section-heading h2 {
+            margin: 0;
+            color: var(--text);
+            font-size: clamp(1.35rem, 3vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: -.7px;
+        }
+
+        .section-subtitle {
+            margin: 6px 0 0;
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.7;
+        }
+
+        .dark-card {
+            height: 100%;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(255,255,255,.015));
+            box-shadow: 0 15px 45px rgba(0, 0, 0, .14);
+            transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+        }
+
+        .dark-card:hover {
+            border-color: rgba(245, 185, 66, .38);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 45px rgba(0, 0, 0, .23);
+        }
+
+        .social-card-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(230px, .75fr);
+            align-items: stretch;
+        }
+
+        .social-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        .social-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            color: var(--gold);
+            font-size: .75rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .social-label i {
+            font-size: 1rem;
+        }
+
+        .social-title {
+            margin: 0 0 15px;
+            font-size: clamp(1.15rem, 2.5vw, 1.55rem);
+            font-weight: 800;
+            line-height: 1.45;
+            overflow-wrap: anywhere;
+        }
+
+        .social-title a {
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .social-title a:hover {
+            color: var(--gold);
+        }
+
+        .social-description {
+            margin: 0 0 24px;
+            color: var(--muted);
+            font-size: .94rem;
+            line-height: 1.9;
+        }
+
+        .social-image {
+            width: 100%;
+            height: 100%;
+            min-height: 250px;
+            max-height: 330px;
+            object-fit: cover;
+            background: var(--surface);
+        }
+
+        .action-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 9px;
+            padding: 12px 19px;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            background: linear-gradient(110deg, var(--blue), var(--pink));
+            color: #fff;
+            font-size: .88rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 7px 22px rgba(108, 123, 255, .15);
+        }
+
+        .action-button:hover {
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(226, 30, 128, .22);
+        }
+
+        .action-button.youtube {
+            background: linear-gradient(110deg, #e62117, #ff5a45);
+            box-shadow: 0 7px 22px rgba(230, 33, 23, .12);
+        }
+
+        .action-button.youtube:hover {
+            box-shadow: 0 10px 28px rgba(230, 33, 23, .25);
+        }
+
+        .gallery-card {
+            padding: 30px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-item {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            padding: 0;
+            border: 1px solid var(--border);
+            border-radius: 15px;
+            background: var(--surface);
+            cursor: zoom-in;
+            aspect-ratio: 4 / 3;
+        }
+
+        .gallery-img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .45s ease, opacity .3s ease;
+        }
+
+        .gallery-item::after {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(7, 7, 11, .42);
+            color: #fff;
+            content: "\F52A";
+            font-family: "bootstrap-icons";
+            font-size: 1.7rem;
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.06);
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        .skills-card {
+            padding: 30px;
+        }
+
+        .skills-intro {
+            margin: -5px 0 24px;
+            color: var(--muted);
+            font-size: .94rem;
+            line-height: 1.85;
+        }
+
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .035);
+            color: #d4d4dc;
+            font-size: .84rem;
+            font-weight: 500;
+            line-height: 1.4;
+            transition: border-color .25s ease, background .25s ease, color .25s ease;
+        }
+
+        .skill-tag i {
+            color: var(--gold);
+            font-size: .85rem;
+        }
+
+        .skill-tag:hover {
+            border-color: rgba(245, 185, 66, .45);
+            background: rgba(245, 185, 66, .07);
+            color: #fff;
+        }
+
+        .closing-note {
+            margin-top: 24px;
+            padding: 20px 22px;
+            border: 1px solid rgba(108, 123, 255, .25);
+            border-radius: 16px;
+            background: linear-gradient(110deg, rgba(108, 123, 255, .08), rgba(226, 30, 128, .05));
+            color: var(--muted);
+            font-size: .9rem;
+            line-height: 1.8;
+        }
+
+        .closing-note i {
+            margin-right: 8px;
+            color: var(--gold);
+        }
+
+        footer {
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            background: #07070b !important;
+            color: var(--muted);
+        }
+
+        footer .small {
+            color: var(--muted);
+        }
+
+        .scroll-progress {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue), var(--pink), var(--orange));
+        }
+
+        .modal-content {
+            background: transparent !important;
+        }
+
+        .modal-backdrop.show {
+            opacity: .92;
+        }
+
+        #photoModalImg {
+            max-height: 88vh;
+            width: auto;
+            max-width: 100%;
+            margin: 0 auto;
+            object-fit: contain;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .5);
+        }
+
+        .modal-close {
+            position: absolute;
+            z-index: 5;
+            top: -42px;
+            right: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255,255,255,.25);
+            border-radius: 50%;
+            background: rgba(255,255,255,.1);
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 767.98px) {
+            .hero {
+                padding: 54px 0 28px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.8px;
+            }
+
+            .hero-description {
+                font-size: .94rem;
+            }
+
+            .content-section {
+                padding: 14px 0 20px;
+            }
+
+            .social-card-inner {
+                grid-template-columns: 1fr;
+            }
+
+            .social-content {
+                padding: 25px;
+            }
+
+            .social-image {
+                height: 230px;
+                min-height: 0;
+                max-height: 270px;
+                order: -1;
+            }
+
+            .gallery-card,
+            .skills-card {
+                padding: 22px;
+            }
+
+            .gallery-grid {
+                gap: 10px;
+            }
+
+            .skill-tag {
+                padding: 9px 12px;
+                font-size: .79rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .stat-pill {
+                font-size: .77rem;
+                padding: 9px 12px;
+            }
+
+            .section-heading {
+                gap: 11px;
+            }
+
+            .section-icon {
+                flex-basis: 42px;
+                width: 42px;
+                height: 42px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important;
+                animation-duration: .01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column">
+
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <main class="flex-shrink-0 page-shell">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand fw-bolder" href="index.html">
+                    <span class="brand-gradient">Pravind Thakur</span>
+                </a>
+
+                <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
 
-
-            <!-- PowerPoint Header + Instagram -->
-            <section class="pt-5 pb-2">
-                <div class="container px-5">
-
-                    <div class="text-center mb-4">
-                        <h1 class="display-5 fw-bolder mb-0">
-                            <span class="text-gradient d-inline">PowerPoint</span>
-                        </h1>
-                    </div>
-
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
-
-                            <!-- Instagram Card -->
-                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-3">
-                                <div class="card-body p-0">
-
-                                    <div class="d-flex flex-column flex-md-row align-items-center">
-
-                                        <div class="p-4 p-md-5">
-
-                                            <h2 class="fw-bolder fs-3 text-break">
-                                                <a class="text-dark text-decoration-none"
-                                                   href="https://www.instagram.com/powerpointplanet"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    instagram.com/powerpointplanet
-                                                </a>
-                                            </h2>
-
-                                            <p>
-                                                Follow PowerPoint Planet on Instagram for quick PowerPoint tips and tricks:
-                                                slide design, animations, high speed typography, VBA macros and automation ideas.
-                                            </p>
-
-                                            <div class="text-center">
-                                                <a class="btn btn-outline-dark"
-                                                   href="https://www.instagram.com/powerpointplanet"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    <i class="bi bi-instagram me-2"></i>
-                                                    Follow @powerpointplanet
-                                                </a>
-                                            </div>
-
-                                        </div>
-
-                                        <img class="img-fluid insta-photo"
-                                             src="assets/Powerpoint.jpg"
-                                             alt="PowerPoint Planet on Instagram" />
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- YouTube Card -->
-                            <div class="card overflow-hidden shadow rounded-4 border-0 mb-3">
-                                <div class="card-body p-0">
-
-                                    <div class="d-flex flex-column flex-md-row align-items-center">
-
-                                        <div class="p-4 p-md-5">
-
-                                            <h2 class="fw-bolder fs-3 text-break">
-                                                <a class="text-dark text-decoration-none"
-                                                   href="https://www.youtube.com/pravindthakur"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    youtube.com/pravindthakur
-                                                </a>
-                                            </h2>
-
-                                            <p>
-                                                Learn PowerPoint with practical tutorials on design, animation, high speed typography,
-                                                VBA and VBScript automation. Join 35K+ subscribers and explore 300+ videos.
-                                            </p>
-
-                                            <div class="text-center">
-                                                <a class="btn btn-danger"
-                                                   href="https://www.youtube.com/pravindthakur"
-                                                   target="_blank"
-                                                   rel="noopener">
-                                                    <i class="bi bi-youtube me-2"></i>
-                                                    Subscribe on YouTube
-                                                </a>
-                                            </div>
-
-                                        </div>
-
-                                        <img class="img-fluid insta-photo"
-                                             src="assets/youtubepowerpoint.jpg"
-                                             alt="Pravind Thakur YouTube channel" />
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-
-            <!-- Sample Slides -->
-            <section class="pt-2 pb-2">
-                <div class="container px-5">
-
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
-
-                            <div class="card shadow border-0 rounded-4 mb-3">
-
-                                <div class="card-body p-4 p-md-5">
-
-                                    <div class="d-flex align-items-center mb-3">
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-easel"></i>
-                                        </div>
-
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">Sample Slides</span>
-                                        </h3>
-                                    </div>
-
-                                    <div class="row g-3">
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint1.jpg"
-                                                 alt="Sample slide 1"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint2.jpg"
-                                                 alt="Sample slide 2"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint3.jpg"
-                                                 alt="Sample slide 3"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint4.jpg"
-                                                 alt="Sample slide 4"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint5.jpg"
-                                                 alt="Sample slide 5"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint6.JPG"
-                                                 alt="Sample slide 6"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint7.jpg"
-                                                 alt="Sample slide 7"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint8.jpg"
-                                                 alt="Sample slide 8"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                        <div class="col-6 col-md-4">
-                                            <img class="gallery-img"
-                                                 src="photos/powerpoint9.jpg"
-                                                 alt="Sample slide 9"
-                                                 loading="lazy"
-                                                 data-bs-toggle="modal"
-                                                 data-bs-target="#photoModal" />
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-
-            <!-- PowerPoint & Automation Skills -->
-            <section class="pt-2 pb-5">
-                <div class="container px-5">
-
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-11 col-xl-9 col-xxl-8">
-
-                            <div class="card shadow border-0 rounded-4">
-
-                                <div class="card-body p-4 p-md-5">
-
-                                    <div class="d-flex align-items-center mb-3">
-
-                                        <div class="feature bg-primary bg-gradient-primary-to-secondary text-white rounded-3 me-3">
-                                            <i class="bi bi-file-earmark-slides"></i>
-                                        </div>
-
-                                        <h3 class="fw-bolder mb-0">
-                                            <span class="text-gradient d-inline">
-                                                PowerPoint &amp; Automation Skills
-                                            </span>
-                                        </h3>
-
-                                    </div>
-
-                                    <div class="d-flex flex-wrap gap-2">
-
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Slide Design &amp; Layout</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Slide Master &amp; Templates</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Animations &amp; Transitions</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Morph Transition</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">High Speed Typography</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Kinetic Text Effects</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Motion Paths</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Trigger-Based Animation</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Shapes &amp; Merge Shapes</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Icons &amp; Vector Graphics</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Charts &amp; Infographics</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">SmartArt &amp; Diagrams</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Color Palettes &amp; Themes</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Typography &amp; Font Pairing</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Storyboarding</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Storytelling with Slides</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Interactive &amp; Clickable Slides</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Video Export &amp; Screen Recording</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Audio &amp; Narration</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">VBA Macros</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">VBScript Automation</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Repetitive Task Automation</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Productivity Shortcuts</span>
-                                        <span class="badge bg-light text-dark border fw-normal fs-6 rounded-pill px-3 py-2">Presentation Delivery</span>
-
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-            </section>
-
-        </main>
-
-
-        <!-- Footer -->
-        <footer class="bg-white py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-center">
-                    <div class="col-auto text-center">
-                        <div class="small m-0">
-                            &copy; Pravind Thakur. All rights reserved.
-                        </div>
-                    </div>
-                </div>
             </div>
-        </footer>
+        </nav>
 
 
-        <!-- Slide popup -->
-        <div class="modal fade" id="photoModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered modal-lg">
-                <div class="modal-content bg-transparent border-0">
-                    <img id="photoModalImg"
-                         class="img-fluid rounded-4"
-                         src=""
-                         alt="" />
+        <!-- Hero -->
+        <section class="hero">
+            <div class="container px-4 px-lg-5">
+
+                <div class="eyebrow">Design · Animation · Automation</div>
+
+                <h1>
+                    PowerPoint<br />
+                    <span class="gradient-text">Beyond Slides.</span>
+                </h1>
+
+                <p class="hero-description">
+                    Exploring the creative side of PowerPoint through visual storytelling,
+                    motion design, high-speed typography and automation. From engaging
+                    presentations to practical VBA and VBScript solutions.
+                </p>
+
+                <div class="hero-stats">
+                    <div class="stat-pill">
+                        <i class="bi bi-youtube"></i>
+                        35K+ YouTube Subscribers
+                    </div>
+                    <div class="stat-pill">
+                        <i class="bi bi-play-btn"></i>
+                        300+ Tutorials
+                    </div>
+                    <div class="stat-pill">
+                        <i class="bi bi-code-slash"></i>
+                        VBA &amp; VBScript
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Social Channels -->
+        <section class="content-section">
+            <div class="container px-4 px-lg-5 content-container">
+
+                <div class="section-heading">
+                    <div class="section-icon">
+                        <i class="bi bi-broadcast"></i>
+                    </div>
+                    <div>
+                        <h2>Connect &amp; Learn</h2>
+                        <p class="section-subtitle">
+                            Follow the content, explore tutorials and discover new techniques.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- Instagram -->
+                <div class="dark-card mb-4">
+                    <div class="social-card-inner">
+
+                        <div class="social-content">
+
+                            <div class="social-label">
+                                <i class="bi bi-instagram"></i>
+                                Instagram
+                            </div>
+
+                            <h3 class="social-title">
+                                <a href="https://www.instagram.com/powerpointplanet"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    instagram.com/powerpointplanet
+                                </a>
+                            </h3>
+
+                            <p class="social-description">
+                                Follow PowerPoint Planet for quick PowerPoint tips and tricks:
+                                slide design, animations, high-speed typography, VBA macros
+                                and automation ideas.
+                            </p>
+
+                            <a class="action-button"
+                               href="https://www.instagram.com/powerpointplanet"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                <i class="bi bi-instagram"></i>
+                                Follow @powerpointplanet
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+
+                        </div>
+
+                        <img class="social-image"
+                             src="assets/Powerpoint.jpg"
+                             alt="PowerPoint Planet on Instagram"
+                             loading="lazy" />
+
+                    </div>
+                </div>
+
+
+                <!-- YouTube -->
+                <div class="dark-card">
+                    <div class="social-card-inner">
+
+                        <div class="social-content">
+
+                            <div class="social-label">
+                                <i class="bi bi-youtube"></i>
+                                YouTube Channel
+                            </div>
+
+                            <h3 class="social-title">
+                                <a href="https://www.youtube.com/pravindthakur"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    youtube.com/pravindthakur
+                                </a>
+                            </h3>
+
+                            <p class="social-description">
+                                Learn PowerPoint through practical tutorials on design,
+                                animation, high-speed typography, VBA and VBScript automation.
+                                Explore 300+ videos and join a community of 35K+ subscribers.
+                            </p>
+
+                            <a class="action-button youtube"
+                               href="https://www.youtube.com/pravindthakur"
+                               target="_blank"
+                               rel="noopener noreferrer">
+                                <i class="bi bi-youtube"></i>
+                                Subscribe on YouTube
+                                <i class="bi bi-arrow-up-right"></i>
+                            </a>
+
+                        </div>
+
+                        <img class="social-image"
+                             src="assets/youtubepowerpoint.jpg"
+                             alt="Pravind Thakur YouTube channel"
+                             loading="lazy" />
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- Sample Slides -->
+        <section class="content-section">
+            <div class="container px-4 px-lg-5 content-container">
+
+                <div class="dark-card gallery-card">
+
+                    <div class="section-heading">
+                        <div class="section-icon">
+                            <i class="bi bi-easel"></i>
+                        </div>
+                        <div>
+                            <h2>Sample Slides</h2>
+                            <p class="section-subtitle">
+                                A selection of PowerPoint designs and creative experiments.
+                                Select any slide to view it in a larger size.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="gallery-grid">
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint1.jpg" data-alt="PowerPoint sample slide 1">
+                            <img class="gallery-img" src="photos/powerpoint1.jpg"
+                                alt="PowerPoint sample slide 1" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint2.jpg" data-alt="PowerPoint sample slide 2">
+                            <img class="gallery-img" src="photos/powerpoint2.jpg"
+                                alt="PowerPoint sample slide 2" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint3.jpg" data-alt="PowerPoint sample slide 3">
+                            <img class="gallery-img" src="photos/powerpoint3.jpg"
+                                alt="PowerPoint sample slide 3" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint4.jpg" data-alt="PowerPoint sample slide 4">
+                            <img class="gallery-img" src="photos/powerpoint4.jpg"
+                                alt="PowerPoint sample slide 4" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint5.jpg" data-alt="PowerPoint sample slide 5">
+                            <img class="gallery-img" src="photos/powerpoint5.jpg"
+                                alt="PowerPoint sample slide 5" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint6.JPG" data-alt="PowerPoint sample slide 6">
+                            <img class="gallery-img" src="photos/powerpoint6.JPG"
+                                alt="PowerPoint sample slide 6" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint7.jpg" data-alt="PowerPoint sample slide 7">
+                            <img class="gallery-img" src="photos/powerpoint7.jpg"
+                                alt="PowerPoint sample slide 7" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint8.jpg" data-alt="PowerPoint sample slide 8">
+                            <img class="gallery-img" src="photos/powerpoint8.jpg"
+                                alt="PowerPoint sample slide 8" loading="lazy" />
+                        </button>
+
+                        <button class="gallery-item" type="button"
+                            data-bs-toggle="modal" data-bs-target="#photoModal"
+                            data-image="photos/powerpoint9.jpg" data-alt="PowerPoint sample slide 9">
+                            <img class="gallery-img" src="photos/powerpoint9.jpg"
+                                alt="PowerPoint sample slide 9" loading="lazy" />
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- PowerPoint & Automation Skills -->
+        <section class="content-section pb-5">
+            <div class="container px-4 px-lg-5 content-container">
+
+                <div class="dark-card skills-card">
+
+                    <div class="section-heading">
+                        <div class="section-icon">
+                            <i class="bi bi-file-earmark-slides"></i>
+                        </div>
+                        <div>
+                            <h2>PowerPoint &amp; Automation Skills</h2>
+                            <p class="section-subtitle">
+                                Creative presentation techniques and productivity-focused automation.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p class="skills-intro">
+                        From building visually engaging slides to creating dynamic animations
+                        and automating repetitive tasks, these are the techniques and tools
+                        explored through my PowerPoint projects and tutorials.
+                    </p>
+
+                    <div class="skills-list">
+
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Slide Design &amp; Layout</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Slide Master &amp; Templates</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Animations &amp; Transitions</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Morph Transition</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>High Speed Typography</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Kinetic Text Effects</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Motion Paths</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Trigger-Based Animation</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Shapes &amp; Merge Shapes</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Icons &amp; Vector Graphics</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Charts &amp; Infographics</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>SmartArt &amp; Diagrams</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Color Palettes &amp; Themes</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Typography &amp; Font Pairing</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Storyboarding</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Storytelling with Slides</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Interactive &amp; Clickable Slides</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Video Export &amp; Screen Recording</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Audio &amp; Narration</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>VBA Macros</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>VBScript Automation</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Repetitive Task Automation</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Productivity Shortcuts</span>
+                        <span class="skill-tag"><i class="bi bi-check2-circle"></i>Presentation Delivery</span>
+
+                    </div>
+
+                    <div class="closing-note">
+                        <i class="bi bi-lightbulb"></i>
+                        <strong style="color: var(--text);">The idea:</strong>
+                        Make presentations more than static slides by combining design,
+                        motion, storytelling and automation.
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="py-4 mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="text-center">
+                <div class="small">
+                    &copy; Pravind Thakur. All rights reserved.
                 </div>
             </div>
         </div>
+    </footer>
 
 
-        <!-- Bootstrap core JS -->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Slide Preview Modal -->
+    <div class="modal fade" id="photoModal" tabindex="-1"
+        aria-labelledby="photoModalLabel" aria-hidden="true">
 
-        <!-- Core theme JS -->
-        <script src="js/scripts.js"></script>
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content border-0 position-relative">
 
-        <!-- Slide popup script -->
-        <script>
-            document.querySelectorAll('.gallery-img').forEach(function (img) {
-                img.addEventListener('click', function () {
-                    var big = document.getElementById('photoModalImg');
-                    big.src = img.src;
-                    big.alt = img.alt;
-                });
+                <button type="button"
+                    class="modal-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close image preview">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+                <img id="photoModalImg"
+                    class="img-fluid rounded-4"
+                    src=""
+                    alt="" />
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Existing site JavaScript -->
+    <script src="js/scripts.js"></script>
+
+    <script>
+        // Slide preview modal
+        document.querySelectorAll('.gallery-item').forEach(function (item) {
+            item.addEventListener('click', function () {
+                var image = document.getElementById('photoModalImg');
+                var source = item.getAttribute('data-image');
+                var altText = item.getAttribute('data-alt');
+
+                image.src = source;
+                image.alt = altText || 'PowerPoint slide preview';
             });
-        </script>
+        });
 
-    </body>
+        // Reading progress indicator
+        (function () {
+            var progress = document.getElementById('scrollProgress');
+
+            function updateProgress() {
+                var scrollableHeight =
+                    document.documentElement.scrollHeight - window.innerHeight;
+
+                var percentage = scrollableHeight > 0
+                    ? (window.scrollY / scrollableHeight) * 100
+                    : 0;
+
+                progress.style.width = Math.min(100, percentage) + '%';
+            }
+
+            window.addEventListener('scroll', updateProgress, { passive: true });
+            window.addEventListener('resize', updateProgress);
+            updateProgress();
+        })();
+    </script>
+
+</body>
 </html>
