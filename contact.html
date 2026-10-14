@@ -1,373 +1,804 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Pravind Thakur | Home</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body class="d-flex flex-column h-100 bg-light">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-dark py-3" style="background:#07070b;border-bottom:1px solid #1c1c24">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-primary">Pravind Thakur</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Professional.html">Professional</a></li>
-                            <li class="nav-item"><a class="nav-link" href="Personal.html">Personal</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Get in touch with Pravind Thakur for professional opportunities, collaborations, and inquiries." />
+    <meta name="author" content="Pravind Thakur" />
+
+    <title>Pravind Thakur | Contact</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+
+    <!-- Existing Site CSS -->
+    <link href="css/styles.css" rel="stylesheet" />
+
+    <style>
+        :root {
+            color-scheme: dark;
+
+            --c-bg: #07070b;
+            --c-surface: rgba(255, 255, 255, 0.035);
+            --c-surface-hover: rgba(255, 255, 255, 0.06);
+            --c-border: #1c1c24;
+            --c-text: #f2f2f2;
+            --c-muted: #a1a1aa;
+            --c-gold: #f5b942;
+            --c-blue: #6c7bff;
+            --c-pink: #e21e80;
+            --c-orange: #ff8a5c;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            min-height: 100%;
+            scroll-behavior: smooth;
+            background: var(--c-bg);
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--c-bg) !important;
+            color: var(--c-text);
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navigation */
+
+        .navbar {
+            background: rgba(7, 7, 11, 0.94) !important;
+            border-bottom: 1px solid var(--c-border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .navbar-brand {
+            color: var(--c-text) !important;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-gradient {
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar .nav-link {
+            color: var(--c-muted) !important;
+            font-weight: 700;
+            transition: color 0.25s ease;
+        }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link.active {
+            color: var(--c-gold) !important;
+        }
+
+        .navbar-toggler {
+            border: 1px solid #343440;
+            padding: 7px 10px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.2);
+        }
+
+        .navbar-toggler-icon {
+            filter: invert(1);
+        }
+
+        /* Main section */
+
+        .contact-section {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            min-height: calc(100vh - 140px);
+            padding: 76px 0 90px;
+            background:
+                radial-gradient(
+                    ellipse at 12% 12%,
+                    rgba(108, 123, 255, 0.12),
+                    transparent 38%
+                ),
+                radial-gradient(
+                    ellipse at 88% 32%,
+                    rgba(226, 30, 128, 0.09),
+                    transparent 35%
+                ),
+                var(--c-bg);
+        }
+
+        .contact-section::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 50%;
+            width: min(760px, 100%);
+            height: 1px;
+            transform: translateX(-50%);
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.6),
+                rgba(226, 30, 128, 0.6),
+                transparent
+            );
+        }
+
+        .contact-shell {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .contact-card {
+            position: relative;
+            overflow: hidden;
+            padding: clamp(28px, 5vw, 60px);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.025);
+            box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+        }
+
+        .contact-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 10%;
+            right: 10%;
+            height: 1px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(108, 123, 255, 0.65),
+                rgba(226, 30, 128, 0.65),
+                transparent
+            );
+        }
+
+        .contact-eyebrow {
+            margin-bottom: 14px;
+            color: var(--c-gold);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .contact-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(226, 30, 128, 0.35);
+            border-radius: 19px;
+            background: linear-gradient(
+                135deg,
+                rgba(108, 123, 255, 0.18),
+                rgba(226, 30, 128, 0.18)
+            );
+            color: #fff;
+            font-size: 1.7rem;
+            box-shadow: 0 8px 30px rgba(108, 123, 255, 0.08);
+        }
+
+        .contact-title {
+            margin-bottom: 14px;
+            color: var(--c-text);
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.12;
+        }
+
+        .gradient-text {
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-subtitle {
+            max-width: 550px;
+            margin: 0 auto;
+            color: var(--c-muted);
+            font-size: 1rem;
+            line-height: 1.9;
+        }
+
+        .contact-form-wrap {
+            max-width: 650px;
+            margin: 44px auto 0;
+        }
+
+        /* Form fields */
+
+        .form-floating {
+            margin-bottom: 20px !important;
+        }
+
+        .form-floating > .form-control {
+            min-height: 62px;
+            padding: 1.2rem 1rem;
+            border: 1px solid #292933;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.035);
+            color: var(--c-text);
+            font-family: inherit;
+            font-size: 0.94rem;
+            box-shadow: none;
+            transition:
+                border-color 0.25s ease,
+                background 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .form-floating > textarea.form-control {
+            min-height: 170px;
+            padding-top: 1.7rem;
+            resize: vertical;
+        }
+
+        .form-floating > label {
+            padding: 1.2rem 1rem;
+            color: #92929f;
+            font-size: 0.88rem;
+        }
+
+        .form-floating > .form-control:focus {
+            border-color: var(--c-blue);
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.12);
+        }
+
+        .form-floating > .form-control:focus ~ label,
+        .form-floating > .form-control:not(:placeholder-shown) ~ label {
+            color: var(--c-muted);
+        }
+
+        .form-control::placeholder {
+            color: transparent;
+        }
+
+        .form-control:-webkit-autofill,
+        .form-control:-webkit-autofill:hover,
+        .form-control:-webkit-autofill:focus {
+            -webkit-text-fill-color: var(--c-text);
+            transition: background-color 9999s ease-in-out 0s;
+        }
+
+        /* Submit button */
+
+        .btn-contact {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            min-height: 58px;
+            padding: 15px 28px;
+            border: 0;
+            border-radius: 12px;
+            background: linear-gradient(
+                110deg,
+                var(--c-blue),
+                var(--c-pink)
+            );
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            box-shadow: 0 10px 30px rgba(108, 123, 255, 0.15);
+            transition:
+                transform 0.25s ease,
+                box-shadow 0.25s ease,
+                opacity 0.25s ease;
+        }
+
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            color: #fff;
+            box-shadow: 0 14px 35px rgba(226, 30, 128, 0.22);
+        }
+
+        .btn-contact:focus-visible {
+            outline: 2px solid var(--c-gold);
+            outline-offset: 4px;
+        }
+
+        .btn-contact:disabled {
+            cursor: wait;
+            opacity: 0.7;
+            transform: none;
+        }
+
+        /* Form status messages */
+
+        .form-status {
+            padding: 15px 17px;
+            margin-bottom: 22px;
+            border: 1px solid;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .form-status-success {
+            border-color: rgba(52, 211, 153, 0.35);
+            background: rgba(52, 211, 153, 0.08);
+            color: #6ee7b7;
+        }
+
+        .form-status-error {
+            border-color: rgba(248, 113, 113, 0.35);
+            background: rgba(248, 113, 113, 0.08);
+            color: #fca5a5;
+        }
+
+        .contact-note {
+            margin-top: 22px;
+            color: #777783;
+            font-size: 0.78rem;
+            line-height: 1.7;
+        }
+
+        .contact-note i {
+            margin-right: 5px;
+            color: var(--c-gold);
+        }
+
+        /* Footer */
+
+        .site-footer {
+            padding: 24px 0;
+            border-top: 1px solid var(--c-border);
+            background: var(--c-bg);
+            color: var(--c-muted);
+            font-size: 0.82rem;
+        }
+
+        .site-footer a {
+            color: var(--c-muted);
+            transition: color 0.2s ease;
+        }
+
+        .site-footer a:hover {
+            color: var(--c-gold);
+        }
+
+        /* Scroll progress indicator */
+
+        #cScroll {
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(
+                90deg,
+                var(--c-blue),
+                var(--c-pink),
+                var(--c-orange)
+            );
+        }
+
+        /* Responsive layout */
+
+        @media (max-width: 767px) {
+            .contact-section {
+                min-height: auto;
+                padding: 42px 0 55px;
+            }
+
+            .contact-shell {
+                padding: 0 16px;
+            }
+
+            .contact-card {
+                padding: 30px 20px;
+                border-radius: 18px;
+            }
+
+            .contact-title {
+                letter-spacing: -1.2px;
+            }
+
+            .contact-form-wrap {
+                margin-top: 32px;
+            }
+
+            .contact-icon {
+                width: 56px;
+                height: 56px;
+                margin-bottom: 20px;
+                border-radius: 16px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+                animation-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Scroll Progress -->
+    <div id="cScroll" aria-hidden="true"></div>
+
+    <main class="flex-shrink-0">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container px-4 px-lg-5">
+
+                <a class="navbar-brand" href="index.html">
+                    <span class="brand-gradient">Pravind Thakur</span>
+                </a>
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Professional.html">Professional</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="Personal.html">Personal</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="contact.html">Contact</a>
+                        </li>
+                    </ul>
                 </div>
-            </nav>
 
-            <!-- ===== Cinematic home body: styles ===== -->
-            <script>document.documentElement.classList.add('js');</script>
-            <style>
-                .cine{background:#07070b;color:#f2f2f2;position:relative;overflow:hidden}
-                .cine a{text-decoration:none}
-                .c-grad{background:linear-gradient(100deg,#6c7bff 0%,#e21e80 70%,#ff8a5c 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-                .c-gold{color:#f5b942}
-                .c-muted{color:#a1a1aa}
-                #cScroll{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,#1e30f3,#e21e80);z-index:2000}
-
-                .c-hero{position:relative;min-height:88vh;display:flex;align-items:center;padding:9vh 0}
-                .c-hero::before{content:"";position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx,70%) var(--my,40%),rgba(226,30,128,.28),transparent 65%);pointer-events:none}
-                .c-hero::after{content:"";position:absolute;inset:0;opacity:.07;pointer-events:none;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
-                .c-lb{position:absolute;left:0;right:0;height:7vh;background:#000;display:flex;align-items:center;justify-content:space-between;padding:0 5vw;font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;color:#71717a;z-index:2}
-                .c-lb.top{top:0}.c-lb.bot{bottom:0}
-                .c-eyebrow{letter-spacing:.3em;font-size:.75rem;text-transform:uppercase;color:#f5b942}
-                .c-title{font-size:clamp(3rem,9vw,7rem);font-weight:800;line-height:.95;letter-spacing:-.03em;margin:.6rem 0 1.2rem}
-                .c-role{font-size:clamp(1.1rem,2.4vw,1.6rem);font-weight:300;min-height:2.2em}
-                .c-role b{font-weight:600;color:#fff;transition:opacity .35s,transform .35s;display:inline-block;border-bottom:2px solid #e21e80}
-                .c-role b.out{opacity:0;transform:translateY(8px)}
-                .c-btn{display:inline-block;padding:.9rem 2rem;border-radius:999px;font-weight:700;font-size:.95rem;transition:transform .25s,box-shadow .25s,background .25s}
-                .c-btn:hover{transform:translateY(-3px)}
-                .c-btn.fill{background:linear-gradient(90deg,#1e30f3,#e21e80);color:#fff}
-                .c-btn.fill:hover{box-shadow:0 10px 30px rgba(226,30,128,.4);color:#fff}
-                .c-btn.line{border:1px solid rgba(255,255,255,.35);color:#fff}
-                .c-btn.line:hover{background:#fff;color:#000}
-                .c-portrait{position:relative;display:flex;justify-content:center;z-index:1}
-                .c-portrait::before{content:"";position:absolute;width:75%;aspect-ratio:1;border-radius:50%;top:8%;background:conic-gradient(from 90deg,#1e30f3,#e21e80,#ff8a5c,#1e30f3);filter:blur(70px);opacity:.55;animation:cSpin 14s linear infinite}
-                @keyframes cSpin{to{transform:rotate(360deg)}}
-                .c-portrait img{position:relative;max-height:62vh;max-width:100%;animation:cFloat 6s ease-in-out infinite;filter:drop-shadow(0 25px 40px rgba(0,0,0,.6))}
-                @keyframes cFloat{50%{transform:translateY(-12px)}}
-                .c-scroll{position:absolute;bottom:9vh;left:50%;width:1px;height:46px;background:linear-gradient(#f5b942,transparent);z-index:2;animation:cDrop 2s ease-in-out infinite}
-                @keyframes cDrop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-                .c-sec{padding:7rem 0;position:relative}
-                .c-h2{font-size:clamp(2rem,4.5vw,3.2rem);font-weight:800;letter-spacing:-.02em}
-
-                .c-reel{overflow:hidden;padding:1.5rem 0;border-top:1px solid #1c1c24;border-bottom:1px solid #1c1c24;background:#0b0b11;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
-                .c-track{display:flex;gap:14px;width:max-content;animation:cMarq 60s linear infinite}
-                .c-reel:hover .c-track{animation-play-state:paused}
-                @keyframes cMarq{to{transform:translateX(-50%)}}
-                .c-frame{flex:0 0 auto;border:6px solid #15151c;border-radius:4px;overflow:hidden;position:relative}
-                .c-frame img{height:230px;width:auto;display:block;filter:grayscale(1) contrast(1.1);transition:filter .4s,transform .4s}
-                .c-frame:hover img{filter:none;transform:scale(1.06)}
-
-                .c-stat{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1}
-
-                .c-worlds{display:flex;gap:14px;min-height:380px}
-                .c-world{flex:1;border-radius:22px;padding:2.4rem;display:flex;flex-direction:column;justify-content:flex-end;position:relative;overflow:hidden;transition:flex .6s cubic-bezier(.2,.8,.2,1)}
-                .c-world:hover{flex:1.7}
-                .c-world.work{background:radial-gradient(circle at 20% 10%,#2b3fff,#0b1240 70%)}
-                .c-world.create{background:radial-gradient(circle at 80% 10%,#ff6a3d,#7a0f4a 75%)}
-                .c-world .more{max-height:0;opacity:0;overflow:hidden;transition:max-height .6s,opacity .6s}
-                .c-world:hover .more{max-height:200px;opacity:1}
-                .c-world h3{font-size:clamp(1.5rem,3vw,2.2rem);font-weight:800}
-                @media (max-width:767px){.c-worlds{flex-direction:column}.c-world .more{max-height:200px;opacity:1}}
-
-                .c-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:1.8rem;height:100%;transition:transform .15s,border-color .3s,background .3s;transform-style:preserve-3d}
-                .c-card:hover{border-color:rgba(226,30,128,.7);background:rgba(255,255,255,.07)}
-                .c-ico{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;background:linear-gradient(135deg,#1e30f3,#e21e80);color:#fff;margin-bottom:1.1rem}
-
-                .c-quote{font-family:Georgia,'Times New Roman',serif;font-style:italic;font-size:clamp(1.8rem,4.6vw,3.4rem);line-height:1.25;text-align:center;max-width:900px;margin:0 auto}
-                .c-tag{display:inline-block;padding:.55rem 1.1rem;margin:.3rem;border:1px solid rgba(255,255,255,.18);border-radius:999px;font-size:.95rem;transition:all .25s;cursor:default}
-                .c-tag:hover{background:#fff;color:#000;transform:translateY(-4px) rotate(-2deg);box-shadow:0 10px 24px rgba(226,30,128,.35)}
-
-                .c-cta{background:#0b0b11;border-top:1px solid #1c1c24;padding:7rem 0;text-align:center;position:relative;overflow:hidden}
-                .c-cta::before{content:"";position:absolute;left:50%;top:50%;width:640px;height:640px;max-width:120%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(226,30,128,.28),rgba(30,48,243,.14) 45%,transparent 70%);pointer-events:none}
-                .c-cta .container{position:relative}
-
-                .js .rv{opacity:0;transform:translateY(34px);transition:opacity .9s ease,transform .9s ease}
-                .js .rv.in{opacity:1;transform:none}
-                .js .rv.d1{transition-delay:.12s}.js .rv.d2{transition-delay:.24s}.js .rv.d3{transition-delay:.36s}
-                @media (prefers-reduced-motion:reduce){
-                    .c-track,.c-portrait::before,.c-portrait img,.c-scroll{animation:none}
-                    .js .rv{opacity:1;transform:none;transition:none}
-                    .c-world,.c-card,.c-tag,.c-btn{transition:none}
-                }
-            </style>
-
-            <div class="cine">
-                <div id="cScroll"></div>
-
-                <!-- 1. Hero scene-->
-                <section class="c-hero" id="cHero">
-                    <div class="container px-5" style="position:relative;z-index:1">
-                        <div class="row align-items-center gx-5">
-                            <div class="col-lg-7 text-center text-lg-start rv">
-                                <div class="c-eyebrow">Work &middot; Creativity &middot; Life</div>
-                                <h1 class="c-title"><span class="c-grad">Pravind<br>Thakur</span></h1>
-                                <div class="c-role">I am a <b id="cRole">business analyst</b></div>
-                                <p class="c-muted mb-4" style="max-width:520px">Nearly a decade in capital markets, 35K+ learners on YouTube, and a camera never far away. Building, creating and staying kind.</p>
-                                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
-                                    <a class="c-btn fill" href="Professional.html">Professional</a>
-                                    <a class="c-btn line" href="Personal.html">Personal</a>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 mt-5 mt-lg-0 rv d2">
-                                <div class="c-portrait"><img src="assets/Profile.png" alt="Pravind Thakur" /></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="c-scroll"></div>
-                    <div class="c-lb bot"><span>Scroll to explore</span><span>Capital markets &middot; PowerPoint &middot; Photography</span></div>
-                </section>
-
-                <!-- 2. Photo reel-->
-                <section class="c-reel" aria-label="Photo reel">
-                    <div class="c-track">
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo1.JPG" alt="Photo 1" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo2.JPG" alt="Photo 2" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo3.JPG" alt="Photo 3" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo4.JPG" alt="Photo 4" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo5.JPG" alt="Photo 5" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo7.jpeg" alt="Photo 7" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo8.jpeg" alt="Photo 8" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo9.jpg" alt="Photo 9" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo1.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo2.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo3.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo4.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo5.JPG" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo7.jpeg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo8.jpeg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                        <a class="c-frame" href="Photography.html"><img src="photos/photo9.jpg" alt="" loading="lazy" onerror="this.parentNode.style.display='none'" /></a>
-                    </div>
-                </section>
-
-                <!-- 3. Numbers-->
-                <section class="c-sec" style="padding:5rem 0">
-                    <div class="container px-5">
-                        <div class="row text-center gy-4">
-                            <div class="col-6 col-md-3 rv"><div class="c-stat c-grad" data-count="9" data-suffix="+">0</div><div class="c-muted small mt-2">Years in capital markets</div></div>
-                            <div class="col-6 col-md-3 rv d1"><div class="c-stat c-grad" data-count="16" data-suffix="M+">0</div><div class="c-muted small mt-2">Records processed faster</div></div>
-                            <div class="col-6 col-md-3 rv d2"><div class="c-stat c-grad" data-count="35" data-suffix="K+">0</div><div class="c-muted small mt-2">YouTube subscribers</div></div>
-                            <div class="col-6 col-md-3 rv d3"><div class="c-stat c-grad" data-count="300" data-suffix="+">0</div><div class="c-muted small mt-2">Videos published</div></div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 4. Two worlds-->
-                <section class="c-sec" style="padding-top:2rem">
-                    <div class="container px-5">
-                        <div class="text-center mb-5 rv">
-                            <div class="c-eyebrow">Two sides</div>
-                            <h2 class="c-h2">One story, <span class="c-grad">two worlds</span></h2>
-                            <p class="c-muted">Hover to step inside.</p>
-                        </div>
-                        <div class="c-worlds rv d1">
-                            <div class="c-world work">
-                                <div class="c-eyebrow" style="color:#9db4ff">Work</div>
-                                <h3>Capital markets and corporate actions</h3>
-                                <div class="more">
-                                    <p class="mt-2">Business Analyst on TCS BaNCS, working with global banks across APAC, EMEA, NAM and LATAM on corporate actions, SWIFT messaging and reference data.</p>
-                                    <a class="c-btn fill" href="Professional.html">See my work</a>
-                                </div>
-                            </div>
-                            <div class="c-world create">
-                                <div class="c-eyebrow" style="color:#ffe3d1">Create</div>
-                                <h3>PowerPoint, photography and trading</h3>
-                                <div class="more">
-                                    <p class="mt-2">I teach PowerPoint and automation on YouTube, shoot photos and video, and follow equity and commodity markets.</p>
-                                    <a class="c-btn line" href="Personal.html">Meet the creator</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 5. Explore cards-->
-                <section class="c-sec" style="padding-top:2rem">
-                    <div class="container px-5">
-                        <div class="text-center mb-5 rv">
-                            <div class="c-eyebrow">Explore</div>
-                            <h2 class="c-h2">Pick a <span class="c-grad">scene</span></h2>
-                        </div>
-                        <div class="row g-4">
-                            <div class="col-md-6 col-xl-3 rv">
-                                <a class="c-card d-block text-white" data-tilt href="Professional.html">
-                                    <div class="c-ico"><i class="bi bi-bank"></i></div>
-                                    <h3 class="h5 fw-bolder">Capital markets</h3>
-                                    <p class="c-muted small">Corporate actions, asset servicing and reference data on TCS BaNCS.</p>
-                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
-                                </a>
-                            </div>
-                            <div class="col-md-6 col-xl-3 rv d1">
-                                <a class="c-card d-block text-white" data-tilt href="Powerpoint.html">
-                                    <div class="c-ico"><i class="bi bi-file-earmark-slides"></i></div>
-                                    <h3 class="h5 fw-bolder">PowerPoint</h3>
-                                    <p class="c-muted small">Design, animation and VBA automation tutorials for 35K+ learners.</p>
-                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
-                                </a>
-                            </div>
-                            <div class="col-md-6 col-xl-3 rv d2">
-                                <a class="c-card d-block text-white" data-tilt href="Photography.html">
-                                    <div class="c-ico"><i class="bi bi-camera"></i></div>
-                                    <h3 class="h5 fw-bolder">Photography</h3>
-                                    <p class="c-muted small">Lifestyle, travel and portrait moments, with cinematography and reels.</p>
-                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
-                                </a>
-                            </div>
-                            <div class="col-md-6 col-xl-3 rv d3">
-                                <a class="c-card d-block text-white" data-tilt href="Trading.html">
-                                    <div class="c-ico"><i class="bi bi-graph-up-arrow"></i></div>
-                                    <h3 class="h5 fw-bolder">Trading</h3>
-                                    <p class="c-muted small">Equity and commodity markets, analysis and risk management.</p>
-                                    <span class="c-gold fw-bolder small">Explore <i class="bi bi-arrow-right"></i></span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 6. Title card quote-->
-                <section class="c-sec" style="background:#0b0b11">
-                    <div class="container px-5 rv">
-                        <p class="c-quote">&ldquo;In a world where you can be anything, <span class="c-grad">be kind.</span>&rdquo;</p>
-                    </div>
-                </section>
-
-                <!-- 7. Skills-->
-                <section class="c-sec">
-                    <div class="container px-5">
-                        <div class="text-center mb-4 rv">
-                            <div class="c-eyebrow">The toolkit</div>
-                            <h2 class="c-h2">What I <span class="c-grad">bring</span></h2>
-                        </div>
-                        <div class="text-center rv d1" style="max-width:860px;margin:0 auto">
-                            <span class="c-tag">Corporate Actions</span><span class="c-tag">Asset Servicing</span><span class="c-tag">SWIFT Messaging</span><span class="c-tag">Reference Data</span><span class="c-tag">Business Analysis</span><span class="c-tag">Oracle SQL &amp; PL/SQL</span><span class="c-tag">Performance Tuning</span><span class="c-tag">GDPR Archival</span><span class="c-tag">UAT &amp; Production Support</span><span class="c-tag">PowerPoint &amp; VBA</span><span class="c-tag">Cinematography</span><span class="c-tag">Color Grading</span><span class="c-tag">Storytelling</span>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 8. Call to action-->
-                <section class="c-cta">
-                    <div class="container px-5 rv">
-                        <div class="c-eyebrow mb-2">Your move</div>
-                        <h2 class="c-h2 mb-4">Let's build <span class="c-grad">something together</span></h2>
-                        <a class="c-btn fill me-sm-3 mb-3 mb-sm-0" href="contact.html">Contact me</a>
-                        <a class="c-btn line" href="assets/PravindThakur.pdf" download="PravindThakur.pdf"><i class="bi bi-download me-2"></i>Download resume</a>
-                    </div>
-                </section>
             </div>
+        </nav>
 
-            <!-- ===== Cinematic home body: behaviour ===== -->
-            <script>
-            (function () {
-                var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                var fine = window.matchMedia('(hover: hover)').matches;
+        <!-- Contact Section -->
+        <section class="contact-section">
+            <div class="contact-shell">
 
-                var bar = document.getElementById('cScroll');
-                window.addEventListener('scroll', function () {
-                    var h = document.documentElement;
-                    var max = h.scrollHeight - h.clientHeight;
-                    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
-                }, { passive: true });
+                <div class="contact-card">
 
-                var hero = document.getElementById('cHero');
-                if (hero && fine && !reduce) {
-                    hero.addEventListener('mousemove', function (e) {
-                        var r = hero.getBoundingClientRect();
-                        hero.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-                        hero.style.setProperty('--my', (e.clientY - r.top) + 'px');
-                    });
-                }
+                    <!-- Heading -->
+                    <div class="text-center">
 
-                var roles = ['business analyst', 'PowerPoint creator', 'photographer', 'market watcher', 'storyteller'];
-                var roleEl = document.getElementById('cRole');
-                var ri = 0;
-                if (roleEl && !reduce) {
-                    setInterval(function () {
-                        roleEl.classList.add('out');
-                        setTimeout(function () {
-                            ri = (ri + 1) % roles.length;
-                            roleEl.textContent = roles[ri];
-                            roleEl.classList.remove('out');
-                        }, 350);
-                    }, 2400);
-                }
+                        <div class="contact-icon">
+                            <i class="bi bi-envelope-paper" aria-hidden="true"></i>
+                        </div>
 
-                function countUp(el) {
-                    var end = parseInt(el.getAttribute('data-count'), 10);
-                    var suffix = el.getAttribute('data-suffix') || '';
-                    if (reduce) { el.textContent = end + suffix; return; }
-                    var start = null;
-                    function step(ts) {
-                        if (!start) start = ts;
-                        var p = Math.min((ts - start) / 1500, 1);
-                        var eased = 1 - Math.pow(1 - p, 3);
-                        el.textContent = Math.round(end * eased) + (p === 1 ? suffix : '');
-                        if (p < 1) requestAnimationFrame(step);
-                    }
-                    requestAnimationFrame(step);
-                }
+                        <div class="contact-eyebrow">Let's Connect</div>
 
-                var io = new IntersectionObserver(function (entries) {
-                    entries.forEach(function (en) {
-                        if (!en.isIntersecting) return;
-                        en.target.classList.add('in');
-                        en.target.querySelectorAll('[data-count]').forEach(countUp);
-                        io.unobserve(en.target);
-                    });
-                }, { threshold: 0.15 });
-                document.querySelectorAll('.rv').forEach(function (el) { io.observe(el); });
+                        <h1 class="contact-title">
+                            Get in <span class="gradient-text">touch.</span>
+                        </h1>
 
-                if (fine && !reduce) {
-                    document.querySelectorAll('[data-tilt]').forEach(function (card) {
-                        card.addEventListener('mousemove', function (e) {
-                            var r = card.getBoundingClientRect();
-                            var x = (e.clientX - r.left) / r.width - 0.5;
-                            var y = (e.clientY - r.top) / r.height - 0.5;
-                            card.style.transform = 'perspective(700px) rotateX(' + (-y * 12) + 'deg) rotateY(' + (x * 12) + 'deg) translateY(-4px)';
-                        });
-                        card.addEventListener('mouseleave', function () {
-                            card.style.transform = '';
-                        });
-                    });
-                }
-            })();
-            </script>
-        </main>
-        <!-- Footer-->
-<footer class="py-4 mt-auto" style="background:#07070b;border-top:1px solid #1c1c24;color:#a1a1aa">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-center">
-            <div class="col-auto text-center">
-                <div class="small m-0">&copy; Pravind Thakur. All rights reserved.</div>
+                        <p class="contact-subtitle">
+                            Have a professional opportunity, a project idea, or simply
+                            want to connect? Send me a message or connect with me on
+                            <a
+                                href="https://www.linkedin.com/in/pravindthakur"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label="Connect with Pravind Thakur on LinkedIn"
+                                style="color: var(--c-gold); font-weight: 700;">
+                                <i class="bi bi-linkedin me-1" aria-hidden="true"></i>LinkedIn</a>.
+                            I'd love to hear from you.
+                        </p>
+
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="contact-form-wrap">
+
+                        <form
+                            id="contactForm"
+                            action="https://api.web3forms.com/submit"
+                            method="POST">
+
+                            <!-- Web3Forms Configuration -->
+                            <input
+                                type="hidden"
+                                name="access_key"
+                                value="878c58c5-ea82-4740-922f-58b1c3e87656" />
+
+                            <input
+                                type="hidden"
+                                name="subject"
+                                value="New message | PravindThakur.com" />
+
+                            <!-- Spam Protection -->
+                            <input
+                                type="checkbox"
+                                name="botcheck"
+                                style="display: none"
+                                tabindex="-1"
+                                autocomplete="off" />
+
+                            <!-- Name -->
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    placeholder="Your full name"
+                                    autocomplete="name"
+                                    maxlength="100"
+                                    required />
+
+                                <label for="name">Full name</label>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    id="email"
+                                    name="email"
+                                    type="email"
+                                    placeholder="name@example.com"
+                                    autocomplete="email"
+                                    maxlength="254"
+                                    required />
+
+                                <label for="email">Email address</label>
+                            </div>
+
+                            <!-- Phone -->
+                            <div class="form-floating">
+                                <input
+                                    class="form-control"
+                                    id="phone"
+                                    name="phone"
+                                    type="tel"
+                                    placeholder="Phone number (optional)"
+                                    autocomplete="tel"
+                                    maxlength="30" />
+
+                                <label for="phone">Phone number (optional)</label>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="form-floating">
+                                <textarea
+                                    class="form-control"
+                                    id="message"
+                                    name="message"
+                                    placeholder="Write your message"
+                                    maxlength="5000"
+                                    required></textarea>
+
+                                <label for="message">Your message</label>
+                            </div>
+
+                            <!-- Success Message -->
+                            <div
+                                class="form-status form-status-success d-none"
+                                id="submitSuccessMessage"
+                                role="status"
+                                aria-live="polite">
+
+                                <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
+
+                                <strong>Message sent successfully!</strong>
+                                Thank you for reaching out. I appreciate your message.
+                            </div>
+
+                            <!-- Error Message -->
+                            <div
+                                class="form-status form-status-error d-none"
+                                id="submitErrorMessage"
+                                role="alert">
+
+                                <i class="bi bi-exclamation-circle-fill me-2" aria-hidden="true"></i>
+
+                                <strong>Unable to send your message.</strong>
+                                Please try again. If the issue continues, you can contact me through LinkedIn.
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-grid">
+                                <button
+                                    class="btn-contact"
+                                    id="submitButton"
+                                    type="submit">
+
+                                    <span id="submitButtonText">Send Message</span>
+                                    <i class="bi bi-arrow-right" id="submitButtonIcon" aria-hidden="true"></i>
+
+                                </button>
+                            </div>
+
+                            <p class="contact-note text-center mb-0">
+                                <i class="bi bi-shield-check" aria-hidden="true"></i>
+                                Your message will be used to respond to your inquiry.
+                            </p>
+
+                        </form>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer mt-auto">
+        <div class="container px-4 px-lg-5">
+            <div class="d-flex flex-column flex-sm-row align-items-center justify-content-between gap-2">
+
+                <div class="text-center text-sm-start">
+                    &copy; <span id="currentYear">2026</span> Pravind Thakur. All rights reserved.
+                </div>
+
             </div>
         </div>
-    </div>
-</footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+    </footer>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Existing Site JavaScript -->
+    <script src="js/scripts.js"></script>
+
+    <!-- Page Scripts -->
+    <script>
+        // Update copyright year automatically
+        document.getElementById('currentYear').textContent =
+            new Date().getFullYear();
+
+        // Scroll progress indicator
+        function updateScrollProgress() {
+            const scrollTop =
+                window.scrollY || document.documentElement.scrollTop;
+
+            const scrollableHeight =
+                document.documentElement.scrollHeight - window.innerHeight;
+
+            const progress = scrollableHeight > 0
+                ? (scrollTop / scrollableHeight) * 100
+                : 0;
+
+            document.getElementById('cScroll').style.width =
+                Math.min(progress, 100) + '%';
+        }
+
+        window.addEventListener('scroll', updateScrollProgress, {
+            passive: true
+        });
+
+        window.addEventListener('resize', updateScrollProgress);
+
+        updateScrollProgress();
+
+        // Contact form submission using Web3Forms
+        document.getElementById('contactForm').addEventListener(
+            'submit',
+            async function (event) {
+                event.preventDefault();
+
+                const form = event.target;
+                const button = document.getElementById('submitButton');
+                const buttonText = document.getElementById('submitButtonText');
+                const buttonIcon = document.getElementById('submitButtonIcon');
+                const successMessage =
+                    document.getElementById('submitSuccessMessage');
+                const errorMessage =
+                    document.getElementById('submitErrorMessage');
+
+                // Hide previous status messages
+                successMessage.classList.add('d-none');
+                errorMessage.classList.add('d-none');
+
+                // Prevent duplicate submissions
+                button.disabled = true;
+                buttonText.textContent = 'Sending...';
+                buttonIcon.className = 'bi bi-arrow-repeat';
+
+                try {
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        headers: {
+                            'Accept': 'application/json'
+                        },
+                        body: new FormData(form)
+                    });
+
+                    const data = await response.json();
+
+                    if (response.ok && data.success) {
+                        successMessage.classList.remove('d-none');
+                        form.reset();
+
+                        successMessage.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    } else {
+                        errorMessage.classList.remove('d-none');
+
+                        errorMessage.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
+                    }
+
+                } catch (error) {
+                    errorMessage.classList.remove('d-none');
+
+                    errorMessage.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+
+                } finally {
+                    button.disabled = false;
+                    buttonText.textContent = 'Send Message';
+                    buttonIcon.className = 'bi bi-arrow-right';
+                }
+            }
+        );
+    </script>
+
+</body>
 </html>
