@@ -106,8 +106,11 @@
             box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.2);
         }
 
-        .navbar-toggler-icon {
-            filter: invert(1);
+        @media (max-width: 991.98px) {
+            #navbarSupportedContent .navbar-nav {
+                margin-left: 0 !important;
+                align-items: flex-start;
+            }
         }
 
         /* Main page */
