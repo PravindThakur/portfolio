@@ -84,8 +84,11 @@
             box-shadow: 0 0 0 0.15rem rgba(245, 185, 66, 0.2);
         }
 
-        .navbar .navbar-toggler-icon {
-            filter: invert(1);
+        @media (max-width: 991.98px) {
+            #navbarSupportedContent .navbar-nav {
+                margin-left: 0 !important;
+                align-items: flex-start;
+            }
         }
 
         /* =========================================
@@ -673,8 +676,8 @@
              NAVIGATION
         ========================================= -->
 
-        <nav class="navbar navbar-expand-lg navbar-light py-3">
-            <div class="container px-5">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container px-4 px-lg-5">
 
                 <a class="navbar-brand" href="index.html">
                     <span class="fw-bolder text-primary">Pravind Thakur</span>
