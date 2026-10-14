@@ -92,8 +92,11 @@
             box-shadow: none !important;
         }
 
-        .navbar-toggler-icon {
-            filter: invert(1);
+        @media (max-width: 991.98px) {
+            #navbarSupportedContent .navbar-nav {
+                margin-left: 0 !important;
+                align-items: flex-start;
+            }
         }
 
         .page-shell {
